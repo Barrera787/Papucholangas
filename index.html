@@ -712,9 +712,54 @@
       </div>
 
       <!-- SPOTIFY PLAYER (oficial) -->
-      <div class="spotify-player">
-        <iframe class="spotify-embed" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcF6B6QPhFDv?utm_source=generator&theme=0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
+      <!-- SECCIÓN DE MÚSICA COMPLETA (REPRODUCTOR + BOTÓN BLEND) -->
+<div class="music-section" style="margin: 30px 0 20px;">
+  
+  <!-- Reproductor genérico de ambiente (lo-fi) -->
+  <div class="spotify-player" style="margin-bottom: 20px;">
+    <iframe class="spotify-embed" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcF6B6QPhFDv?utm_source=generator&theme=0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+
+  <!-- BOTÓN ESPECIAL PARA LA BLEND DE BARRERA (OPCIÓN 2) -->
+  <div style="display: flex; justify-content: center; margin: 20px 0 10px;">
+    <a href="https://open.spotify.com/blend/taste-match/b926f9f31b37b705?si=I5sMqomiTrKrn2LSQ9nqMg&fallback=getapp&blendDecoration=5f9c38d2" 
+       target="_blank" 
+       class="blend-button" 
+       style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(145deg, #ff5577, #b13e55); padding: 16px 32px; border-radius: 60px; color: white; text-decoration: none; font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 8px 0 #6b2533, 0 10px 25px rgba(255,85,119,0.4); transition: all 0.15s ease; width: 100%; max-width: 500px; margin: 0 auto;">
+      <i data-lucide="headphones" width="24" height="24"></i>
+      <span>🎧 ABRIR BLEND DE BARRERA EN SPOTIFY</span>
+      <i data-lucide="external-link" width="20" height="20"></i>
+    </a>
+  </div>
+  
+  <!-- Texto explicativo sutil -->
+  <div style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px;">
+    *Cuando Tuta acepte, aquí estará su mezcla personalizada
+  </div>
+  
+</div>
+
+<!-- Estilos adicionales para el botón (agregar al <style> existente) -->
+<style>
+  .blend-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 0 #6b2533, 0 15px 30px rgba(255,85,119,0.5);
+    filter: brightness(1.1);
+  }
+  
+  .blend-button:active {
+    transform: translateY(5px);
+    box-shadow: 0 5px 0 #6b2533;
+  }
+  
+  @media (max-width: 600px) {
+    .blend-button {
+      padding: 14px 20px;
+      font-size: 0.95rem;
+      gap: 8px;
+    }
+  }
+</style>
 
       <!-- RECOMPENSA VIRTUAL -->
       <div style="text-align: right; color: var(--text-secondary); margin-top: 15px; font-size:0.9rem;" id="virtualRewardLine">⭐ próximo nivel: 100 pts</div>
@@ -1040,3 +1085,4 @@
   </script>
 </body>
 </html>
+
