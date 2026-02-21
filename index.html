@@ -60,6 +60,89 @@
       line-height: 1.5;
     }
 
+    /* pantalla login */
+    .login-screen {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      background: var(--bg-dark);
+      backdrop-filter: blur(20px);
+    }
+    .login-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 60px;
+      padding: 3rem 2.5rem;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: var(--shadow-heavy);
+      text-align: center;
+      animation: floatIn 0.5s ease;
+    }
+    @keyframes floatIn {
+      0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .login-card h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      background: linear-gradient(145deg, #fff, #b0d0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+    }
+    .login-sub {
+      color: var(--text-secondary);
+      margin-bottom: 2.2rem;
+    }
+    .password-field {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--glass-border);
+      border-radius: 80px;
+      padding: 16px 24px;
+      width: 100%;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      outline: none;
+      margin-bottom: 1.8rem;
+      transition: 0.2s;
+    }
+    .password-field:focus {
+      border-color: var(--primary-glow);
+      box-shadow: 0 0 0 4px rgba(0,224,255,0.15);
+    }
+    .login-btn {
+      background: linear-gradient(145deg, #1f2a45, #0f172a);
+      border: none;
+      padding: 16px 32px;
+      border-radius: 80px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: white;
+      width: 100%;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 0 #0b0f1c;
+      transition: 0.1s ease;
+    }
+    .login-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 0 #0b0f1c, 0 0 30px var(--primary-glow);
+    }
+    .login-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 5px 0 #0b0f1c;
+    }
+
+    /* app oculta inicialmente */
+    #app {
+      display: none;
+    }
+
     /* partículas fondo animado profesional */
     #particles-js {
       position: fixed;
@@ -430,72 +513,86 @@
   </style>
 </head>
 <body>
-  <div id="particles-js"></div> <!-- fondo animado profesional -->
+  <!-- LOGIN SCREEN con contraseña Papucholangas -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <h2>nexus flow</h2>
+      <div class="login-sub">acceso privado · estudio 2026</div>
+      <input type="password" id="passwordInput" class="password-field" placeholder="contraseña" autofocus>
+      <button class="login-btn" id="loginBtn">ENTRAR AL DASHBOARD</button>
+      <div style="margin-top: 20px; color: var(--text-secondary); font-size:0.85rem; opacity:0.7">demo: Papucholangas</div>
+    </div>
+  </div>
 
-  <!-- confetti overlay -->
-  <canvas id="confettiCanvas" class="confetti-canvas" style="display: none;"></canvas>
-  <audio id="taskSound" src="data:audio/mp3;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gR2VtaW5pU291bmRzLnByb2Zlc3Npb25hbC5tcDMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQxAAAA18a4QaAQAADp8uFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" type="audio/mpeg"></audio>
+  <!-- APLICACIÓN PRINCIPAL (oculta hasta login correcto) -->
+  <div id="app">
+    <div id="particles-js"></div> <!-- fondo animado profesional -->
 
-  <main class="glass-dashboard">
-    <!-- header con nivel y modo toggle -->
-    <div class="app-header">
-      <div class="logo-area">
-        <div class="logo-icon"><i data-lucide="sparkles" width="28"></i></div>
-        <div class="logo-text"><h1>nexus flow</h1></div>
+    <!-- confetti overlay -->
+    <canvas id="confettiCanvas" class="confetti-canvas" style="display: none;"></canvas>
+    <audio id="taskSound" src="data:audio/mp3;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gR2VtaW5pU291bmRzLnByb2Zlc3Npb25hbC5tcDMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQxAAAA18a4QaAQAADp8uFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" type="audio/mpeg"></audio>
+
+    <main class="glass-dashboard">
+      <!-- header con nivel y modo toggle -->
+      <div class="app-header">
+        <div class="logo-area">
+          <div class="logo-icon"><i data-lucide="sparkles" width="28"></i></div>
+          <div class="logo-text"><h1>nexus flow</h1></div>
+        </div>
+        <div class="action-bar">
+          <span class="badge"><i data-lucide="flame"></i> <span id="streakDisplay">0</span> · racha</span>
+          <span class="badge"><i data-lucide="zap"></i> nivel <span id="levelDisplay">1</span></span>
+          <span class="badge"><i data-lucide="star"></i> <span id="pointsDisplay">0</span> pts</span>
+          <div class="glass-button" id="themeToggle"><i data-lucide="moon"></i> claro/oscuro</div>
+        </div>
       </div>
-      <div class="action-bar">
-        <span class="badge"><i data-lucide="flame"></i> <span id="streakDisplay">0</span> · racha</span>
-        <span class="badge"><i data-lucide="zap"></i> nivel <span id="levelDisplay">1</span></span>
-        <span class="badge"><i data-lucide="star"></i> <span id="pointsDisplay">0</span> pts</span>
-        <div class="glass-button" id="themeToggle"><i data-lucide="moon"></i> claro/oscuro</div>
+
+      <!-- dashboard stats -->
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-title"><i data-lucide="check-circle" width="18"></i> completadas</div><div class="stat-value" id="completedCount">0</div><div class="progress-micro"><div class="progress-micro-fill" id="globalProgressBar" style="width:0%"></div></div></div>
+        <div class="stat-card"><div class="stat-title"><i data-lucide="list-todo"></i> total tareas</div><div class="stat-value" id="totalTasks">0</div></div>
+        <div class="stat-card"><div class="stat-title"><i data-lucide="layers"></i> progreso por mate</div><div class="stat-value" style="font-size:1.2rem;" id="subjectProgressText">⚡ 0%</div><div class="progress-micro"><div class="progress-micro-fill" id="subjectProgressFill" style="width:0%"></div></div></div>
+        <div class="stat-card"><div class="stat-title"><i data-lucide="gift"></i> recompensa</div><div class="stat-value" style="font-size:1.4rem;" id="rewardBadge">🔒 novato</div></div>
       </div>
-    </div>
 
-    <!-- dashboard stats -->
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-title"><i data-lucide="check-circle" width="18"></i> completadas</div><div class="stat-value" id="completedCount">0</div><div class="progress-micro"><div class="progress-micro-fill" id="globalProgressBar" style="width:0%"></div></div></div>
-      <div class="stat-card"><div class="stat-title"><i data-lucide="list-todo"></i> total tareas</div><div class="stat-value" id="totalTasks">0</div></div>
-      <div class="stat-card"><div class="stat-title"><i data-lucide="layers"></i> progreso por mate</div><div class="stat-value" style="font-size:1.2rem;" id="subjectProgressText">⚡ 0%</div><div class="progress-micro"><div class="progress-micro-fill" id="subjectProgressFill" style="width:0%"></div></div></div>
-      <div class="stat-card"><div class="stat-title"><i data-lucide="gift"></i> recompensa</div><div class="stat-value" style="font-size:1.4rem;" id="rewardBadge">🔒 novato</div></div>
-    </div>
+      <!-- filtro y búsqueda -->
+      <div class="search-filter-row">
+        <div class="search-box"><i data-lucide="search" width="18"></i><input type="text" id="searchInput" placeholder="Buscar tarea..."></div>
+        <select class="filter-select" id="filterSubject">
+          <option value="*">Todas las materias</option>
+          <option value="Matemáticas">📐 Matemáticas</option>
+          <option value="Física">⚡ Física</option>
+          <option value="Castellano">📖 Castellano</option>
+          <option value="Bioquímica">🧬 Bioquímica</option>
+          <option value="Filosofía">🤔 Filosofía</option>
+          <option value="Inglés">🌎 Inglés</option>
+          <option value="Taller">🛠️ Taller</option>
+          <option value="Baloncesto">🏀 Baloncesto</option>
+          <option value="otro">✨ otra</option>
+        </select>
+      </div>
 
-    <!-- filtro y búsqueda -->
-    <div class="search-filter-row">
-      <div class="search-box"><i data-lucide="search" width="18"></i><input type="text" id="searchInput" placeholder="Buscar tarea..."></div>
-      <select class="filter-select" id="filterSubject">
-        <option value="*">Todas las materias</option>
-        <option value="Matemáticas">📐 Matemáticas</option>
-        <option value="Física">⚡ Física</option>
-        <option value="Castellano">📖 Castellano</option>
-        <option value="Bioquímica">🧬 Bioquímica</option>
-        <option value="Filosofía">🤔 Filosofía</option>
-        <option value="Inglés">🌎 Inglés</option>
-        <option value="Taller">🛠️ Taller</option>
-        <option value="Baloncesto">🏀 Baloncesto</option>
-        <option value="otro">✨ otra</option>
-      </select>
-    </div>
+      <!-- input nueva tarea -->
+      <div class="task-input-panel">
+        <select id="materiaSelect">
+          <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
+          <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option><option>otro</option>
+        </select>
+        <input type="text" id="taskInput" placeholder="Nombre de la tarea">
+        <input type="date" id="dateInput">
+        <button id="addTaskBtn"><i data-lucide="plus"></i> crear tarea</button>
+      </div>
 
-    <!-- input nueva tarea -->
-    <div class="task-input-panel">
-      <select id="materiaSelect">
-        <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
-        <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option><option>otro</option>
-      </select>
-      <input type="text" id="taskInput" placeholder="Nombre de la tarea">
-      <input type="date" id="dateInput">
-      <button id="addTaskBtn"><i data-lucide="plus"></i> crear tarea</button>
-    </div>
+      <!-- mensaje motivacional dinámico -->
+      <div class="motivation-box" id="motivationMsg">🚀 ¡Inicia tu primera tarea!</div>
 
-    <!-- mensaje motivacional dinámico -->
-    <div class="motivation-box" id="motivationMsg">🚀 ¡Inicia tu primera tarea!</div>
+      <!-- lista de tareas -->
+      <div id="tasksList" class="tasks-container"></div>
 
-    <!-- lista de tareas -->
-    <div id="tasksList" class="tasks-container"></div>
-
-    <!-- espacio para recompensas virtuales extra -->
-    <div style="text-align: right; color: var(--text-secondary); font-size:0.9rem; margin-top:10px" id="virtualRewardLine">⭐ desbloquea racha 7</div>
-  </main>
+      <!-- espacio para recompensas virtuales extra -->
+      <div style="text-align: right; color: var(--text-secondary); font-size:0.9rem; margin-top:10px" id="virtualRewardLine">⭐ desbloquea racha 7</div>
+    </main>
+  </div>
 
   <script type="module">
     // ========== CONFIG FIREBASE (modular CDN) ==========
@@ -515,6 +612,31 @@
     const db = getDatabase(app);
     const tasksRef = ref(db, 'tareas');
 
+    // ========== CONTROL DE ACCESO: CONTRASEÑA "Papucholangas" ==========
+    const loginScreen = document.getElementById('loginScreen');
+    const appContainer = document.getElementById('app');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginBtn = document.getElementById('loginBtn');
+
+    function checkPassword() {
+      if (passwordInput.value === 'Papucholangas') {
+        loginScreen.style.display = 'none';
+        appContainer.style.display = 'block';
+        // Inicializar partículas y todo después del login
+        initParticles();
+        // Cargar datos Firebase (ya está escuchando pero comenzamos después)
+        setupFirebaseListener();
+        // Ajustar tamaño canvas confetti
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+      } else {
+        alert('Contraseña incorrecta');
+      }
+    }
+
+    loginBtn.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
+
     // ========== ESTADO GLOBAL Y VARIABLES ==========
     let allTasks = [];                // almacén para filtros
     let userLevel = 1;
@@ -522,7 +644,7 @@
     let streak = 0;                   // racha diaria real (basada en completadas hoy)
     let lastCompletedDate = '';
 
-    // elementos DOM
+    // elementos DOM (solo accesibles cuando app visible)
     const tasksDiv = document.getElementById('tasksList');
     const totalSpan = document.getElementById('totalTasks');
     const completedSpan = document.getElementById('completedCount');
@@ -548,7 +670,7 @@
     let confettiCtx = confettiCanvas.getContext('2d');
     let particles = [];
 
-    // ========== FUNCIONES DE CONFETTI (sencillo pero efectivo) ==========
+    // ========== FUNCIONES DE CONFETTI ==========
     function startConfetti() {
       confettiCanvas.style.display = 'block';
       for (let i=0; i<60; i++) particles.push({ x: Math.random()*window.innerWidth, y: -20, r: Math.random()*6+2, d: Math.random()*5+2, color: `hsl(${Math.random()*360},80%,60%)` });
@@ -565,16 +687,14 @@
 
     // ========== RACHA DIARIA REAL ==========
     function updateStreak(tasks) {
-      const today = new Date().toDateString().split(' ')[1]+' '+new Date().getDate(); // simplificado
-      const completedToday = tasks.filter(t => t.hecho && t.completedDate === today).length; // almacenar completedDate
+      const today = new Date().toDateString().split(' ')[1]+' '+new Date().getDate(); 
+      const completedToday = tasks.filter(t => t.hecho && t.completedDate === today).length;
       if (completedToday > 0) {
         if (lastCompletedDate !== today) {
           streak++;
           lastCompletedDate = today;
         }
       } else {
-        // si no completó ninguna hoy, no reseteamos automático; depende de lógica de día siguiente (simplificada)
-        // reset si pasó 1 dia sin completar? para demo: si lastCompletedDate es anterior a ayer, reiniciamos
         const yesterday = new Date(Date.now()-864e5).toDateString().split(' ')[1]+' '+ (new Date(Date.now()-864e5).getDate());
         if (lastCompletedDate && lastCompletedDate !== today && lastCompletedDate !== yesterday) streak = 0;
       }
@@ -583,7 +703,7 @@
 
     // ========== NIVEL Y PUNTOS ==========
     function updateLevelAndPoints(completedDelta = 0) {
-      if (completedDelta > 0) userPoints += 10 * completedDelta; // 10 pts por tarea
+      if (completedDelta > 0) userPoints += 10 * completedDelta;
       let newLevel = Math.floor(userPoints / 100) + 1;
       if (newLevel > userLevel) {
         userLevel = newLevel;
@@ -610,7 +730,7 @@
       const percent = total ? (completed/total)*100 : 0;
       globalBar.style.width = percent + '%';
 
-      // actualizar progreso materia (para la primera materia con más tareas)
+      // progreso materia principal
       const subjectCounts = {};
       tasks.forEach(t => { if(!t.hecho) subjectCounts[t.materia] = (subjectCounts[t.materia]||0)+1; });
       const topSubject = Object.keys(subjectCounts).sort((a,b)=>subjectCounts[b]-subjectCounts[a])[0] || 'Ninguna';
@@ -643,13 +763,13 @@
           </div>
         </div>`;
       }).join('');
-      lucide.createIcons(); // redibujar iconos
+      lucide.createIcons();
 
-      // adjuntar eventos a botones
+      // eventos botones
       document.querySelectorAll('.complete-btn').forEach(b => b.addEventListener('click', (e) => {
         const key = b.dataset.key; const done = b.dataset.done === 'true';
         update(ref(db, 'tareas/'+key), { hecho: !done });
-        if (!done) { // completar
+        if (!done) {
           sound.play().catch(e=>{}); startConfetti();
           const today = new Date().toDateString().split(' ')[1]+' '+new Date().getDate();
           update(ref(db, 'tareas/'+key), { completedDate: today });
@@ -664,15 +784,17 @@
     }
 
     // ========== FIREBASE REAL TIME ==========
-    onValue(tasksRef, (snapshot) => {
-      const tasks = [];
-      snapshot.forEach(child => {
-        tasks.push({ key: child.key, ...child.val() });
+    function setupFirebaseListener() {
+      onValue(tasksRef, (snapshot) => {
+        const tasks = [];
+        snapshot.forEach(child => {
+          tasks.push({ key: child.key, ...child.val() });
+        });
+        tasks.sort((a,b) => (a.fecha||'') > (b.fecha||'') ? 1 : -1);
+        renderTasks(tasks);
+        updateStreak(tasks);
       });
-      tasks.sort((a,b) => (a.fecha||'') > (b.fecha||'') ? 1 : -1); // orden por fecha
-      renderTasks(tasks);
-      updateStreak(tasks);
-    });
+    }
 
     // ========== AGREGAR TAREA ==========
     addBtn.addEventListener('click', () => {
@@ -693,24 +815,18 @@
     });
 
     // ========== INICIALIZAR FONDO PARTICULAS ==========
-    particlesJS('particles-js', {
-      particles: { number: { value: 60 }, color: { value: '#4a80f0' }, opacity: { value: 0.3 }, size: { value: 2 }, line_linked: { enable: true, distance: 150, color: '#4a80f0', opacity: 0.2 }, move: { enable: true, speed: 0.8 } },
-      interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } }
-    });
-
-    // animación entrada (sutil) ya está con glass
+    function initParticles() {
+      particlesJS('particles-js', {
+        particles: { number: { value: 60 }, color: { value: '#4a80f0' }, opacity: { value: 0.3 }, size: { value: 2 }, line_linked: { enable: true, distance: 150, color: '#4a80f0', opacity: 0.2 }, move: { enable: true, speed: 0.8 } },
+        interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' } } }
+      });
+    }
 
     // suscripción a filtros
     searchInput.addEventListener('input', () => renderTasks(allTasks));
     filterSubject.addEventListener('change', () => renderTasks(allTasks));
 
-    // actualización de canvas confetti al resize
     window.addEventListener('resize', () => { confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; });
-    confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight;
-
-    // sonido soft y microanimaciones completadas (incorporadas)
-    // nivel y puntos iniciales
-    userPoints = 0; userLevel = 1;
   </script>
   <script>lucide.createIcons();</script>
 </body>
