@@ -1101,31 +1101,31 @@
         </div>
       </div>
 
-      <!-- ===== TAREAS (estilo exámenes) ===== -->
-<div class="examen-section">
-  <div class="examen-header">
-    <i data-lucide="list-todo" width="28" height="28" style="color: var(--accent-tuta);"></i>
-    <h3>Mis tareas</h3>
-  </div>
-  
-  <!-- Panel para agregar tarea (igual que exámenes) -->
-  <div class="examen-input-panel">
-    <select id="tareaMateria">
-      <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
-      <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
-      <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
-      <option>Artes</option><option>Informática</option>
-    </select>
-    <input type="text" id="tareaNombre" placeholder="Nombre de la tarea">
-    <input type="date" id="tareaFecha" placeholder="Fecha">
-    <button id="addTareaBtn"><i data-lucide="plus"></i> Agregar tarea</button>
-  </div>
-  
-  <!-- Lista de tareas (estilo exámenes) -->
-  <div id="tareasContainer">
-    <!-- Las tareas se generan aquí con el mismo estilo que los exámenes -->
-  </div>
-</div>
+      <!-- EXÁMENES -->
+      <div class="examen-section">
+        <div class="examen-header">
+          <i data-lucide="calendar-clock" width="28" height="28" style="color: var(--accent-tuta);"></i>
+          <h3>Próximos exámenes</h3>
+        </div>
+        
+        <!-- Panel para agregar examen -->
+        <div class="examen-input-panel">
+          <select id="examenMateria">
+            <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
+            <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
+            <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
+            <option>Artes</option><option>Informática</option>
+          </select>
+          <input type="date" id="examenFecha" placeholder="Fecha">
+          <input type="number" id="examenProgreso" min="0" max="100" value="50" placeholder="% preparado">
+          <button id="addExamenBtn"><i data-lucide="plus"></i> Agregar examen</button>
+        </div>
+        
+        <!-- Lista de exámenes -->
+        <div id="examenesContainer">
+          <!-- Los exámenes se generan aquí -->
+        </div>
+      </div>
 
       <!-- MENSAJE MOTIVACIONAL -->
       <div class="motivation-box" id="motivationMsg">
@@ -2089,4 +2089,5 @@
   </script>
 </body>
 </html>
+
 
