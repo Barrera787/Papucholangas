@@ -276,7 +276,76 @@ document.getElementById("racha").textContent="Racha de disciplina 🔥: "+data.v
 cargar();
 
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, update } 
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyD8Z8M5TL-SU3oMFYULFaIzhBrD9yObXwo",
+  authDomain: "papucholangas.firebaseapp.com",
+  databaseURL: "https://papucholangas-default-rtdb.firebaseio.com", 
+  projectId: "papucholangas",
+  storageBucket: "papucholangas.firebasestorage.app",
+  messagingSenderId: "392558100266",
+  appId: "1:392558100266:web:eb3a5313670bcafba96853"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const tareasRef = ref(db, "tareas");
+
+const lista = document.getElementById("lista");
+
+window.agregar = function(){
+  let materia = document.getElementById("materia").value;
+  let texto = document.getElementById("texto").value;
+  let profe = document.getElementById("profe").value;
+
+  if(texto==="") return;
+
+  push(tareasRef, {
+    materia: materia,
+    texto: texto,
+    profe: materia==="Taller"?profe:"",
+    hecho: false
+  });
+
+  document.getElementById("texto").value="";
+};
+
+onValue(tareasRef, (snapshot) => {
+  lista.innerHTML = "";
+  snapshot.forEach(child => {
+    let t = child.val();
+    let key = child.key;
+
+    let li = document.createElement("li");
+    if(t.hecho) li.classList.add("hecho");
+
+    li.innerHTML = `
+      <span><strong>[${t.materia}${t.profe ? " - " + t.profe : ""}]</strong> ${t.texto}</span>
+      <div>
+        <button onclick="marcar('${key}', ${t.hecho})">✔</button>
+        <button onclick="borrar('${key}')">🗑</button>
+      </div>
+    `;
+
+    lista.appendChild(li);
+  });
+});
+
+window.marcar = function(key, estado){
+  update(ref(db, "tareas/" + key), {
+    hecho: !estado
+  });
+};
+
+window.borrar = function(key){
+  remove(ref(db, "tareas/" + key));
+};
+</script>
 </body>
 </html>
+
 
