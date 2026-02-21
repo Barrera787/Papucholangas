@@ -20,9 +20,7 @@ font-size:22px;
 font-weight:bold;
 }
 
-section{
-padding:20px;
-}
+section{padding:20px;}
 
 input,select,button{
 padding:8px;
@@ -36,10 +34,7 @@ color:white;
 cursor:pointer;
 }
 
-ul{
-list-style:none;
-padding:0;
-}
+ul{list-style:none;padding:0;}
 
 li{
 background:#1a1a1a;
@@ -51,10 +46,7 @@ justify-content:space-between;
 align-items:center;
 }
 
-.hecho{
-text-decoration:line-through;
-opacity:0.5;
-}
+.hecho{text-decoration:line-through;opacity:0.5;}
 
 .matematicas{border-left:5px solid #00ff88;}
 .fisica{border-left:5px solid #00c3ff;}
@@ -78,11 +70,10 @@ height:20px;
 background:#00ff88;
 border-radius:10px;
 width:0%;
+transition:0.3s;
 }
 
-.oculto{
-display:none;
-}
+.oculto{display:none;}
 
 .login{
 display:flex;
@@ -152,11 +143,28 @@ Sistema Supremo Barrera & Tuta 🚀🔥
 </section>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, update } 
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD8Z8M5TL-SU3oMFYULFaIzhBrD9yObXwo",
+  authDomain: "papucholangas.firebaseapp.com",
+  databaseURL: "https://papucholangas-default-rtdb.firebaseio.com",
+  projectId: "papucholangas",
+  storageBucket: "papucholangas.firebasestorage.app",
+  messagingSenderId: "392558100266",
+  appId: "1:392558100266:web:eb3a5313670bcafba96853"
+};
+
+const appFirebase = initializeApp(firebaseConfig);
+const db = getDatabase(appFirebase);
+const tareasRef = ref(db,"tareas");
 
 let contraseña="Papucholangas";
 
-function entrar(){
+window.entrar=function(){
 let c=document.getElementById("clave").value;
 if(c===contraseña){
 document.getElementById("login").style.display="none";
@@ -166,48 +174,53 @@ alert("Clave incorrecta");
 }
 }
 
-function mostrarProfe(){
+window.mostrarProfe=function(){
 let m=document.getElementById("materia").value;
 document.getElementById("profe").style.display=(m==="Taller")?"inline":"none";
 }
 
-function agregar(){
+window.agregar=function(){
 let materia=document.getElementById("materia").value;
 let texto=document.getElementById("texto").value;
 let profe=document.getElementById("profe").value;
 
 if(texto==="") return;
 
-let tarea={
-materia:materia,
-texto:texto,
+push(tareasRef,{
+materia,
+texto,
 profe:(materia==="Taller")?profe:"",
 hecho:false
-};
+});
 
-let tareas=JSON.parse(localStorage.getItem("tareas"))||[];
-tareas.push(tarea);
-localStorage.setItem("tareas",JSON.stringify(tareas));
 document.getElementById("texto").value="";
-cargar();
 }
 
-function cargar(){
+onValue(tareasRef,(snapshot)=>{
 let lista=document.getElementById("lista");
 lista.innerHTML="";
-let tareas=JSON.parse(localStorage.getItem("tareas"))||[];
 let pendientes=0;
 let hechas=0;
 
-tareas.forEach((t,i)=>{
+snapshot.forEach(child=>{
+let t=child.val();
+let key=child.key;
+
 let li=document.createElement("li");
 let clase=t.materia.toLowerCase();
 
 if(clase.includes("matem")) clase="matematicas";
-if(clase.includes("baloncesto")) clase="baloncesto";
-if(clase.includes("c.pol")) clase="otro";
+else if(clase.includes("fis")) clase="fisica";
+else if(clase.includes("cast")) clase="castellano";
+else if(clase.includes("bio")) clase="bioquimica";
+else if(clase.includes("filo")) clase="filosofia";
+else if(clase.includes("ingles")) clase="ingles";
+else if(clase.includes("taller")) clase="taller";
+else if(clase.includes("baloncesto")) clase="baloncesto";
+else clase="otro";
 
 li.classList.add(clase);
+
 if(t.hecho){li.classList.add("hecho");hechas++;}else{pendientes++;}
 
 li.innerHTML=`<span><strong>[${t.materia}${t.profe?" - "+t.profe:""}]</strong> ${t.texto}</span>`;
@@ -216,11 +229,11 @@ let botones=document.createElement("div");
 
 let check=document.createElement("button");
 check.textContent="✔";
-check.onclick=()=>{t.hecho=!t.hecho;actualizar(i,t);};
+check.onclick=()=>marcar(key,t.hecho);
 
 let borrar=document.createElement("button");
 borrar.textContent="🗑";
-borrar.onclick=()=>{eliminar(i);};
+borrar.onclick=()=>remove(ref(db,"tareas/"+key));
 
 botones.appendChild(check);
 botones.appendChild(borrar);
@@ -235,23 +248,13 @@ let porcentaje=total? (hechas/total)*100:0;
 document.getElementById("barra").style.width=porcentaje+"%";
 
 actualizarRacha(hechas);
+});
+
+window.marcar=function(key,estado){
+update(ref(db,"tareas/"+key),{hecho:!estado});
 }
 
-function actualizar(i,t){
-let tareas=JSON.parse(localStorage.getItem("tareas"));
-tareas[i]=t;
-localStorage.setItem("tareas",JSON.stringify(tareas));
-cargar();
-}
-
-function eliminar(i){
-let tareas=JSON.parse(localStorage.getItem("tareas"));
-tareas.splice(i,1);
-localStorage.setItem("tareas",JSON.stringify(tareas));
-cargar();
-}
-
-function modoEnfoque(){
+window.modoEnfoque=function(){
 document.body.style.background=
 (document.body.style.background==="black")?"#0f0f0f":"black";
 }
@@ -272,80 +275,7 @@ data.valor=0;
 localStorage.setItem("racha",JSON.stringify(data));
 document.getElementById("racha").textContent="Racha de disciplina 🔥: "+data.valor+" días";
 }
-
-cargar();
-
 </script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove, update } 
-from "https://www.gstatic.com/firebasejs/12.9.0/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD8Z8M5TL-SU3oMFYULFaIzhBrD9yObXwo",
-  authDomain: "papucholangas.firebaseapp.com",
-  databaseURL: "https://papucholangas-default-rtdb.firebaseio.com", 
-  projectId: "papucholangas",
-  storageBucket: "papucholangas.firebasestorage.app",
-  messagingSenderId: "392558100266",
-  appId: "1:392558100266:web:eb3a5313670bcafba96853"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const tareasRef = ref(db, "tareas");
-
-const lista = document.getElementById("lista");
-
-window.agregar = function(){
-  let materia = document.getElementById("materia").value;
-  let texto = document.getElementById("texto").value;
-  let profe = document.getElementById("profe").value;
-
-  if(texto==="") return;
-
-  push(tareasRef, {
-    materia: materia,
-    texto: texto,
-    profe: materia==="Taller"?profe:"",
-    hecho: false
-  });
-
-  document.getElementById("texto").value="";
-};
-
-onValue(tareasRef, (snapshot) => {
-  lista.innerHTML = "";
-  snapshot.forEach(child => {
-    let t = child.val();
-    let key = child.key;
-
-    let li = document.createElement("li");
-    if(t.hecho) li.classList.add("hecho");
-
-    li.innerHTML = `
-      <span><strong>[${t.materia}${t.profe ? " - " + t.profe : ""}]</strong> ${t.texto}</span>
-      <div>
-        <button onclick="marcar('${key}', ${t.hecho})">✔</button>
-        <button onclick="borrar('${key}')">🗑</button>
-      </div>
-    `;
-
-    lista.appendChild(li);
-  });
-});
-
-window.marcar = function(key, estado){
-  update(ref(db, "tareas/" + key), {
-    hecho: !estado
-  });
-};
-
-window.borrar = function(key){
-  remove(ref(db, "tareas/" + key));
-};
-</script>
 </body>
 </html>
-
-
