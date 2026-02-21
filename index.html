@@ -32,6 +32,7 @@
       --text-secondary: #a5b3d1;
       --success: #2ee6a8;
       --danger: #ff5577;
+      --warning: #ffaa00;
       --shadow-heavy: 0 25px 45px -12px rgba(0,0,0,0.8);
       --blur-amount: 20px;
       --border-radius-main: 40px;
@@ -372,7 +373,7 @@
       height: 32px;
     }
 
-    /* ===== TABLA DE TAREAS ===== */
+    /* ===== TABLA DE TAREAS CON BOTONES ===== */
     .tareas-table-container {
       width: 100%;
       margin: 20px 0 40px 0;
@@ -406,6 +407,7 @@
       padding: 14px 12px;
       border-bottom: 1px solid rgba(255,255,255,0.05);
       color: var(--text-primary);
+      vertical-align: middle;
     }
     .tareas-table tr:last-child td {
       border-bottom: none;
@@ -414,6 +416,10 @@
       background: rgba(255,255,255,0.05);
       transition: 0.15s;
     }
+    .tareas-table tr.completada td .task-nombre {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
     .materia-badge {
       display: inline-block;
       padding: 4px 10px;
@@ -421,7 +427,7 @@
       font-size: 0.85rem;
       font-weight: 500;
     }
-    /* Colores de materias en la tabla */
+    /* Colores de materias */
     .materia-badge[data-materia="Matemáticas"] { background: rgba(0,255,136,0.15); color: #00ff88; }
     .materia-badge[data-materia="Física"] { background: rgba(0,195,255,0.15); color: #00c3ff; }
     .materia-badge[data-materia="Castellano"] { background: rgba(255,77,77,0.15); color: #ff4d4d; }
@@ -436,20 +442,56 @@
     .materia-badge[data-materia="Religión"] { background: rgba(204,102,255,0.15); color: #cc66ff; }
     .materia-badge[data-materia="Artes"] { background: rgba(255,102,102,0.15); color: #ff6666; }
     .materia-badge[data-materia="Informática"] { background: rgba(102,204,255,0.15); color: #66ccff; }
+    
     .fecha-cell {
       color: var(--text-secondary);
       font-size: 0.9rem;
+    }
+    .acciones-cell {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .accion-btn {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      width: 36px;
+      height: 36px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.15s;
+      color: var(--text-primary);
+    }
+    .accion-btn:hover {
+      transform: scale(1.1);
+    }
+    .accion-btn.completar:hover {
+      background: var(--success);
+      color: black;
+      border-color: var(--success);
+    }
+    .accion-btn.completar.activo {
+      background: var(--success);
+      color: black;
+    }
+    .accion-btn.editar:hover {
+      background: var(--primary-glow);
+      color: black;
+      border-color: var(--primary-glow);
+    }
+    .accion-btn.eliminar:hover {
+      background: var(--danger);
+      color: white;
+      border-color: var(--danger);
     }
     .empty-table-message {
       text-align: center;
       padding: 40px !important;
       color: var(--text-secondary);
       font-style: italic;
-    }
-
-    /* Las tasks cards originales ahora están ocultas */
-    .tasks-container {
-      display: none;
     }
 
     /* CHAT SECTION */
@@ -991,6 +1033,13 @@
         padding: 10px 8px;
         font-size: 0.9rem;
       }
+      .acciones-cell {
+        gap: 4px;
+      }
+      .accion-btn {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     #taskSound, #chatSound { display: none; }
@@ -1069,10 +1118,10 @@
       <button class="ver-tareas-btn" id="verTareasBtn">
         <i data-lucide="eye"></i>
         VER MIS TAREAS
-        <i data-lucide="arrow-down"></i>
+        <i data-lucide="arrow-down" id="toggleIcon"></i>
       </button>
 
-      <!-- ===== TABLA DE TAREAS (oculta inicialmente) ===== -->
+      <!-- ===== TABLA DE TAREAS CON BOTONES ===== -->
       <div id="tareasTableContainer" class="tareas-table-container oculto">
         <table class="tareas-table">
           <thead>
@@ -1080,6 +1129,7 @@
               <th>Materia</th>
               <th>Nombre de la tarea</th>
               <th>Fecha</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody id="tareasTableBody">
@@ -1378,6 +1428,7 @@
     const dateInput = document.getElementById('dateInput');
     const themeBtn = document.getElementById('themeToggle');
     const verTareasBtn = document.getElementById('verTareasBtn');
+    const toggleIcon = document.getElementById('toggleIcon');
     const tareasTableContainer = document.getElementById('tareasTableContainer');
     const tareasTableBody = document.getElementById('tareasTableBody');
     
@@ -1430,20 +1481,39 @@
     const sound = document.getElementById('taskSound');
     const chatSound = document.getElementById('chatSound');
 
-    // ===== FUNCIÓN PARA MOSTRAR TABLA =====
+    // ===== FUNCIÓN PARA MOSTRAR/OCULTAR TABLA =====
+    let tablaVisible = false;
+    
     if (verTareasBtn) {
       verTareasBtn.addEventListener('click', () => {
-        // Quitar clase oculto para mostrar la tabla
-        tareasTableContainer.classList.remove('oculto');
-        // Hacer scroll suave hacia la tabla
-        tareasTableContainer.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
+        tablaVisible = !tablaVisible;
+        
+        if (tablaVisible) {
+          // Mostrar tabla
+          tareasTableContainer.classList.remove('oculto');
+          toggleIcon.setAttribute('data-lucide', 'arrow-up');
+          // Scroll suave hacia la tabla
+          setTimeout(() => {
+            tareasTableContainer.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }, 100);
+        } else {
+          // Ocultar tabla
+          tareasTableContainer.classList.add('oculto');
+          toggleIcon.setAttribute('data-lucide', 'arrow-down');
+          // Scroll suave hacia arriba (header)
+          document.querySelector('.app-header').scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        lucide.createIcons();
       });
     }
 
-    // ===== FUNCIÓN PARA RENDERIZAR TABLA DE TAREAS =====
+    // ===== FUNCIÓN PARA RENDERIZAR TABLA DE TAREAS (ABEJO) =====
     function renderTablaTareas(tasks) {
       // Limpiar tabla
       tareasTableBody.innerHTML = '';
@@ -1451,39 +1521,97 @@
       if (!tasks || tasks.length === 0) {
         // Mostrar mensaje si no hay tareas
         const emptyRow = document.createElement('tr');
-        emptyRow.innerHTML = `<td colspan="3" class="empty-table-message">✨ No hay tareas agregadas aún. ¡Crea una!</td>`;
+        emptyRow.innerHTML = `<td colspan="4" class="empty-table-message">✨ No hay tareas agregadas aún. ¡Crea una!</td>`;
         tareasTableBody.appendChild(emptyRow);
         return;
       }
       
-      // Ordenar tareas por fecha
-      const tareasOrdenadas = [...tasks].sort((a, b) => {
-        if (a.fecha && b.fecha) return new Date(a.fecha) - new Date(b.fecha);
-        if (a.fecha && !b.fecha) return -1;
-        if (!a.fecha && b.fecha) return 1;
-        return 0;
-      });
+      // Ordenar por timestamp (las más nuevas al final)
+      const tareasOrdenadas = [...tasks].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
       
       // Crear filas para cada tarea
       tareasOrdenadas.forEach(tarea => {
-        const row = document.createElement('tr');
+        agregarFilaTarea(tarea);
+      });
+    }
+    
+    // Función para agregar una fila (usada al crear nueva tarea)
+    function agregarFilaTarea(tarea) {
+      const row = document.createElement('tr');
+      row.setAttribute('data-key', tarea.key);
+      if (tarea.hecho) {
+        row.classList.add('completada');
+      }
+      
+      // Formatear fecha
+      let fechaFormateada = 'Sin fecha';
+      if (tarea.fecha) {
+        const fecha = new Date(tarea.fecha);
+        fechaFormateada = fecha.toLocaleDateString();
+      }
+      
+      row.innerHTML = `
+        <td>
+          <span class="materia-badge" data-materia="${tarea.materia}">${tarea.materia}</span>
+        </td>
+        <td class="task-nombre">${tarea.texto}</td>
+        <td class="fecha-cell">${fechaFormateada}</td>
+        <td class="acciones-cell">
+          <button class="accion-btn completar ${tarea.hecho ? 'activo' : ''}" data-key="${tarea.key}" data-done="${tarea.hecho}">
+            <i data-lucide="${tarea.hecho ? 'rotate-ccw' : 'check'}"></i>
+          </button>
+          <button class="accion-btn editar" data-key="${tarea.key}" data-text="${tarea.texto}">
+            <i data-lucide="pencil"></i>
+          </button>
+          <button class="accion-btn eliminar" data-key="${tarea.key}">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </td>
+      `;
+      
+      tareasTableBody.appendChild(row);
+      
+      // Asignar eventos a los botones de esta fila
+      const completarBtn = row.querySelector('.completar');
+      const editarBtn = row.querySelector('.editar');
+      const eliminarBtn = row.querySelector('.eliminar');
+      
+      completarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const key = completarBtn.dataset.key;
+        const hecho = completarBtn.dataset.done === 'true';
         
-        // Formatear fecha
-        let fechaFormateada = 'Sin fecha';
-        if (tarea.fecha) {
-          const fecha = new Date(tarea.fecha);
-          fechaFormateada = fecha.toLocaleDateString();
+        update(ref(db, 'tareas/' + key), { hecho: !hecho })
+          .then(() => {
+            if (!hecho) {
+              sound.play().catch(e => {});
+              startConfetti();
+              const today = new Date().toDateString().split(' ')[1] + ' ' + new Date().getDate();
+              update(ref(db, 'tareas/' + key), { completedDate: today });
+              
+              const autor = Math.random() > 0.5 ? 'Tuta' : 'Barrera';
+              updateLevelAndPoints(1, autor);
+              verificarLogros();
+            }
+          });
+      });
+      
+      editarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const key = editarBtn.dataset.key;
+        const textoActual = editarBtn.dataset.text;
+        const nuevoTexto = prompt('Editar tarea:', textoActual);
+        if (nuevoTexto && nuevoTexto.trim()) {
+          update(ref(db, 'tareas/' + key), { texto: nuevoTexto.trim() });
         }
-        
-        row.innerHTML = `
-          <td>
-            <span class="materia-badge" data-materia="${tarea.materia}">${tarea.materia}</span>
-          </td>
-          <td>${tarea.texto}</td>
-          <td class="fecha-cell">${fechaFormateada}</td>
-        `;
-        
-        tareasTableBody.appendChild(row);
+      });
+      
+      eliminarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const key = eliminarBtn.dataset.key;
+        if (confirm('¿Eliminar esta tarea?')) {
+          remove(ref(db, 'tareas/' + key));
+        }
       });
     }
 
@@ -1587,7 +1715,7 @@
       const rewards = ['🔰 aprendices', '⚡ compas', '🔥 dupla', '💎 leyendas', '🏆 inmortales'];
       rewardLine.innerText = `🎁 ${rewards[Math.min(userLevel-1,4)]} · próximo en ${100 - (userPoints%100)}pts`;
 
-      // Renderizar tabla de tareas
+      // Renderizar tabla completa
       renderTablaTareas(tasks);
       
       const completadasSemana = tasks.filter(t => {
@@ -1931,7 +2059,7 @@
       });
     }
 
-    // AGREGAR TAREA - FUNCIONAL
+    // AGREGAR TAREA - FUNCIONAL (SE AGREGA ABAJO)
     addBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const texto = taskInput.value.trim();
@@ -1953,7 +2081,7 @@
         .then(() => {
           taskInput.value = '';
           dateInput.value = '';
-          console.log('✅ Tarea agregada:', tarea);
+          console.log('✅ Tarea agregada abajo:', tarea);
         })
         .catch(error => {
           console.error('❌ Error:', error);
