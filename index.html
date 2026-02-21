@@ -1101,74 +1101,36 @@
         </div>
       </div>
 
-      <!-- INPUT TAREAS -->
-      <div class="task-input-panel">
-        <select id="materiaSelect">
-          <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
-          <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
-          <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
-          <option>Artes</option><option>Informática</option>
-        </select>
-        <input type="text" id="taskInput" placeholder="Nombre de la tarea">
-        <input type="date" id="dateInput">
-        <button id="addTaskBtn"><i data-lucide="plus"></i> crear tarea</button>
-      </div>
-
-      <!-- ===== BOTÓN GRANDE HORIZONTAL ===== -->
-      <button class="ver-tareas-btn" id="verTareasBtn">
-        <i data-lucide="eye"></i>
-        VER MIS TAREAS
-        <i data-lucide="arrow-down" id="toggleIcon"></i>
-      </button>
-
-      <!-- ===== TABLA DE TAREAS CON BOTONES ===== -->
-      <div id="tareasTableContainer" class="tareas-table-container oculto">
-        <table class="tareas-table">
-          <thead>
-            <tr>
-              <th>Materia</th>
-              <th>Nombre de la tarea</th>
-              <th>Fecha</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tareasTableBody">
-            <!-- Las filas se generan dinámicamente -->
-          </tbody>
-        </table>
-      </div>
+      <!-- ===== TAREAS (estilo exámenes) ===== -->
+<div class="examen-section">
+  <div class="examen-header">
+    <i data-lucide="list-todo" width="28" height="28" style="color: var(--accent-tuta);"></i>
+    <h3>Mis tareas</h3>
+  </div>
+  
+  <!-- Panel para agregar tarea (igual que exámenes) -->
+  <div class="examen-input-panel">
+    <select id="tareaMateria">
+      <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
+      <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
+      <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
+      <option>Artes</option><option>Informática</option>
+    </select>
+    <input type="text" id="tareaNombre" placeholder="Nombre de la tarea">
+    <input type="date" id="tareaFecha" placeholder="Fecha">
+    <button id="addTareaBtn"><i data-lucide="plus"></i> Agregar tarea</button>
+  </div>
+  
+  <!-- Lista de tareas (estilo exámenes) -->
+  <div id="tareasContainer">
+    <!-- Las tareas se generan aquí con el mismo estilo que los exámenes -->
+  </div>
+</div>
 
       <!-- MENSAJE MOTIVACIONAL -->
       <div class="motivation-box" id="motivationMsg">
         <i data-lucide="message-circle"></i>
         <span>🧢 Tuta dice: Échale ganas, mi Barrera.</span>
-      </div>
-
-      <!-- COMPETENCIA -->
-      <div class="competencia-section">
-        <div class="competencia-titulo">
-          <i data-lucide="trophy" width="28" height="28" style="color: var(--accent-tuta);"></i>
-          <i data-lucide="swords" width="24" height="24" style="color: var(--accent-barrera);"></i>
-          <h3>Competencia del día</h3>
-        </div>
-        <div class="competencia-barras">
-          <div class="barra-competencia">
-            <span class="barra-nombre"><i data-lucide="crown" width="16"></i> Tuta</span>
-            <div class="barra-contenedor">
-              <div class="barra-tuta" id="barraTuta" style="width: 0%;">0</div>
-            </div>
-            <span class="barra-vs">VS</span>
-          </div>
-          <div class="barra-competencia">
-            <span class="barra-nombre"><i data-lucide="zap" width="16"></i> Barrera</span>
-            <div class="barra-contenedor">
-              <div class="barra-barrera" id="barraBarrera" style="width: 0%;">0</div>
-            </div>
-          </div>
-        </div>
-        <div style="text-align: center; margin-top: 15px; color: var(--text-secondary);" id="competenciaMensaje">
-          🏆 ¡El que gane hoy, elige la próxima playlist!
-        </div>
       </div>
 
       <!-- CHAT -->
@@ -1195,7 +1157,7 @@
           <span class="emoji-reaccion" data-emoji="👍">👍 0</span>
           <span class="emoji-reaccion" data-emoji="🎉">🎉 0</span>
           <span class="emoji-reaccion" data-emoji="🤣">🤣 0</span>
-          <span class="emoji-reaccion" data-emoji="💯">💯 0</span>
+          <span class="emoji-reaccio" data-emoji="💯">💯 0</span>
         </div>
       </div>
 
@@ -2127,3 +2089,4 @@
   </script>
 </body>
 </html>
+
