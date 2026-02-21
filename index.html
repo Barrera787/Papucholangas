@@ -55,7 +55,7 @@
       position: relative;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       padding: 16px;
     }
 
@@ -331,26 +331,13 @@
       box-shadow: 0 8px 0 #0b0f1c, 0 0 15px var(--primary-glow);
     }
 
-    /* TAREAS - CON SCROLL Y ORDEN POR FECHA */
+    /* TAREAS - AHORA SE APILAN Y APARECEN TODAS */
     .tasks-container {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin: 20px 0;
-      max-height: 500px;
-      overflow-y: auto;
-      padding-right: 8px;
-    }
-    .tasks-container::-webkit-scrollbar {
-      width: 6px;
-    }
-    .tasks-container::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-    }
-    .tasks-container::-webkit-scrollbar-thumb {
-      background: var(--primary-glow);
-      border-radius: 10px;
+      width: 100%;
     }
     .task-card {
       background: var(--card-bg);
@@ -363,6 +350,7 @@
       align-items: center;
       gap: 12px;
       animation: taskAppear 0.3s ease;
+      width: 100%;
     }
     @keyframes taskAppear {
       from { opacity: 0; transform: translateY(10px); }
@@ -1044,7 +1032,7 @@
         <span>🧢 Tuta dice: Échale ganas, mi Barrera.</span>
       </div>
 
-      <!-- LISTA DE TAREAS - ORDENADAS POR FECHA -->
+      <!-- LISTA DE TAREAS - AHORA SE APILAN Y APARECEN TODAS -->
       <div id="tasksList" class="tasks-container"></div>
 
       <!-- COMPETENCIA -->
