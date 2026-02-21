@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sistema Supremo Barrera 1003</title>
+
+<style>
+body{
+font-family:Arial;
+background:#0f0f0f;
+color:white;
+margin:0;
+}
+
+header{
+background:#ff6a00;
+padding:20px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+}
+
+section{
+padding:20px;
+}
+
+input,select,button{
+padding:8px;
+margin:5px;
+}
+
+button{
+background:#ff6a00;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+ul{
+list-style:none;
+padding:0;
+}
+
+li{
+background:#1a1a1a;
+margin:8px 0;
+padding:10px;
+border-radius:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.hecho{
+text-decoration:line-through;
+opacity:0.5;
+}
+
+.matematicas{border-left:5px solid #00ff88;}
+.fisica{border-left:5px solid #00c3ff;}
+.castellano{border-left:5px solid #ff4d4d;}
+.bioquimica{border-left:5px solid #a64dff;}
+.filosofia{border-left:5px solid yellow;}
+.ingles{border-left:5px solid pink;}
+.taller{border-left:5px solid #00ffcc;}
+.baloncesto{border-left:5px solid orange;}
+.otro{border-left:5px solid gray;}
+
+.progreso{
+height:20px;
+background:#333;
+border-radius:10px;
+margin-top:10px;
+}
+
+.barra{
+height:20px;
+background:#00ff88;
+border-radius:10px;
+width:0%;
+}
+
+.oculto{
+display:none;
+}
+
+.login{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+</style>
+</head>
+
+<body>
+
+<div id="login" class="login">
+<h2>Acceso Sistema Supremo 1003</h2>
+<input type="password" id="clave" placeholder="Contraseña">
+<button onclick="entrar()">Entrar</button>
+</div>
+
+<div id="app" class="oculto">
+
+<header>
+Sistema Supremo Barrera & Tuta 🚀🔥
+</header>
+
+<section>
+
+<button onclick="modoEnfoque()">Modo Enfoque</button>
+
+<h3>Agregar Tarea</h3>
+
+<select id="materia" onchange="mostrarProfe()">
+<option>Matemáticas</option>
+<option>Física</option>
+<option>Castellano</option>
+<option>Bioquímica</option>
+<option>Filosofía</option>
+<option>Inglés</option>
+<option>Taller</option>
+<option>Baloncesto (Edu Física)</option>
+<option>Dibujo</option>
+<option>C. Políticas</option>
+<option>Religión</option>
+<option>Informática</option>
+</select>
+
+<select id="profe" style="display:none;">
+<option>Yecid</option>
+<option>Zabaleta</option>
+<option>Barbosa</option>
+</select>
+
+<input type="text" id="texto" placeholder="Escribe la tarea...">
+<button onclick="agregar()">Agregar</button>
+
+<h3>Tareas</h3>
+<ul id="lista"></ul>
+
+<div id="contador"></div>
+
+<div class="progreso">
+<div class="barra" id="barra"></div>
+</div>
+
+<div id="racha"></div>
+
+</section>
+</div>
+
+<script>
+
+let contraseña="1003JEFE";
+
+function entrar(){
+let c=document.getElementById("clave").value;
+if(c===contraseña){
+document.getElementById("login").style.display="none";
+document.getElementById("app").classList.remove("oculto");
+}else{
+alert("Clave incorrecta");
+}
+}
+
+function mostrarProfe(){
+let m=document.getElementById("materia").value;
+document.getElementById("profe").style.display=(m==="Taller")?"inline":"none";
+}
+
+function agregar(){
+let materia=document.getElementById("materia").value;
+let texto=document.getElementById("texto").value;
+let profe=document.getElementById("profe").value;
+
+if(texto==="") return;
+
+let tarea={
+materia:materia,
+texto:texto,
+profe:(materia==="Taller")?profe:"",
+hecho:false
+};
+
+let tareas=JSON.parse(localStorage.getItem("tareas"))||[];
+tareas.push(tarea);
+localStorage.setItem("tareas",JSON.stringify(tareas));
+document.getElementById("texto").value="";
+cargar();
+}
+
+function cargar(){
+let lista=document.getElementById("lista");
+lista.innerHTML="";
+let tareas=JSON.parse(localStorage.getItem("tareas"))||[];
+let pendientes=0;
+let hechas=0;
+
+tareas.forEach((t,i)=>{
+let li=document.createElement("li");
+let clase=t.materia.toLowerCase();
+
+if(clase.includes("matem")) clase="matematicas";
+if(clase.includes("baloncesto")) clase="baloncesto";
+if(clase.includes("c.pol")) clase="otro";
+
+li.classList.add(clase);
+if(t.hecho){li.classList.add("hecho");hechas++;}else{pendientes++;}
+
+li.innerHTML=`<span><strong>[${t.materia}${t.profe?" - "+t.profe:""}]</strong> ${t.texto}</span>`;
+
+let botones=document.createElement("div");
+
+let check=document.createElement("button");
+check.textContent="✔";
+check.onclick=()=>{t.hecho=!t.hecho;actualizar(i,t);};
+
+let borrar=document.createElement("button");
+borrar.textContent="🗑";
+borrar.onclick=()=>{eliminar(i);};
+
+botones.appendChild(check);
+botones.appendChild(borrar);
+li.appendChild(botones);
+lista.appendChild(li);
+});
+
+document.getElementById("contador").textContent="Pendientes: "+pendientes;
+
+let total=pendientes+hechas;
+let porcentaje=total? (hechas/total)*100:0;
+document.getElementById("barra").style.width=porcentaje+"%";
+
+actualizarRacha(hechas);
+}
+
+function actualizar(i,t){
+let tareas=JSON.parse(localStorage.getItem("tareas"));
+tareas[i]=t;
+localStorage.setItem("tareas",JSON.stringify(tareas));
+cargar();
+}
+
+function eliminar(i){
+let tareas=JSON.parse(localStorage.getItem("tareas"));
+tareas.splice(i,1);
+localStorage.setItem("tareas",JSON.stringify(tareas));
+cargar();
+}
+
+function modoEnfoque(){
+document.body.style.background=
+(document.body.style.background==="black")?"#0f0f0f":"black";
+}
+
+function actualizarRacha(hechas){
+let hoy=new Date().toDateString();
+let data=JSON.parse(localStorage.getItem("racha"))||{dia:hoy,valor:0};
+
+if(hechas>0){
+if(data.dia!==hoy){
+data.valor++;
+data.dia=hoy;
+}
+}else{
+data.valor=0;
+}
+
+localStorage.setItem("racha",JSON.stringify(data));
+document.getElementById("racha").textContent="Racha de disciplina 🔥: "+data.valor+" días";
+}
+
+cargar();
+
+</script>
+
+</body>
+</html>
