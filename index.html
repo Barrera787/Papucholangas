@@ -980,17 +980,20 @@
       </div>
 
       <!-- INPUT TAREAS -->
-      <div class="task-input-panel">
-        <select id="materiaSelect">
-          <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
-          <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
-          <option>Etica</option><option>Dibujo</option><option>Ciencias Politicas</option><option>Religion</option>
-          <option>Artes</option><option>Informatica</option>
-        </select>
-        <input type="text" id="taskInput" placeholder="Nombre de la tarea">
-        <input type="date" id="dateInput">
-        <button id="addTaskBtn"><i data-lucide="plus"></i> crear</button>
-      </div>
+      <!-- 🚨 FILTRO DE MATERIAS ELIMINADO COMPLETAMENTE 🚨 -->
+
+<!-- INPUT TAREAS - CORREGIDO (AHORA SÍ FUNCIONA) -->
+<div class="task-input-panel">
+  <select id="materiaSelect">
+    <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
+    <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
+    <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
+    <option>Artes</option><option>Informática</option>
+  </select>
+  <input type="text" id="taskInput" placeholder="Nombre de la tarea">
+  <input type="date" id="dateInput">
+  <button id="addTaskBtn"><i data-lucide="plus"></i> crear tarea</button>
+</div>
 
       <!-- MENSAJE MOTIVACIONAL -->
       <div class="motivation-box" id="motivationMsg">
@@ -1672,19 +1675,43 @@
         renderExamenes(examenes);
       });
     }
+    
+   // AGREGAR TAREA - VERSIÓN CORREGIDA Y FUNCIONAL
+const addBtn = document.getElementById('addTaskBtn');
+const taskInput = document.getElementById('taskInput');
+const dateInput = document.getElementById('dateInput');
+const materiaSelect = document.getElementById('materiaSelect');
 
-    // AGREGAR TAREA
-    addBtn.addEventListener('click', () => {
-      const texto = taskInput.value.trim();
-      if (!texto) return;
-      push(tasksRef, {
-        texto,
-        materia: materiaSelect.value,
-        fecha: dateInput.value || null,
-        hecho: false
+if (addBtn) {
+  addBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const texto = taskInput.value.trim();
+    
+    if (!texto) {
+      alert('Escribe el nombre de la tarea');
+      return;
+    }
+    
+    const tarea = {
+      texto: texto,
+      materia: materiaSelect.value,
+      fecha: dateInput.value || null,
+      hecho: false,
+      timestamp: Date.now()
+    };
+    
+    push(ref(db, 'tareas'), tarea)
+      .then(() => {
+        taskInput.value = '';
+        dateInput.value = '';
+        console.log('✅ Tarea agregada:', tarea);
+      })
+      .catch(error => {
+        console.error('❌ Error:', error);
+        alert('No se pudo agregar la tarea');
       });
-      taskInput.value = '';
-    });
+  });
+}
 
     // TEMA CLARO/OSCURO
     themeBtn.addEventListener('click', () => {
@@ -1729,5 +1756,6 @@
   </script>
 </body>
 </html>
+
 
 
