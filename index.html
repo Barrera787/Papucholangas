@@ -91,99 +91,6 @@
       max-width: 440px;
       box-shadow: var(--shadow-heavy);
       text-align: center;
-      animation: floatI<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>TUTA & BARRERA · estudio definitivo</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <!-- Lucide icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- partículas fondo -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    :root {
-      --bg-dark: #0a0c12;
-      --glass-bg: rgba(15, 20, 28, 0.85);
-      --glass-border: rgba(70, 90, 140, 0.3);
-      --card-bg: rgba(22, 28, 38, 0.8);
-      --primary-glow: #00e0ff;
-      --accent-tuta: #ffaa00;
-      --accent-barrera: #ff5577;
-      --text-primary: #f0f3f8;
-      --text-secondary: #a5b3d1;
-      --success: #2ee6a8;
-      --danger: #ff5577;
-      --shadow-heavy: 0 25px 45px -12px rgba(0,0,0,0.8);
-      --blur-amount: 20px;
-      --border-radius-main: 40px;
-      --border-radius-card: 32px;
-    }
-
-    body.light {
-      --bg-dark: #eef2f8;
-      --glass-bg: rgba(255, 255, 255, 0.8);
-      --glass-border: rgba(150, 170, 200, 0.4);
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --text-primary: #121826;
-      --text-secondary: #2f3a5a;
-    }
-
-    body {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      min-height: 100vh;
-      transition: background 0.3s ease;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0; left: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.4;
-    }
-
-    /* LOGIN */
-    .login-screen {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      background: var(--bg-dark);
-      backdrop-filter: blur(20px);
-      padding: 16px;
-    }
-    .login-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 60px;
-      padding: 2.5rem 2rem;
-      width: 100%;
-      max-width: 440px;
-      box-shadow: var(--shadow-heavy);
-      text-align: center;
       animation: floatIn 0.5s ease;
     }
     @keyframes floatIn {
@@ -381,7 +288,7 @@
       transition: width 0.4s ease;
     }
 
-    /* BÚSQUEDA Y FILTROS - ACTUALIZADO con nuevas materias */
+    /* BÚSQUEDA Y FILTROS */
     .search-filter-row {
       display: flex;
       flex-wrap: wrap;
@@ -419,7 +326,7 @@
       min-width: 160px;
     }
 
-    /* INPUT TAREAS - ACTUALIZADO con nuevas materias */
+    /* INPUT TAREAS - Responsive */
     .task-input-panel {
       display: flex;
       flex-wrap: wrap;
@@ -458,7 +365,7 @@
       white-space: nowrap;
     }
 
-    /* TAREAS - con colores para nuevas materias */
+    /* TAREAS */
     .tasks-container {
       display: flex;
       flex-direction: column;
@@ -504,22 +411,6 @@
       border-left: 3px solid var(--primary-glow);
       font-size: 0.8rem;
     }
-    /* Colores específicos para materias */
-    .badge-materia[data-materia="Matemáticas"] { border-left-color: #00ff88; }
-    .badge-materia[data-materia="Física"] { border-left-color: #00c3ff; }
-    .badge-materia[data-materia="Castellano"] { border-left-color: #ff4d4d; }
-    .badge-materia[data-materia="Bioquímica"] { border-left-color: #a64dff; }
-    .badge-materia[data-materia="Filosofía"] { border-left-color: #ffcc00; }
-    .badge-materia[data-materia="Inglés"] { border-left-color: #ff99cc; }
-    .badge-materia[data-materia="Taller"] { border-left-color: #00ffcc; }
-    .badge-materia[data-materia="Baloncesto"] { border-left-color: #ff9900; }
-    .badge-materia[data-materia="Ética"] { border-left-color: #66cc66; }
-    .badge-materia[data-materia="Dibujo"] { border-left-color: #ff66b2; }
-    .badge-materia[data-materia="Sociales"] { border-left-color: #ff9933; }
-    .badge-materia[data-materia="Religión"] { border-left-color: #cc66ff; }
-    .badge-materia[data-materia="Artes"] { border-left-color: #ff6666; }
-    .badge-materia[data-materia="Informática"] { border-left-color: #66ccff; }
-    
     .task-meta {
       display: flex;
       gap: 15px;
@@ -621,7 +512,7 @@
       text-align: right;
     }
 
-    /* REACCIONES */
+    /* REACCIONES CON EMOJIS */
     .reacciones-container {
       display: flex;
       gap: 6px;
@@ -643,6 +534,11 @@
     .emoji-reaccion:hover {
       background: rgba(255,255,255,0.15);
       transform: scale(1.05);
+    }
+    .emoji-reaccion.seleccionado {
+      background: var(--primary-glow);
+      color: black;
+      border-color: white;
     }
 
     .chat-input-area {
@@ -689,7 +585,7 @@
       white-space: nowrap;
     }
 
-    /* COMPETENCIA */
+    /* COMPETENCIA SALUDABLE */
     .competencia-section {
       background: var(--card-bg);
       border-radius: 40px;
@@ -765,7 +661,7 @@
       color: var(--primary-glow);
     }
 
-    /* MODO NO MOLESTAR */
+    /* MODO NO MOLESTAR - CORREGIDO */
     .dnd-section {
       background: var(--card-bg);
       border-radius: 40px;
@@ -809,7 +705,7 @@
       gap: 10px;
     }
 
-    /* LOGROS */
+    /* GALERÍA DE LOGROS */
     .logros-section {
       background: var(--card-bg);
       border-radius: 40px;
@@ -884,7 +780,7 @@
       color: var(--text-secondary);
     }
 
-    /* EXÁMENES - ACTUALIZADO con nuevas materias */
+    /* PRÓXIMOS EXÁMENES - MEJORADO */
     .examen-section {
       background: var(--card-bg);
       border-radius: 40px;
@@ -976,7 +872,7 @@
       gap: 6px;
     }
 
-    /* BOTÓN BLEND */
+    /* BOTÓN BLEND DE BARRERA */
     .blend-section {
       margin: 30px 0 20px;
       text-align: center;
@@ -1025,7 +921,7 @@
       z-index: 9999;
     }
 
-    /* Responsive */
+    /* Responsive extra */
     @media (max-width: 600px) {
       body { padding: 8px; }
       .glass-dashboard { padding: 1rem; }
@@ -1083,7 +979,7 @@
         <div class="stat-card"><div class="stat-title"><i data-lucide="gift"></i> logro</div><div class="stat-value" style="font-size:1.2rem;" id="rewardBadge">🔰 aprendices</div></div>
       </div>
 
-      <!-- FILTROS - ACTUALIZADO con nuevas materias -->
+      <!-- FILTROS -->
       <div class="search-filter-row">
         <div class="search-box"><i data-lucide="search"></i><input type="text" id="searchInput" placeholder="Buscar tarea..."></div>
         <select class="filter-select" id="filterSubject">
@@ -1096,22 +992,16 @@
           <option value="Inglés">🌎 Barrera traduce</option>
           <option value="Taller">🛠️ Taller de Tuta</option>
           <option value="Baloncesto">🏀 Baloncesto con Barrera</option>
-          <option value="Ética">⚖️ Ética con Tuta</option>
-          <option value="Dibujo">🎨 Dibujo con Barrera</option>
-          <option value="Sociales">🌍 Sociales con Tuta</option>
-          <option value="Religión">⛪ Religión con Barrera</option>
-          <option value="Artes">🎭 Artes con Tuta</option>
-          <option value="Informática">💻 Informática con Barrera</option>
         </select>
       </div>
 
-      <!-- INPUT TAREAS - ACTUALIZADO con nuevas materias -->
+      <!-- INPUT TAREAS -->
       <div class="task-input-panel">
         <select id="materiaSelect">
           <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
           <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
-          <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
-          <option>Artes</option><option>Informática</option>
+          <option>Etica</option><option>Dibujo</option><option>Ciencias Politicas</option><option>Religion</option>
+          <option>Artes</option><option>Informatica</option>
         </select>
         <input type="text" id="taskInput" placeholder="Nombre de la tarea">
         <input type="date" id="dateInput">
@@ -1127,7 +1017,7 @@
       <!-- LISTA DE TAREAS -->
       <div id="tasksList" class="tasks-container"></div>
 
-      <!-- COMPETENCIA -->
+      <!-- COMPETENCIA SALUDABLE -->
       <div class="competencia-section">
         <div class="competencia-titulo">
           <i data-lucide="trophy" width="28" height="28" style="color: var(--accent-tuta);"></i>
@@ -1154,7 +1044,7 @@
         </div>
       </div>
 
-      <!-- CHAT -->
+      <!-- CHAT CON REACCIONES -->
       <div class="chat-section">
         <div class="chat-title">
           <i data-lucide="message-square" width="24" style="color: var(--accent-tuta);"></i>
@@ -1172,7 +1062,7 @@
           <input type="text" id="chatInput" placeholder="Escribe un mensaje..." maxlength="200">
           <button id="sendChatBtn"><i data-lucide="send"></i> enviar</button>
         </div>
-        <!-- Barra de emojis -->
+        <!-- Barra de emojis rápidos -->
         <div class="reacciones-container" id="reaccionesRapidas">
           <span class="emoji-reaccion" data-emoji="🔥">🔥 0</span>
           <span class="emoji-reaccion" data-emoji="👍">👍 0</span>
@@ -1182,7 +1072,7 @@
         </div>
       </div>
 
-      <!-- MODO NO MOLESTAR -->
+      <!-- MODO NO MOLESTAR - CORREGIDO -->
       <div class="dnd-section">
         <div class="dnd-estado">
           <div class="dnd-indicador">
@@ -1202,7 +1092,7 @@
         </div>
       </div>
 
-      <!-- LOGROS -->
+      <!-- GALERÍA DE LOGROS -->
       <div class="logros-section">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
           <i data-lucide="award" width="28" height="28" style="color: var(--primary-glow);"></i>
@@ -1242,7 +1132,7 @@
         </div>
       </div>
 
-      <!-- EXÁMENES - ACTUALIZADO con nuevas materias -->
+      <!-- PRÓXIMOS EXÁMENES - EDITABLE -->
       <div class="examen-section">
         <div class="examen-header">
           <i data-lucide="calendar-clock" width="28" height="28" style="color: var(--accent-tuta);"></i>
@@ -1254,8 +1144,6 @@
           <select id="examenMateria">
             <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
             <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
-            <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
-            <option>Artes</option><option>Informática</option>
           </select>
           <input type="date" id="examenFecha" placeholder="Fecha">
           <input type="number" id="examenProgreso" min="0" max="100" value="50" placeholder="% preparado">
@@ -1268,7 +1156,7 @@
         </div>
       </div>
 
-      <!-- BOTÓN BLEND -->
+      <!-- BOTÓN BLEND DE BARRERA (sin reproductor genérico) -->
       <div class="blend-section">
         <a href="https://open.spotify.com/blend/taste-match/b926f9f31b37b705?si=I5sMqomiTrKrn2LSQ9nqMg&fallback=getapp&blendDecoration=5f9c38d2" 
            target="_blank" 
@@ -1279,7 +1167,7 @@
         </a>
         <div style="text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">
           <i data-lucide="heart" width="14" height="14" style="display: inline; margin-right: 4px;"></i> 
-          Blend de Tuta & Barrera
+          Blend personal de Barrera (esperando a Tuta)
         </div>
       </div>
 
@@ -1340,7 +1228,7 @@
       { id: 2, nombre: 'Dupla imparable', desc: '10 tareas en equipo', icon: '🤝', completado: false },
       { id: 3, nombre: 'Racha 7 días', desc: 'Una semana seguida', icon: '🔥', completado: false },
       { id: 4, nombre: 'Chat activo', desc: '50 mensajes', icon: '💬', completado: false },
-      { id: 5, nombre: 'Maestro', desc: '8 materias diferentes', icon: '📚', completado: false },
+      { id: 5, nombre: 'Maestro', desc: '5 materias diferentes', icon: '📚', completado: false },
       { id: 6, nombre: 'Modo diablo', desc: '20 tareas en un día', icon: '😈', completado: false }
     ];
     
@@ -1364,7 +1252,7 @@
     const dateInput = document.getElementById('dateInput');
     const themeBtn = document.getElementById('themeToggle');
     
-    // Chat
+    // Chat elementos
     const chatContainer = document.getElementById('chatContainer');
     const chatSender = document.getElementById('chatSender');
     const chatInput = document.getElementById('chatInput');
@@ -1378,7 +1266,7 @@
     // Logros
     const logrosContainer = document.getElementById('logrosContainer');
     
-    // Resumen
+    // Resumen semanal
     const resumenTareas = document.getElementById('resumenTareas');
     const resumenRacha = document.getElementById('resumenRacha');
     const resumenMensajes = document.getElementById('resumenMensajes');
@@ -1411,7 +1299,6 @@
       requestAnimationFrame(drawConfetti);
       setTimeout(() => { confettiCanvas.style.display = 'none'; particles = []; }, 2000);
     }
-    
     function drawConfetti() {
       if (!confettiCanvas.style.display || confettiCanvas.style.display === 'none') return;
       confettiCtx.clearRect(0,0,window.innerWidth,window.innerHeight);
@@ -1450,6 +1337,7 @@
       levelSpan.innerText = userLevel;
       pointsSpan.innerText = userPoints;
       
+      // Actualizar competencia
       actualizarCompetencia();
       resumenPuntos.innerText = userPoints;
     }
@@ -1498,7 +1386,7 @@
       subjectProgressText.innerText = `${topSubject}: ${subPercent}%`;
       subjectProgressFill.style.width = subPercent + '%';
 
-      // Mensajes
+      // Mensajes con personalidad Tuta/Barrera
       const tutaMsgs = ['🧢 Tuta: échale ganas', '🧢 Tuta: ¿ya merito?', '🧢 Tuta: yo confío en ti'];
       const barreraMsgs = ['⚡ Barrera: vamos bien', '⚡ Barrera: un paso más', '⚡ Barrera: tú puedes'];
       const random = Math.floor(Math.random() * 3);
@@ -1512,10 +1400,7 @@
         const dateStr = t.fecha ? new Date(t.fecha).toLocaleDateString() : 'sin fecha';
         return `<div class="task-card ${t.hecho ? 'completed' : ''}" data-key="${t.key}">
           <div class="task-info">
-            <div class="task-title">
-              <span class="badge-materia" data-materia="${t.materia}">${t.materia}</span> 
-              ${t.texto}
-            </div>
+            <div class="task-title"><span class="badge-materia">${t.materia}</span> ${t.texto}</div>
             <div class="task-meta"><span><i data-lucide="calendar" width="12"></i> ${dateStr}</span></div>
           </div>
           <div class="task-actions">
@@ -1527,7 +1412,7 @@
       }).join('');
       lucide.createIcons();
 
-      // Eventos
+      // Eventos botones tarea
       document.querySelectorAll('.complete-btn').forEach(b => b.addEventListener('click', (e) => {
         e.stopPropagation();
         const key = b.dataset.key; const done = b.dataset.done === 'true';
@@ -1537,6 +1422,7 @@
           const today = new Date().toDateString().split(' ')[1]+' '+new Date().getDate();
           update(ref(db, 'tareas/'+key), { completedDate: today });
           
+          // Determinar quién completó (aleatorio para demo)
           const autor = Math.random() > 0.5 ? 'Tuta' : 'Barrera';
           updateLevelAndPoints(1, autor);
           verificarLogros();
@@ -1554,6 +1440,7 @@
         if (newText && newText.trim()) update(ref(db, 'tareas/'+b.dataset.key), { texto: newText.trim() });
       }));
       
+      // Actualizar resumen semanal
       const completadasSemana = tasks.filter(t => {
         if (!t.completedDate) return false;
         const fecha = new Date(t.completedDate);
@@ -1564,20 +1451,19 @@
       resumenTareas.innerText = completadasSemana;
     }
 
-    // ===== FUNCIONES CHAT CON REACCIONES CORREGIDAS =====
+    // ===== FUNCIONES CHAT CON REACCIONES =====
     function renderChat(messages) {
       const sorted = [...messages].sort((a, b) => a.timestamp - b.timestamp);
       chatContainer.innerHTML = sorted.map(msg => {
         const isTuta = msg.sender === 'Tuta';
         const reacciones = msg.reacciones || {};
         const emojis = ['🔥', '👍', '🎉', '🤣', '💯'];
-        
         const reaccionesHtml = emojis.map(emoji => {
           const count = reacciones[emoji] || 0;
-          return `<span class="emoji-reaccion" data-message-id="${msg.key}" data-emoji="${emoji}">${emoji} ${count}</span>`;
+          return `<span class="emoji-reaccion" data-emoji="${emoji}" onclick="agregarReaccion('${msg.key}', '${emoji}')">${emoji} ${count}</span>`;
         }).join('');
         
-        return `<div class="chat-message ${isTuta ? 'message-tuta' : 'message-barrera'}">
+        return `<div class="chat-message ${isTuta ? 'message-tuta' : 'message-barrera'}" data-message-id="${msg.key}">
           <div class="message-bubble">
             <div class="message-sender">${isTuta ? '🧢 Tuta' : '⚡ Barrera'}</div>
             <div class="message-text">${msg.text}</div>
@@ -1588,35 +1474,19 @@
           </div>
         </div>`;
       }).join('');
-      
       chatContainer.scrollTop = chatContainer.scrollHeight;
       
-      // Agregar listeners de UNA SOLA VEZ
-      document.querySelectorAll('.emoji-reaccion').forEach(emojiSpan => {
-        emojiSpan.removeEventListener('click', manejarClickReaccion);
-        emojiSpan.addEventListener('click', manejarClickReaccion);
-      });
-      
+      // Actualizar contador de mensajes
       resumenMensajes.innerText = messages.length;
     }
 
-    function manejarClickReaccion(event) {
-      const span = event.currentTarget;
-      const messageId = span.dataset.messageId;
-      const emoji = span.dataset.emoji;
-      
-      if (!messageId || !emoji) return;
-      
-      event.stopPropagation();
-      
+    window.agregarReaccion = function(messageId, emoji) {
       const reaccionRef = ref(db, `chat/${messageId}/reacciones/${emoji}`);
-      
-      // onlyOnce: true es la clave para leer UNA sola vez
       onValue(reaccionRef, (snapshot) => {
         const current = snapshot.val() || 0;
         update(ref(db, `chat/${messageId}/reacciones`), { [emoji]: current + 1 });
-      }, { onlyOnce: true });
-    }
+      }, { once: true });
+    };
 
     // ENVIAR MENSAJE CHAT
     sendChatBtn.addEventListener('click', () => {
@@ -1640,7 +1510,7 @@
       }
     });
 
-    // ===== MODO NO MOLESTAR =====
+    // ===== FUNCIONES MODO NO MOLESTAR - CORREGIDO =====
     let dndEstado = { Tuta: false, Barrera: false };
     
     toggleDndTuta.addEventListener('click', () => {
@@ -1656,6 +1526,7 @@
     function actualizarDND(estado) {
       dndEstado = estado;
       
+      // Actualizar Tuta
       if (estado.Tuta) {
         dndTuta.classList.remove('disponible');
         dndTuta.classList.add('nodisponible');
@@ -1668,6 +1539,7 @@
         toggleDndTuta.innerHTML = '<i data-lucide="bell-off"></i> No molestar';
       }
       
+      // Actualizar Barrera
       if (estado.Barrera) {
         dndBarrera.classList.remove('disponible');
         dndBarrera.classList.add('nodisponible');
@@ -1682,7 +1554,7 @@
       lucide.createIcons();
     }
 
-    // ===== LOGROS =====
+    // ===== FUNCIONES LOGROS =====
     function initLogros() {
       logrosContainer.innerHTML = logros.map(logro => `
         <div class="logro-card ${logro.completado ? 'completado' : 'bloqueado'}" id="logro-${logro.id}">
@@ -1694,13 +1566,14 @@
     }
     
     function verificarLogros() {
+      // Verificar logros según estadísticas
       if (userPoints >= 50) logros[0].completado = true;
       if (tareasTuta + tareasBarrera >= 10) logros[1].completado = true;
       if (streak >= 7) logros[2].completado = true;
       if (parseInt(resumenMensajes.innerText) >= 50) logros[3].completado = true;
       
       const materiasHechas = new Set(allTasks.filter(t => t.hecho).map(t => t.materia));
-      if (materiasHechas.size >= 8) logros[4].completado = true;
+      if (materiasHechas.size >= 5) logros[4].completado = true;
       
       const tareasHoy = allTasks.filter(t => {
         if (!t.fecha) return false;
@@ -1710,6 +1583,7 @@
       }).length;
       if (tareasHoy >= 20) logros[5].completado = true;
       
+      // Actualizar UI
       logros.forEach(logro => {
         const el = document.getElementById(`logro-${logro.id}`);
         if (el) {
@@ -1721,7 +1595,7 @@
       });
     }
 
-    // ===== EXÁMENES =====
+    // ===== FUNCIONES EXÁMENES =====
     function renderExamenes(examenes) {
       examenesContainer.innerHTML = '';
       if (!examenes || examenes.length === 0) {
@@ -1866,8 +1740,8 @@
       });
     }
 
+    // Inicializar iconos
     lucide.createIcons();
   </script>
 </body>
 </html>
-
