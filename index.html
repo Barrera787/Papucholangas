@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>TUTA & BARRERA · estudio en equipo</title>
+  <title>TUTA & BARRERA · estudio definitivo</title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,8 +12,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- partículas fondo -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <!-- Spotify SDK -->
-  <script src="https://open.spotify.com/embed/iframe-api/v1"></script>
   <style>
     * {
       margin: 0;
@@ -75,7 +73,7 @@
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       display: flex;
- align-items: center;
+      align-items: center;
       justify-content: center;
       z-index: 10000;
       background: var(--bg-dark);
@@ -143,10 +141,6 @@
     .login-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 0 #0b0f1c, 0 0 25px var(--primary-glow);
-    }
-    .login-btn:active {
-      transform: translateY(5px);
-      box-shadow: 0 5px 0 #0b0f1c;
     }
 
     #app {
@@ -516,6 +510,36 @@
       margin-top: 4px;
       text-align: right;
     }
+
+    /* ===== IDEA 5: REACCIONES CON EMOJIS ===== */
+    .reacciones-container {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .emoji-reaccion {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .emoji-reaccion:hover {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.05);
+    }
+    .emoji-reaccion.seleccionado {
+      background: var(--primary-glow);
+      color: black;
+      border-color: white;
+    }
+
     .chat-input-area {
       display: flex;
       flex-wrap: wrap;
@@ -560,7 +584,243 @@
       white-space: nowrap;
     }
 
-    /* SPOTIFY PLAYER */
+    /* ===== IDEA 2: COMPETENCIA SALUDABLE ===== */
+    .competencia-section {
+      background: var(--card-bg);
+      border-radius: 40px;
+      padding: 22px;
+      margin: 30px 0;
+      border: 1px solid var(--glass-border);
+    }
+    .competencia-titulo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    .competencia-titulo h3 {
+      font-size: 1.3rem;
+    }
+    .competencia-barras {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .barra-competencia {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .barra-nombre {
+      width: 80px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .barra-contenedor {
+      flex: 1;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 36px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+    .barra-tuta {
+      height: 100%;
+      background: var(--accent-tuta);
+      width: 0%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .barra-barrera {
+      height: 100%;
+      background: var(--accent-barrera);
+      width: 0%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 10px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .barra-vs {
+      width: 50px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--primary-glow);
+    }
+
+    /* ===== IDEA 6: MODO NO MOLESTAR ===== */
+    .dnd-section {
+      background: var(--card-bg);
+      border-radius: 40px;
+      padding: 22px;
+      margin: 30px 0;
+      border: 1px solid var(--glass-border);
+    }
+    .dnd-estado {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .dnd-indicador {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .dnd-badge {
+      background: rgba(255,85,119,0.2);
+      border: 1px solid var(--accent-barrera);
+      padding: 8px 16px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dnd-badge.disponible {
+      background: rgba(46,230,168,0.2);
+      border-color: var(--success);
+    }
+    .dnd-toggle {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* ===== IDEA 7: GALERÍA DE LOGROS ===== */
+    .logros-section {
+      background: var(--card-bg);
+      border-radius: 40px;
+      padding: 22px;
+      margin: 30px 0;
+      border: 1px solid var(--glass-border);
+    }
+    .logros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .logro-card {
+      background: rgba(0,0,0,0.2);
+      border-radius: 30px;
+      padding: 16px 12px;
+      text-align: center;
+      border: 1px solid var(--glass-border);
+      transition: 0.2s;
+      opacity: 0.5;
+      filter: grayscale(0.8);
+    }
+    .logro-card.bloqueado {
+      opacity: 0.3;
+      filter: grayscale(1);
+    }
+    .logro-card.completado {
+      opacity: 1;
+      filter: grayscale(0);
+      border-color: var(--primary-glow);
+      box-shadow: 0 0 20px rgba(0,224,255,0.2);
+    }
+    .logro-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .logro-nombre {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .logro-desc {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== IDEA 8: RESUMEN SEMANAL ===== */
+    .resumen-section {
+      background: linear-gradient(145deg, #0f1a28, #1a2538);
+      border-radius: 40px;
+      padding: 22px;
+      margin: 30px 0;
+      border: 1px solid var(--primary-glow);
+    }
+    .resumen-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .resumen-stat {
+      text-align: center;
+    }
+    .resumen-numero {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-glow);
+    }
+    .resumen-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== IDEA 10: PRÓXIMO EXAMEN ===== */
+    .examen-section {
+      background: var(--card-bg);
+      border-radius: 40px;
+      padding: 22px;
+      margin: 30px 0;
+      border: 1px solid var(--glass-border);
+    }
+    .examen-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .examen-info {
+      flex: 2;
+      min-width: 200px;
+    }
+    .examen-materia {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .examen-fecha {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .examen-progress {
+      flex: 1;
+      min-width: 150px;
+    }
+    progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    progress::-webkit-progress-bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+    }
+    progress::-webkit-progress-value {
+      background: linear-gradient(90deg, var(--accent-tuta), var(--accent-barrera));
+      border-radius: 20px;
+    }
+
+    /* SPOTIFY Y BOTÓN BLEND */
     .spotify-player {
       margin: 30px 0 20px;
       border-radius: 30px;
@@ -573,6 +833,30 @@
       height: 352px;
       border: none;
       border-radius: 30px;
+    }
+    .barrera-blend-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(145deg, #ff5577, #b13e55);
+      padding: 16px 28px;
+      border-radius: 60px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 0 #6b2533, 0 10px 25px rgba(255,85,119,0.3);
+      transition: all 0.2s ease;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .barrera-blend-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 0 #6b2533, 0 15px 30px rgba(255,85,119,0.5);
+      background: linear-gradient(145deg, #ff6688, #c2455a);
     }
 
     .motivation-box {
@@ -605,22 +889,20 @@
       .stat-value { font-size: 1.6rem; }
       .task-card { padding: 12px; }
       .task-title { font-size: 0.95rem; }
-      .chat-input-area select, .chat-input-area input, .chat-input-area button { font-size: 0.85rem; }
+      .barrera-blend-button { padding: 14px 20px; font-size: 0.9rem; }
     }
 
-    /* Ocultar elementos de audio nativos */
     #taskSound, #chatSound { display: none; }
   </style>
 </head>
 <body>
-  <!-- LOGIN con contraseña Papucholangas -->
+  <!-- LOGIN -->
   <div id="loginScreen" class="login-screen">
     <div class="login-card">
       <h2>TUTA & BARRERA</h2>
       <div class="login-sub">estudio en equipo · acceso privado</div>
       <input type="password" id="passwordInput" class="password-field" placeholder="Contraseña" autofocus>
       <button class="login-btn" id="loginBtn">ENTRAR AL ESTUDIO</button>
-      <!-- Texto eliminado como solicitaste -->
     </div>
   </div>
 
@@ -632,7 +914,7 @@
     <audio id="chatSound" src="data:audio/mp3;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gR2VtaW5pU291bmRzLnByb2Zlc3Npb25hbC5tcDMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//uQxAAAA18a4QaAQAADp8uFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"></audio>
 
     <main class="glass-dashboard">
-      <!-- HEADER TUTA & BARRERA -->
+      <!-- HEADER -->
       <div class="app-header">
         <div class="logo-area">
           <div class="tuta-icon"><i data-lucide="crown"></i> TUTA</div>
@@ -647,7 +929,7 @@
         </div>
       </div>
 
-      <!-- ESTADÍSTICAS -->
+      <!-- ESTADÍSTICAS BÁSICAS -->
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-title"><i data-lucide="check-circle"></i> completadas</div><div class="stat-value" id="completedCount">0</div><div class="progress-micro"><div class="progress-micro-fill" id="globalProgressBar"></div></div></div>
         <div class="stat-card"><div class="stat-title"><i data-lucide="list"></i> total tareas</div><div class="stat-value" id="totalTasks">0</div></div>
@@ -691,7 +973,34 @@
       <!-- LISTA DE TAREAS -->
       <div id="tasksList" class="tasks-container"></div>
 
-      <!-- CHAT TUTA & BARRERA (CORREGIDO) -->
+      <!-- ===== IDEA 2: COMPETENCIA SALUDABLE ===== -->
+      <div class="competencia-section">
+        <div class="competencia-titulo">
+          <i data-lucide="trophy" width="28" height="28" style="color: var(--accent-tuta);"></i>
+          <i data-lucide="swords" width="24" height="24" style="color: var(--accent-barrera);"></i>
+          <h3>Competencia del día</h3>
+        </div>
+        <div class="competencia-barras">
+          <div class="barra-competencia">
+            <span class="barra-nombre"><i data-lucide="crown" width="16"></i> Tuta</span>
+            <div class="barra-contenedor">
+              <div class="barra-tuta" id="barraTuta" style="width: 0%;">0</div>
+            </div>
+            <span class="barra-vs">VS</span>
+          </div>
+          <div class="barra-competencia">
+            <span class="barra-nombre"><i data-lucide="zap" width="16"></i> Barrera</span>
+            <div class="barra-contenedor">
+              <div class="barra-barrera" id="barraBarrera" style="width: 0%;">0</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 15px; color: var(--text-secondary);" id="competenciaMensaje">
+          🏆 ¡El que gane hoy, elige la próxima playlist!
+        </div>
+      </div>
+
+      <!-- CHAT CON REACCIONES (IDEA 5) -->
       <div class="chat-section">
         <div class="chat-title">
           <i data-lucide="message-square" width="24" style="color: var(--accent-tuta);"></i>
@@ -709,48 +1018,126 @@
           <input type="text" id="chatInput" placeholder="Escribe un mensaje..." maxlength="200">
           <button id="sendChatBtn"><i data-lucide="send"></i> enviar</button>
         </div>
+        <!-- Barra de emojis rápidos (idea 5) -->
+        <div class="reacciones-container" id="reaccionesRapidas">
+          <span class="emoji-reaccion" data-emoji="🔥">🔥 0</span>
+          <span class="emoji-reaccion" data-emoji="👍">👍 0</span>
+          <span class="emoji-reaccion" data-emoji="🎉">🎉 0</span>
+          <span class="emoji-reaccion" data-emoji="🤣">🤣 0</span>
+          <span class="emoji-reaccion" data-emoji="💯">💯 0</span>
+        </div>
       </div>
 
-      <!-- SPOTIFY PLAYER (oficial) -->
-      <!-- SECCIÓN DE MÚSICA COMPLETA (REPRODUCTOR + BOTÓN BLEND) -->
-<div class="music-section" style="margin: 30px 0 20px;">
+      <!-- ===== IDEA 6: MODO NO MOLESTAR ===== -->
+      <div class="dnd-section">
+        <div class="dnd-estado">
+          <div class="dnd-indicador">
+            <i data-lucide="bell" width="24" height="24"></i>
+            <span style="font-weight: 600;">Estado de enfoque:</span>
+            <div class="dnd-badge disponible" id="dndTuta">
+              <i data-lucide="crown" width="16"></i> Tuta: <span>Disponible</span>
+            </div>
+            <div class="dnd-badge disponible" id="dndBarrera">
+              <i data-lucide="zap" width="16"></i> Barrera: <span>Disponible</span>
+            </div>
+          </div>
+          <div class="dnd-toggle">
+            <button class="glass-button" id="toggleDndTuta"><i data-lucide="bell-off"></i> No molestar</button>
+            <button class="glass-button" id="toggleDndBarrera"><i data-lucide="bell-off"></i> No molestar</button>
+          </div>
+        </div>
+      </div>
 
-  <!-- BOTÓN ESPECIAL PARA LA BLEND DE BARRERA (OPCIÓN 2) -->
-  <div style="display: flex; justify-content: center; margin: 20px 0 10px;">
-    <a href="https://open.spotify.com/blend/taste-match/b926f9f31b37b705?si=I5sMqomiTrKrn2LSQ9nqMg&fallback=getapp&blendDecoration=5f9c38d2" 
-       target="_blank" 
-       class="blend-button" 
-       style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(145deg, #ff5577, #b13e55); padding: 16px 32px; border-radius: 60px; color: white; text-decoration: none; font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 8px 0 #6b2533, 0 10px 25px rgba(255,85,119,0.4); transition: all 0.15s ease; width: 100%; max-width: 500px; margin: 0 auto;">
-      <i data-lucide="headphones" width="24" height="24"></i>
-      <span>🎧 ABRIR BLEND DE BARRERA EN SPOTIFY</span>
-      <i data-lucide="external-link" width="20" height="20"></i>
-    </a>
-  </div>
+      <!-- ===== IDEA 7: GALERÍA DE LOGROS ===== -->
+      <div class="logros-section">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+          <i data-lucide="award" width="28" height="28" style="color: var(--primary-glow);"></i>
+          <h3>Logros desbloqueados</h3>
+        </div>
+        <div class="logros-grid" id="logrosContainer">
+          <!-- Se generan con JS -->
+        </div>
+      </div>
 
-  
-</div>
+      <!-- ===== IDEA 8: RESUMEN SEMANAL ===== -->
+      <div class="resumen-section">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i data-lucide="calendar-check" width="28" height="28" style="color: var(--success);"></i>
+          <h3>Resumen de la semana</h3>
+        </div>
+        <div class="resumen-stats" id="resumenSemanal">
+          <div class="resumen-stat">
+            <div class="resumen-numero" id="resumenTareas">47</div>
+            <div class="resumen-label">tareas</div>
+          </div>
+          <div class="resumen-stat">
+            <div class="resumen-numero" id="resumenRacha">6</div>
+            <div class="resumen-label">racha máxima</div>
+          </div>
+          <div class="resumen-stat">
+            <div class="resumen-numero" id="resumenMensajes">124</div>
+            <div class="resumen-label">mensajes</div>
+          </div>
+          <div class="resumen-stat">
+            <div class="resumen-numero" id="resumenPuntos">350</div>
+            <div class="resumen-label">puntos</div>
+          </div>
+        </div>
+        <div style="text-align: center; color: var(--primary-glow); margin-top: 10px; font-size: 0.9rem;">
+          🎵 Canción más escuchada: "Blend de Barrera"
+        </div>
+      </div>
 
-<!-- Estilos adicionales para el botón (agregar al <style> existente) -->
-<style>
-  .blend-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 0 #6b2533, 0 15px 30px rgba(255,85,119,0.5);
-    filter: brightness(1.1);
-  }
-  
-  .blend-button:active {
-    transform: translateY(5px);
-    box-shadow: 0 5px 0 #6b2533;
-  }
-  
-  @media (max-width: 600px) {
-    .blend-button {
-      padding: 14px 20px;
-      font-size: 0.95rem;
-      gap: 8px;
-    }
-  }
-</style>
+      <!-- ===== IDEA 10: PRÓXIMO EXAMEN ===== -->
+      <div class="examen-section">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i data-lucide="calendar-clock" width="28" height="28" style="color: var(--accent-tuta);"></i>
+          <h3>Próximos exámenes</h3>
+        </div>
+        <div id="examenesContainer">
+          <div class="examen-item">
+            <div class="examen-info">
+              <div class="examen-materia">📐 Matemáticas</div>
+              <div class="examen-fecha">15 de abril, 2025</div>
+            </div>
+            <div class="examen-progress">
+              <progress value="70" max="100"></progress>
+              <div style="font-size: 0.8rem; text-align: right;">70% preparado</div>
+            </div>
+          </div>
+          <div class="examen-item">
+            <div class="examen-info">
+              <div class="examen-materia">⚡ Física</div>
+              <div class="examen-fecha">22 de abril, 2025</div>
+            </div>
+            <div class="examen-progress">
+              <progress value="45" max="100"></progress>
+              <div style="font-size: 0.8rem; text-align: right;">45% preparado</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPOTIFY + BOTÓN BLEND DE BARRERA -->
+      <div class="spotify-player">
+        <iframe class="spotify-embed" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcF6B6QPhFDv?utm_source=generator&theme=0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        
+        <!-- BOTÓN BLEND DE BARRERA -->
+        <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 10px;">
+          <a href="https://open.spotify.com/blend/taste-match/b926f9f31b37b705?si=I5sMqomiTrKrn2LSQ9nqMg&fallback=getapp&blendDecoration=5f9c38d2" 
+             target="_blank" 
+             class="barrera-blend-button">
+            <i data-lucide="headphones" width="22" height="22"></i>
+            <span>🎶 ABRIR BLEND DE BARRERA EN SPOTIFY</span>
+            <i data-lucide="external-link" width="18" height="18"></i>
+          </a>
+        </div>
+        
+        <div style="text-align: center; color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 10px; opacity: 0.8;">
+          <i data-lucide="heart" width="14" height="14" style="display: inline; margin-right: 4px;"></i> 
+          Blend personal de Barrera (esperando a Tuta)
+        </div>
+      </div>
 
       <!-- RECOMPENSA VIRTUAL -->
       <div style="text-align: right; color: var(--text-secondary); margin-top: 15px; font-size:0.9rem;" id="virtualRewardLine">⭐ próximo nivel: 100 pts</div>
@@ -774,6 +1161,9 @@
     const db = getDatabase(app);
     const tasksRef = ref(db, 'tareas');
     const chatRef = ref(db, 'chat');
+    const reaccionesRef = ref(db, 'reacciones');
+    const dndRef = ref(db, 'modoNoMolestar');
+    const logrosRef = ref(db, 'logros');
 
     // LOGIN
     const loginScreen = document.getElementById('loginScreen');
@@ -789,6 +1179,8 @@
         setupFirebaseListeners();
         confettiCanvas.width = window.innerWidth;
         confettiCanvas.height = window.innerHeight;
+        initLogros();
+        actualizarCompetencia();
       } else {
         alert('Contraseña incorrecta');
       }
@@ -799,6 +1191,15 @@
     // VARIABLES GLOBALES
     let allTasks = [];
     let userLevel = 1, userPoints = 0, streak = 0, lastCompletedDate = '';
+    let tareasTuta = 0, tareasBarrera = 0;
+    let logros = [
+      { id: 1, nombre: 'Primeros pasos', desc: 'Completar 5 tareas', icon: '🌱', completado: false },
+      { id: 2, nombre: 'Dupla imparable', desc: '10 tareas en equipo', icon: '🤝', completado: false },
+      { id: 3, nombre: 'Racha 7 días', desc: 'Una semana seguida', icon: '🔥', completado: false },
+      { id: 4, nombre: 'Chat activo', desc: '50 mensajes', icon: '💬', completado: false },
+      { id: 5, nombre: 'Maestro', desc: '5 materias diferentes', icon: '📚', completado: false },
+      { id: 6, nombre: 'Modo diablo', desc: '20 tareas en un día', icon: '😈', completado: false }
+    ];
     
     // Elementos DOM
     const tasksDiv = document.getElementById('tasksList');
@@ -825,6 +1226,26 @@
     const chatSender = document.getElementById('chatSender');
     const chatInput = document.getElementById('chatInput');
     const sendChatBtn = document.getElementById('sendChatBtn');
+    
+    // Competencia
+    const barraTuta = document.getElementById('barraTuta');
+    const barraBarrera = document.getElementById('barraBarrera');
+    const competenciaMensaje = document.getElementById('competenciaMensaje');
+    
+    // Logros
+    const logrosContainer = document.getElementById('logrosContainer');
+    
+    // Resumen semanal
+    const resumenTareas = document.getElementById('resumenTareas');
+    const resumenRacha = document.getElementById('resumenRacha');
+    const resumenMensajes = document.getElementById('resumenMensajes');
+    const resumenPuntos = document.getElementById('resumenPuntos');
+    
+    // DND
+    const dndTuta = document.getElementById('dndTuta');
+    const dndBarrera = document.getElementById('dndBarrera');
+    const toggleDndTuta = document.getElementById('toggleDndTuta');
+    const toggleDndBarrera = document.getElementById('toggleDndBarrera');
     
     // Confetti
     const confettiCanvas = document.getElementById('confettiCanvas');
@@ -858,10 +1279,15 @@
         if (lastCompletedDate && lastCompletedDate !== today && lastCompletedDate !== yesterday) streak = 0;
       }
       streakSpan.innerText = streak;
+      return streak;
     }
 
-    function updateLevelAndPoints(completedDelta = 0) {
-      if (completedDelta > 0) userPoints += 10 * completedDelta;
+    function updateLevelAndPoints(completedDelta = 0, autor = 'desconocido') {
+      if (completedDelta > 0) {
+        userPoints += 10 * completedDelta;
+        if (autor === 'Tuta') tareasTuta += completedDelta;
+        if (autor === 'Barrera') tareasBarrera += completedDelta;
+      }
       let newLevel = Math.floor(userPoints / 100) + 1;
       if (newLevel > userLevel) {
         userLevel = newLevel;
@@ -872,6 +1298,29 @@
       }
       levelSpan.innerText = userLevel;
       pointsSpan.innerText = userPoints;
+      
+      // Actualizar competencia
+      actualizarCompetencia();
+    }
+
+    function actualizarCompetencia() {
+      const total = tareasTuta + tareasBarrera;
+      if (total > 0) {
+        const porcentajeTuta = (tareasTuta / total) * 100;
+        const porcentajeBarrera = (tareasBarrera / total) * 100;
+        barraTuta.style.width = porcentajeTuta + '%';
+        barraBarrera.style.width = porcentajeBarrera + '%';
+        barraTuta.innerHTML = tareasTuta;
+        barraBarrera.innerHTML = tareasBarrera;
+        
+        if (tareasTuta > tareasBarrera) {
+          competenciaMensaje.innerHTML = '🏆 Tuta va ganando!';
+        } else if (tareasBarrera > tareasTuta) {
+          competenciaMensaje.innerHTML = '🏆 Barrera va ganando!';
+        } else {
+          competenciaMensaje.innerHTML = '⚔️ Están empatados!';
+        }
+      }
     }
 
     // RENDER TAREAS
@@ -933,7 +1382,11 @@
           sound.play().catch(e=>{}); startConfetti();
           const today = new Date().toDateString().split(' ')[1]+' '+new Date().getDate();
           update(ref(db, 'tareas/'+key), { completedDate: today });
-          updateLevelAndPoints(1);
+          
+          // Determinar quién completó (aleatorio para demo)
+          const autor = Math.random() > 0.5 ? 'Tuta' : 'Barrera';
+          updateLevelAndPoints(1, autor);
+          verificarLogros();
         }
       }));
       
@@ -949,48 +1402,192 @@
       }));
     }
 
-    // ===== FUNCIONES CHAT (CORREGIDAS) =====
+    // ===== FUNCIONES CHAT CON REACCIONES =====
     function renderChat(messages) {
-      // Ordenar de más antiguo a más nuevo para mostrarlos correctamente
       const sorted = [...messages].sort((a, b) => a.timestamp - b.timestamp);
       chatContainer.innerHTML = sorted.map(msg => {
         const isTuta = msg.sender === 'Tuta';
-        return `<div class="chat-message ${isTuta ? 'message-tuta' : 'message-barrera'}">
+        return `<div class="chat-message ${isTuta ? 'message-tuta' : 'message-barrera'}" data-message-id="${msg.key}">
           <div class="message-bubble">
             <div class="message-sender">${isTuta ? '🧢 Tuta' : '⚡ Barrera'}</div>
             <div class="message-text">${msg.text}</div>
             <div class="message-time">${new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+            <div class="reacciones-container" id="reacciones-${msg.key}">
+              ${renderReacciones(msg.reacciones || {})}
+            </div>
           </div>
         </div>`;
       }).join('');
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
-    // ENVIAR MENSAJE CHAT - Versión corregida
+    function renderReacciones(reacciones) {
+      const emojis = ['🔥', '👍', '🎉', '🤣', '💯'];
+      return emojis.map(emoji => {
+        const count = reacciones[emoji] || 0;
+        return `<span class="emoji-reaccion" data-emoji="${emoji}" onclick="agregarReaccion(this, '${emoji}')">${emoji} ${count}</span>`;
+      }).join('');
+    }
+
+    window.agregarReaccion = function(element, emoji) {
+      const messageDiv = element.closest('.chat-message');
+      const messageId = messageDiv.dataset.messageId;
+      const reaccionesRef = ref(db, `chat/${messageId}/reacciones/${emoji}`);
+      
+      // Incrementar contador
+      onValue(reaccionesRef, (snapshot) => {
+        const current = snapshot.val() || 0;
+        update(ref(db, `chat/${messageId}/reacciones`), { [emoji]: current + 1 });
+      }, { once: true });
+    };
+
+    // ENVIAR MENSAJE CHAT
     sendChatBtn.addEventListener('click', () => {
       const text = chatInput.value.trim();
       if (!text) return;
       
-      // Enviar a Firebase
       push(chatRef, {
         sender: chatSender.value,
         text: text,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        reacciones: {}
       }).then(() => {
-        chatInput.value = ''; // Limpiar solo después de enviar exitosamente
-      }).catch(error => {
-        console.error("Error enviando mensaje:", error);
-        alert("No se pudo enviar el mensaje");
+        chatInput.value = '';
+        // Actualizar resumen de mensajes
+        resumenMensajes.innerText = parseInt(resumenMensajes.innerText) + 1;
       });
     });
 
-    // También enviar con Enter
     chatInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
         sendChatBtn.click();
       }
     });
+
+    // ===== FUNCIONES MODO NO MOLESTAR =====
+    let dndEstado = { Tuta: false, Barrera: false };
+    
+    toggleDndTuta.addEventListener('click', () => {
+      dndEstado.Tuta = !dndEstado.Tuta;
+      update(ref(db, 'modoNoMolestar'), dndEstado);
+    });
+    
+    toggleDndBarrera.addEventListener('click', () => {
+      dndEstado.Barrera = !dndEstado.Barrera;
+      update(ref(db, 'modoNoMolestar'), dndEstado);
+    });
+    
+    function actualizarDND(estado) {
+      dndEstado = estado;
+      
+      if (estado.Tuta) {
+        dndTuta.classList.remove('disponible');
+        dndTuta.style.background = 'rgba(255,85,119,0.2)';
+        dndTuta.querySelector('span').innerText = 'No molestar';
+        toggleDndTuta.innerHTML = '<i data-lucide="bell"></i> Disponible';
+      } else {
+        dndTuta.classList.add('disponible');
+        dndTuta.querySelector('span').innerText = 'Disponible';
+        toggleDndTuta.innerHTML = '<i data-lucide="bell-off"></i> No molestar';
+      }
+      
+      if (estado.Barrera) {
+        dndBarrera.classList.remove('disponible');
+        dndBarrera.style.background = 'rgba(255,85,119,0.2)';
+        dndBarrera.querySelector('span').innerText = 'No molestar';
+        toggleDndBarrera.innerHTML = '<i data-lucide="bell"></i> Disponible';
+      } else {
+        dndBarrera.classList.add('disponible');
+        dndBarrera.querySelector('span').innerText = 'Disponible';
+        toggleDndBarrera.innerHTML = '<i data-lucide="bell-off"></i> No molestar';
+      }
+      lucide.createIcons();
+    }
+
+    // ===== FUNCIONES LOGROS =====
+    function initLogros() {
+      logrosContainer.innerHTML = logros.map(logro => `
+        <div class="logro-card ${logro.completado ? 'completado' : 'bloqueado'}" id="logro-${logro.id}">
+          <div class="logro-icon">${logro.icon}</div>
+          <div class="logro-nombre">${logro.nombre}</div>
+          <div class="logro-desc">${logro.desc}</div>
+        </div>
+      `).join('');
+    }
+    
+    function verificarLogros() {
+      // Verificar logros según estadísticas
+      if (userPoints >= 50) logros[0].completado = true;
+      if (tareasTuta + tareasBarrera >= 10) logros[1].completado = true;
+      if (streak >= 7) logros[2].completado = true;
+      if (parseInt(resumenMensajes.innerText) >= 50) logros[3].completado = true;
+      
+      const materiasHechas = new Set(allTasks.filter(t => t.hecho).map(t => t.materia));
+      if (materiasHechas.size >= 5) logros[4].completado = true;
+      
+      const tareasHoy = allTasks.filter(t => {
+        if (!t.fecha) return false;
+        const fechaTarea = new Date(t.fecha).toDateString();
+        const hoy = new Date().toDateString();
+        return fechaTarea === hoy && t.hecho;
+      }).length;
+      if (tareasHoy >= 20) logros[5].completado = true;
+      
+      // Actualizar UI
+      logros.forEach(logro => {
+        const el = document.getElementById(`logro-${logro.id}`);
+        if (el) {
+          if (logro.completado) {
+            el.classList.remove('bloqueado');
+            el.classList.add('completado');
+          }
+        }
+      });
+    }
+
+    // ===== FIREBASE LISTENERS =====
+    function setupFirebaseListeners() {
+      onValue(tasksRef, (snapshot) => {
+        const tasks = [];
+        snapshot.forEach(child => tasks.push({ key: child.key, ...child.val() }));
+        tasks.sort((a,b) => (a.fecha||'') > (b.fecha||'') ? 1 : -1);
+        renderTasks(tasks);
+        const streakActual = updateStreak(tasks);
+        
+        // Actualizar resumen semanal
+        const completadasSemana = tasks.filter(t => {
+          if (!t.completedDate) return false;
+          const fecha = new Date(t.completedDate);
+          const hoy = new Date();
+          const diff = hoy - fecha;
+          return diff <= 7 * 24 * 60 * 60 * 1000;
+        }).length;
+        resumenTareas.innerText = completadasSemana;
+        resumenRacha.innerText = streakActual;
+        resumenPuntos.innerText = userPoints;
+      });
+
+      onValue(chatRef, (snapshot) => {
+        const msgs = [];
+        snapshot.forEach(child => {
+          msgs.push({ 
+            key: child.key, 
+            ...child.val() 
+          });
+        });
+        renderChat(msgs);
+        if (msgs.length > 0) {
+          chatSound.play().catch(e => console.log("Sound error:", e));
+          resumenMensajes.innerText = msgs.length;
+        }
+      });
+      
+      onValue(dndRef, (snapshot) => {
+        const estado = snapshot.val() || { Tuta: false, Barrera: false };
+        actualizarDND(estado);
+      });
+    }
 
     // AGREGAR TAREA
     addBtn.addEventListener('click', () => {
@@ -1005,7 +1602,7 @@
       taskInput.value = '';
     });
 
-    // TEMA CLARO/OSCURO - CORREGIDO
+    // TEMA CLARO/OSCURO
     themeBtn.addEventListener('click', () => {
       document.body.classList.toggle('light');
       const icon = themeBtn.querySelector('i');
@@ -1021,34 +1618,6 @@
     searchInput.addEventListener('input', () => renderTasks(allTasks));
     filterSubject.addEventListener('change', () => renderTasks(allTasks));
 
-    // ===== FIREBASE LISTENERS =====
-    function setupFirebaseListeners() {
-      // Escuchar tareas
-      onValue(tasksRef, (snapshot) => {
-        const tasks = [];
-        snapshot.forEach(child => tasks.push({ key: child.key, ...child.val() }));
-        tasks.sort((a,b) => (a.fecha||'') > (b.fecha||'') ? 1 : -1);
-        renderTasks(tasks);
-        updateStreak(tasks);
-      });
-
-      // Escuchar chat - Versión corregida
-      onValue(chatRef, (snapshot) => {
-        const msgs = [];
-        snapshot.forEach(child => {
-          msgs.push({ 
-            key: child.key, 
-            ...child.val() 
-          });
-        });
-        renderChat(msgs);
-        if (msgs.length > 0) {
-          chatSound.play().catch(e => console.log("Sound error:", e));
-        }
-      });
-    }
-
-    // AJUSTES DE PANTALLA
     window.addEventListener('resize', () => { 
       confettiCanvas.width = window.innerWidth; 
       confettiCanvas.height = window.innerHeight; 
@@ -1076,5 +1645,4 @@
   </script>
 </body>
 </html>
-
 
