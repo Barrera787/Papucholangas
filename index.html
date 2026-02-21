@@ -244,7 +244,7 @@
       border-color: var(--primary-glow);
     }
 
-    /* STATS GRID - Responsive */
+    /* STATS GRID */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -288,7 +288,7 @@
       transition: width 0.4s ease;
     }
 
-    /* INPUT TAREAS - CORREGIDO */
+    /* INPUT TAREAS */
     .task-input-panel {
       display: flex;
       flex-wrap: wrap;
@@ -331,12 +331,26 @@
       box-shadow: 0 8px 0 #0b0f1c, 0 0 15px var(--primary-glow);
     }
 
-    /* TAREAS - con colores para materias */
+    /* TAREAS - CON SCROLL Y ORDEN POR FECHA */
     .tasks-container {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin: 20px 0;
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .tasks-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .tasks-container::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+    .tasks-container::-webkit-scrollbar-thumb {
+      background: var(--primary-glow);
+      border-radius: 10px;
     }
     .task-card {
       background: var(--card-bg);
@@ -1011,7 +1025,7 @@
         </div>
       </div>
 
-      <!-- INPUT TAREAS - CORREGIDO (SIN FILTRO) -->
+      <!-- INPUT TAREAS -->
       <div class="task-input-panel">
         <select id="materiaSelect">
           <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
@@ -1030,7 +1044,7 @@
         <span>🧢 Tuta dice: Échale ganas, mi Barrera.</span>
       </div>
 
-      <!-- LISTA DE TAREAS -->
+      <!-- LISTA DE TAREAS - ORDENADAS POR FECHA -->
       <div id="tasksList" class="tasks-container"></div>
 
       <!-- COMPETENCIA -->
@@ -1174,7 +1188,7 @@
         </div>
       </div>
 
-      <!-- BOT CON IA - TUTOBOT / BARRERABOT -->
+      <!-- BOT CON IA -->
       <div class="bot-section">
         <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
           <!-- Avatar del bot -->
@@ -1437,9 +1451,28 @@
       }
     }
 
+    // ===== FUNCIÓN PARA ORDENAR TAREAS POR FECHA =====
+    function ordenarTareasPorFecha(tasks) {
+      return tasks.sort((a, b) => {
+        // Si ambas tienen fecha, comparar
+        if (a.fecha && b.fecha) {
+          return new Date(a.fecha) - new Date(b.fecha);
+        }
+        // Si solo a tiene fecha, a va primero
+        if (a.fecha && !b.fecha) return -1;
+        // Si solo b tiene fecha, b va primero
+        if (!a.fecha && b.fecha) return 1;
+        // Si ninguna tiene fecha, mantener orden original (por timestamp)
+        return (a.timestamp || 0) - (b.timestamp || 0);
+      });
+    }
+
     // RENDER TAREAS
     function renderTasks(tasks) {
       allTasks = [...tasks];
+      
+      // ORDENAR POR FECHA (las más próximas arriba)
+      const tareasOrdenadas = ordenarTareasPorFecha(tasks);
       
       const total = tasks.length;
       const completed = tasks.filter(t => t.hecho).length;
@@ -1467,7 +1500,7 @@
       const rewards = ['🔰 aprendices', '⚡ compas', '🔥 dupla', '💎 leyendas', '🏆 inmortales'];
       rewardLine.innerText = `🎁 ${rewards[Math.min(userLevel-1,4)]} · próximo en ${100 - (userPoints%100)}pts`;
 
-      tasksDiv.innerHTML = tasks.map(t => {
+      tasksDiv.innerHTML = tareasOrdenadas.map(t => {
         const dateStr = t.fecha ? new Date(t.fecha).toLocaleDateString() : 'sin fecha';
         return `<div class="task-card ${t.hecho ? 'completed' : ''}" data-key="${t.key}">
           <div class="task-info">
@@ -1821,7 +1854,6 @@
       onValue(tasksRef, (snapshot) => {
         const tasks = [];
         snapshot.forEach(child => tasks.push({ key: child.key, ...child.val() }));
-        tasks.sort((a,b) => (a.fecha||'') > (b.fecha||'') ? 1 : -1);
         renderTasks(tasks);
         const streakActual = updateStreak(tasks);
         resumenRacha.innerText = streakActual;
@@ -1855,7 +1887,7 @@
       });
     }
 
-    // AGREGAR TAREA - CORREGIDO Y FUNCIONAL
+    // AGREGAR TAREA - FUNCIONAL
     addBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const texto = taskInput.value.trim();
@@ -1923,5 +1955,3 @@
   </script>
 </body>
 </html>
-
-
