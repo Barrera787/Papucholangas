@@ -1864,10 +1864,6 @@
             <div class="examen-materia">📚 ${examen.materia}</div>
             <div class="examen-fecha">📅 ${new Date(examen.fecha).toLocaleDateString()}</div>
           </div>
-          <div class="examen-progress">
-            <progress value="${examen.progreso}" max="100"></progress>
-            <div style="font-size: 0.8rem; text-align: right;">${examen.progreso}% preparado</div>
-          </div>
           <div class="examen-actions">
             <button class="icon-btn delete-examen" data-key="${examen.key}"><i data-lucide="trash-2"></i></button>
           </div>
@@ -2089,6 +2085,7 @@
   </script>
 </body>
 </html>
+
 
 
 
