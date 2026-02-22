@@ -3,14 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TUTA & BARRERA · quién hizo qué</title>
+  <title>TUTA & BARRERA · tareas simples</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
     body { background: #0a0c12; color: white; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; }
+    .container { max-width: 600px; margin: 0 auto; display: none; }
     h1 { color: #ffaa00; margin-bottom: 20px; }
     
-    /* SELECTOR DE QUIÉN ERES */
+    /* LOGIN */
+    #loginScreen {
+      position: fixed;
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      background: #0a0c12; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      z-index: 1000;
+    }
+    .login-box {
+      background: #1a1e2a; 
+      padding: 40px; 
+      border-radius: 20px; 
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    .login-box h2 {
+      color: #ffaa00; 
+      margin-bottom: 20px;
+    }
+    .login-box input {
+      width: 100%; 
+      padding: 12px; 
+      margin-bottom: 20px; 
+      background: #2a2f3a; 
+      color: white; 
+      border: 1px solid #3a4050; 
+      border-radius: 8px;
+    }
+    .login-box button {
+      background: #ffaa00; 
+      color: black; 
+      padding: 12px 30px; 
+      border: none; 
+      border-radius: 8px; 
+      font-weight: bold; 
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    /* SELECTOR DE USUARIO */
     .selector-usuario {
       background: #1a1e2a;
       padding: 20px;
@@ -28,15 +73,53 @@
       cursor: pointer;
       opacity: 0.5;
       transition: 0.2s;
+      flex: 1;
     }
     .btn-usuario.activo {
       opacity: 1;
-      transform: scale(1.05);
+      transform: scale(1.02);
+      box-shadow: 0 0 15px currentColor;
     }
     .btn-tuta { background: #ffaa00; color: black; }
     .btn-barrera { background: #ff5577; color: white; }
     
-    .formulario { background: #1a1e2a; padding: 20px; border-radius: 16px; margin-bottom: 20px; }
+    /* ESTADÍSTICAS */
+    .stats {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: #1a1e2a;
+      padding: 15px;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+    }
+    .stat-label {
+      color: #888;
+      font-size: 0.8rem;
+      margin-bottom: 5px;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .total { color: #ffaa00; }
+    .completadas { color: #00ff88; }
+    .pendientes { color: #ff5577; }
+    .tuta-stats { color: #ffaa00; font-size: 0.9rem; margin-top: 5px; }
+    .barrera-stats { color: #ff5577; font-size: 0.9rem; margin-top: 5px; }
+    
+    /* FORMULARIO */
+    .formulario {
+      background: #1a1e2a;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
     select, input, button { 
       width: 100%;
       background: #2a2f3a; 
@@ -46,7 +129,7 @@
       border-radius: 8px; 
       margin-bottom: 10px;
     }
-    button { 
+    #agregar { 
       background: #ffaa00; 
       color: black; 
       font-weight: bold; 
@@ -54,8 +137,9 @@
       border: none;
       margin-bottom: 0;
     }
-    button:hover { background: #ffbb22; }
+    #agregar:hover { background: #ffbb22; }
     
+    /* TAREAS */
     .tarea {
       background: #1a1e2a;
       border-radius: 12px;
@@ -71,6 +155,7 @@
     .tarea-materia { font-size: 0.8rem; color: #aaa; margin-bottom: 4px; }
     .tarea-nombre { font-size: 1.1rem; font-weight: 500; }
     .tarea-fecha { font-size: 0.8rem; color: #888; margin-top: 4px; }
+    .tarea-creador { font-size: 0.7rem; color: #666; margin-top: 4px; }
     
     /* QUIÉN COMPLETÓ */
     .completado-por {
@@ -85,13 +170,14 @@
     .completado-tuta { background: #ffaa00; color: black; }
     .completado-barrera { background: #ff5577; color: white; }
     
-    .acciones { display: flex; gap: 8px; }
+    .acciones { display: flex; gap: 5px; }
     .acciones button {
       width: auto;
-      padding: 8px 12px;
+      padding: 8px 10px;
       margin: 0;
       background: #2a2f3a;
       color: white;
+      font-size: 0.9rem;
     }
     .acciones button:hover { background: #3a4050; }
     .completada { opacity: 0.8; }
@@ -115,13 +201,51 @@
   </style>
 </head>
 <body>
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h2>TUTA & BARRERA</h2>
+      <input type="password" id="passInput" placeholder="Contraseña">
+      <button id="loginBtn">ENTRAR</button>
+    </div>
+  </div>
+
+  <!-- APP -->
   <div class="container">
     <h1>TUTA & BARRERA</h1>
     
-    <!-- SELECTOR: ¿QUIÉN ERES? -->
+    <!-- SELECTOR DE USUARIO -->
     <div class="selector-usuario">
       <button class="btn-usuario btn-tuta" id="btnTuta">🧢 TUTA</button>
       <button class="btn-usuario btn-barrera" id="btnBarrera">⚡ BARRERA</button>
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">TOTAL</div>
+        <div class="stat-number total" id="statsTotal">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">COMPLETADAS</div>
+        <div class="stat-number completadas" id="statsCompletadas">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">PENDIENTES</div>
+        <div class="stat-number pendientes" id="statsPendientes">0</div>
+      </div>
+    </div>
+
+    <!-- ESTADÍSTICAS POR USUARIO -->
+    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+      <div class="stat-card" style="flex: 1;">
+        <div class="stat-label">🧢 TUTA</div>
+        <div class="stat-number tuta-stats" id="statsTuta">0</div>
+      </div>
+      <div class="stat-card" style="flex: 1;">
+        <div class="stat-label">⚡ BARRERA</div>
+        <div class="stat-number barrera-stats" id="statsBarrera">0</div>
+      </div>
     </div>
 
     <!-- FORMULARIO -->
@@ -160,6 +284,10 @@
     const tareasRef = ref(db, 'tareas');
 
     // Elementos
+    const loginScreen = document.getElementById('loginScreen');
+    const passInput = document.getElementById('passInput');
+    const loginBtn = document.getElementById('loginBtn');
+    const container = document.querySelector('.container');
     const lista = document.getElementById('lista');
     const materia = document.getElementById('materia');
     const nombre = document.getElementById('nombre');
@@ -167,12 +295,32 @@
     const agregar = document.getElementById('agregar');
     const btnTuta = document.getElementById('btnTuta');
     const btnBarrera = document.getElementById('btnBarrera');
+    
+    // Elementos de estadísticas
+    const statsTotal = document.getElementById('statsTotal');
+    const statsCompletadas = document.getElementById('statsCompletadas');
+    const statsPendientes = document.getElementById('statsPendientes');
+    const statsTuta = document.getElementById('statsTuta');
+    const statsBarrera = document.getElementById('statsBarrera');
 
-    // Usuario actual (Tuta por defecto)
+    // LOGIN - Contraseña: SantiAlejo
+    loginBtn.addEventListener('click', () => {
+      if (passInput.value === 'SantiAlejo') {
+        loginScreen.style.display = 'none';
+        container.style.display = 'block';
+      } else {
+        alert('Contraseña incorrecta');
+      }
+    });
+
+    passInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loginBtn.click();
+    });
+
+    // Usuario actual
     let usuarioActual = 'Tuta';
     btnTuta.classList.add('activo');
 
-    // Cambiar usuario
     btnTuta.addEventListener('click', () => {
       usuarioActual = 'Tuta';
       btnTuta.classList.add('activo');
@@ -194,8 +342,8 @@
         texto: nombre.value,
         fecha: fecha.value || null,
         hecho: false,
-        creadoPor: usuarioActual,      // Quién la creó
-        completadoPor: null,            // Quién la completó (nadie aún)
+        creadoPor: usuarioActual,
+        completadoPor: null,
         timestamp: Date.now()
       });
       
@@ -210,8 +358,24 @@
         tareas.push({ key: child.key, ...child.val() });
       });
 
-      // Ordenar por timestamp
+      // Ordenar por timestamp (nuevas abajo)
       tareas.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+
+      // Actualizar estadísticas generales
+      const total = tareas.length;
+      const completadas = tareas.filter(t => t.hecho).length;
+      const pendientes = total - completadas;
+      
+      statsTotal.innerText = total;
+      statsCompletadas.innerText = completadas;
+      statsPendientes.innerText = pendientes;
+
+      // Estadísticas por usuario (tareas completadas por cada uno)
+      const tutaCompletadas = tareas.filter(t => t.completadoPor === 'Tuta').length;
+      const barreraCompletadas = tareas.filter(t => t.completadoPor === 'Barrera').length;
+      
+      statsTuta.innerText = tutaCompletadas;
+      statsBarrera.innerText = barreraCompletadas;
 
       // Mostrar tareas
       lista.innerHTML = tareas.map(t => {
@@ -223,9 +387,10 @@
         <div class="tarea ${t.hecho ? 'completada' : ''} ${materiaClass}">
           ${t.hecho ? `<div class="completado-por ${completadoClass}">✅ ${t.completadoPor}</div>` : ''}
           <div class="tarea-info">
-            <div class="tarea-materia">📚 ${t.materia} · creada por ${t.creadoPor || '?'}</div>
+            <div class="tarea-materia">📚 ${t.materia}</div>
             <div class="tarea-nombre">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
+            <div class="tarea-creador">✍️ Creada por: ${t.creadoPor || '?'}</div>
           </div>
           <div class="acciones">
             <button class="completar" data-key="${t.key}" data-hecho="${t.hecho}">
