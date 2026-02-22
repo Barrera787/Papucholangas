@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TUTA & BARRERA · estudio definitivo</title>
-  <!-- Google Fonts para tipografía más bonita -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
       position: relative;
     }
     
-    /* Fondo con partículas (efecto profesional) */
+    /* Fondo con partículas */
     body::before {
       content: '';
       position: fixed;
@@ -38,7 +38,7 @@
     }
     
     .container { 
-      max-width: 700px; 
+      max-width: 800px; 
       margin: 0 auto; 
       display: none; 
       position: relative;
@@ -156,20 +156,18 @@
       color: white; 
     }
     
-    /* ESTADÍSTICAS */
-    .stats {
-      display: flex;
+    /* ESTADÍSTICAS PRINCIPALES */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 15px;
       margin-bottom: 20px;
-      flex-wrap: wrap;
     }
     .stat-card {
       background: rgba(26, 30, 42, 0.7);
       backdrop-filter: blur(20px);
       padding: 20px 15px;
       border-radius: 24px;
-      flex: 1;
-      min-width: 100px;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
@@ -188,10 +186,298 @@
     .total { color: #ffaa00; }
     .completadas { color: #00e0ff; }
     .pendientes { color: #ff5577; }
-    .tuta-stats { color: #ffaa00; font-size: 1.2rem; font-weight: 700; }
-    .barrera-stats { color: #ff5577; font-size: 1.2rem; font-weight: 700; }
     
-    /* FORMULARIO */
+    /* ===== NUEVA SECCIÓN: COMPETENCIA ===== */
+    .competencia-section {
+      background: rgba(26, 30, 42, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 22px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .competencia-titulo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .competencia-barras {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .barra-competencia {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .barra-nombre {
+      width: 80px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .barra-contenedor {
+      flex: 1;
+      height: 30px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+    }
+    .barra-tuta {
+      height: 100%;
+      background: linear-gradient(90deg, #ffaa00, #ff8800);
+      width: 0%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      color: black;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .barra-barrera {
+      height: 100%;
+      background: linear-gradient(90deg, #ff5577, #ff3366);
+      width: 0%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .barra-vs {
+      width: 50px;
+      text-align: center;
+      font-weight: 700;
+      color: #00e0ff;
+    }
+    
+    /* ===== NUEVA SECCIÓN: EXÁMENES ===== */
+    .examen-section {
+      background: rgba(26, 30, 42, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 22px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .examen-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .examen-input-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .examen-input-panel input,
+    .examen-input-panel select {
+      background: rgba(42, 47, 58, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 12px;
+      color: white;
+      flex: 1 1 130px;
+    }
+    .examen-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .examen-info {
+      flex: 2;
+      min-width: 200px;
+    }
+    .examen-materia {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .examen-fecha {
+      color: #a0a8c0;
+      font-size: 0.9rem;
+    }
+    .examen-progress {
+      flex: 1;
+      min-width: 150px;
+    }
+    progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    progress::-webkit-progress-bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+    }
+    progress::-webkit-progress-value {
+      background: linear-gradient(90deg, #ffaa00, #ff5577);
+      border-radius: 20px;
+    }
+    
+    /* ===== NUEVA SECCIÓN: LOGROS ===== */
+    .logros-section {
+      background: rgba(26, 30, 42, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 22px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .logros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .logro-card {
+      background: rgba(0,0,0,0.2);
+      border-radius: 20px;
+      padding: 16px 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.2s;
+      opacity: 0.5;
+      filter: grayscale(0.8);
+    }
+    .logro-card.completado {
+      opacity: 1;
+      filter: grayscale(0);
+      border-color: #ffaa00;
+      box-shadow: 0 0 20px rgba(255,170,0,0.2);
+    }
+    .logro-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .logro-nombre {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .logro-desc {
+      font-size: 0.7rem;
+      color: #a0a8c0;
+    }
+    
+    /* ===== NUEVA SECCIÓN: RESUMEN SEMANAL ===== */
+    .resumen-section {
+      background: linear-gradient(145deg, #1a1e2a, #121520);
+      border-radius: 30px;
+      padding: 22px;
+      margin-bottom: 25px;
+      border: 1px solid #00e0ff;
+    }
+    .resumen-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .resumen-stat {
+      text-align: center;
+    }
+    .resumen-numero {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #00e0ff;
+    }
+    .resumen-label {
+      font-size: 0.8rem;
+      color: #a0a8c0;
+    }
+    
+    /* ===== NUEVA SECCIÓN: MODO NO MOLESTAR ===== */
+    .dnd-section {
+      background: rgba(26, 30, 42, 0.7);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 22px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .dnd-estado {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .dnd-indicador {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .dnd-badge {
+      padding: 8px 16px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    .dnd-badge.disponible {
+      background: rgba(0, 224, 255, 0.2);
+      border: 1px solid #00e0ff;
+      color: #00e0ff;
+    }
+    .dnd-badge.nodisponible {
+      background: rgba(255, 85, 119, 0.2);
+      border: 1px solid #ff5577;
+      color: #ff5577;
+    }
+    .dnd-toggle {
+      display: flex;
+      gap: 10px;
+    }
+    
+    /* ===== BOTÓN BLEND ===== */
+    .blend-section {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .barrera-blend-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(145deg, #ff5577, #b13e55);
+      padding: 16px 28px;
+      border-radius: 60px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 0 #6b2533, 0 10px 25px rgba(255,85,119,0.3);
+      transition: all 0.2s ease;
+      width: 100%;
+      max-width: 480px;
+    }
+    .barrera-blend-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 0 #6b2533, 0 15px 30px rgba(255,85,119,0.5);
+    }
+    
+    /* TAREAS */
     .formulario {
       background: rgba(26, 30, 42, 0.7);
       backdrop-filter: blur(20px);
@@ -199,7 +485,6 @@
       border-radius: 30px;
       margin-bottom: 25px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
     }
     select, input { 
       width: 100%;
@@ -209,14 +494,6 @@
       padding: 14px; 
       border-radius: 20px; 
       margin-bottom: 12px;
-      font-size: 0.95rem;
-      backdrop-filter: blur(10px);
-    }
-    select option { background: #1a1e2a; }
-    select:focus, input:focus {
-      outline: none;
-      border-color: #ffaa00;
-      box-shadow: 0 0 0 3px rgba(255, 170, 0, 0.1);
     }
     #agregar { 
       background: linear-gradient(145deg, #ffaa00, #ff8800); 
@@ -226,16 +503,8 @@
       border: none;
       padding: 14px;
       border-radius: 60px;
-      font-size: 1rem;
-      transition: 0.2s;
-      box-shadow: 0 10px 20px -5px rgba(255, 170, 0, 0.3);
+      width: 100%;
     }
-    #agregar:hover { 
-      transform: translateY(-2px);
-      box-shadow: 0 15px 25px -5px #ffaa00;
-    }
-    
-    /* TAREAS */
     .tarea {
       background: rgba(26, 30, 42, 0.7);
       backdrop-filter: blur(20px);
@@ -247,45 +516,13 @@
       align-items: center;
       border-left: 5px solid;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3);
-      transition: 0.2s;
-      position: relative;
-    }
-    .tarea:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
-      border-color: rgba(255, 170, 0, 0.3);
     }
     .tarea-info { flex: 1; }
-    .tarea-materia { 
-      font-size: 0.8rem; 
-      color: #a0a8c0; 
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .tarea-nombre { 
-      font-size: 1.1rem; 
-      font-weight: 600; 
-      margin-bottom: 6px;
-    }
-    .tarea-fecha { 
-      font-size: 0.8rem; 
-      color: #8088a0; 
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .tarea-creador { 
-      font-size: 0.7rem; 
-      color: #707890; 
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .tarea-materia { font-size: 0.8rem; color: #a0a8c0; }
+    .tarea-nombre { font-size: 1.1rem; font-weight: 600; }
+    .tarea-fecha { font-size: 0.8rem; color: #8088a0; }
+    .tarea-creador { font-size: 0.7rem; color: #707890; }
     
-    /* QUIÉN COMPLETÓ */
     .completado-por {
       position: absolute;
       top: -8px;
@@ -294,51 +531,22 @@
       border-radius: 60px;
       font-size: 0.7rem;
       font-weight: 700;
-      box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
     }
-    .completado-tuta { 
-      background: linear-gradient(145deg, #ffaa00, #ff8800); 
-      color: black; 
-    }
-    .completado-barrera { 
-      background: linear-gradient(145deg, #ff5577, #ff3366); 
-      color: white; 
-    }
+    .completado-tuta { background: #ffaa00; color: black; }
+    .completado-barrera { background: #ff5577; color: white; }
     
-    .acciones { 
-      display: flex; 
-      gap: 5px;
-      margin-left: 10px;
-    }
+    .acciones { display: flex; gap: 5px; }
     .acciones button {
       width: 40px;
       height: 40px;
-      padding: 0;
-      margin: 0;
       background: rgba(42, 47, 58, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: white;
-      font-size: 1.1rem;
       border-radius: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       cursor: pointer;
-      transition: 0.2s;
-      backdrop-filter: blur(10px);
     }
-    .acciones button:hover { 
-      background: #ffaa00;
-      color: black;
-      transform: scale(1.1);
-      border-color: #ffaa00;
-    }
-    .completada { opacity: 0.8; }
-    .completada .tarea-nombre { 
-      text-decoration: line-through; 
-      text-decoration-color: #00e0ff;
-      text-decoration-thickness: 2px;
-    }
+    .acciones button:hover { background: #ffaa00; color: black; }
+    .completada .tarea-nombre { text-decoration: line-through; opacity: 0.6; }
     
     /* Colores por materia */
     .matematicas { border-left-color: #00ff88; }
@@ -355,11 +563,6 @@
     .religion { border-left-color: #cc66ff; }
     .artes { border-left-color: #ff6666; }
     .informatica { border-left-color: #66ccff; }
-    
-    /* Scrollbar bonito */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: rgba(26, 30, 42, 0.5); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(145deg, #ffaa00, #ff5577); border-radius: 10px; }
   </style>
 </head>
 <body>
@@ -382,8 +585,8 @@
       <button class="btn-usuario btn-barrera" id="btnBarrera">⚡ BARRERA</button>
     </div>
 
-    <!-- ESTADÍSTICAS -->
-    <div class="stats">
+    <!-- ESTADÍSTICAS PRINCIPALES -->
+    <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">TOTAL</div>
         <div class="stat-number total" id="statsTotal">0</div>
@@ -398,19 +601,52 @@
       </div>
     </div>
 
-    <!-- ESTADÍSTICAS POR USUARIO -->
-    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-      <div class="stat-card" style="flex: 1;">
-        <div class="stat-label">🧢 TUTA</div>
-        <div class="tuta-stats" id="statsTuta">0</div>
+    <!-- ===== NUEVO: COMPETENCIA ===== -->
+    <div class="competencia-section">
+      <div class="competencia-titulo">
+        <span style="font-size: 1.5rem;">🏆</span>
+        <h3>Competencia del día</h3>
       </div>
-      <div class="stat-card" style="flex: 1;">
-        <div class="stat-label">⚡ BARRERA</div>
-        <div class="barrera-stats" id="statsBarrera">0</div>
+      <div class="competencia-barras">
+        <div class="barra-competencia">
+          <span class="barra-nombre">🧢 Tuta</span>
+          <div class="barra-contenedor">
+            <div class="barra-tuta" id="barraTuta" style="width: 0%;">0</div>
+          </div>
+          <span class="barra-vs">VS</span>
+        </div>
+        <div class="barra-competencia">
+          <span class="barra-nombre">⚡ Barrera</span>
+          <div class="barra-contenedor">
+            <div class="barra-barrera" id="barraBarrera" style="width: 0%;">0</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 15px; color: #a0a8c0;" id="competenciaMensaje">
+        🏆 ¡El que gane hoy, elige la próxima playlist!
       </div>
     </div>
 
-    <!-- FORMULARIO -->
+    <!-- ===== NUEVO: MODO NO MOLESTAR ===== -->
+    <div class="dnd-section">
+      <div class="dnd-estado">
+        <div class="dnd-indicador">
+          <span>🔔 Estado:</span>
+          <div class="dnd-badge disponible" id="dndTuta">
+            🧢 Tuta: <span>Disponible</span>
+          </div>
+          <div class="dnd-badge disponible" id="dndBarrera">
+            ⚡ Barrera: <span>Disponible</span>
+          </div>
+        </div>
+        <div class="dnd-toggle">
+          <button class="btn-usuario btn-tuta" id="toggleDndTuta" style="padding: 8px 16px;">🔕 No molestar</button>
+          <button class="btn-usuario btn-barrera" id="toggleDndBarrera" style="padding: 8px 16px;">🔕 No molestar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULARIO DE TAREAS -->
     <div class="formulario">
       <select id="materia">
         <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
@@ -425,6 +661,69 @@
 
     <!-- LISTA DE TAREAS -->
     <div id="lista"></div>
+
+    <!-- ===== NUEVO: LOGROS ===== -->
+    <div class="logros-section">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <span style="font-size: 1.5rem;">🏅</span>
+        <h3>Logros desbloqueados</h3>
+      </div>
+      <div class="logros-grid" id="logrosContainer"></div>
+    </div>
+
+    <!-- ===== NUEVO: RESUMEN SEMANAL ===== -->
+    <div class="resumen-section">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.5rem;">📊</span>
+        <h3>Resumen de la semana</h3>
+      </div>
+      <div class="resumen-stats" id="resumenSemanal">
+        <div class="resumen-stat">
+          <div class="resumen-numero" id="resumenTareas">0</div>
+          <div class="resumen-label">tareas</div>
+        </div>
+        <div class="resumen-stat">
+          <div class="resumen-numero" id="resumenRacha">0</div>
+          <div class="resumen-label">racha</div>
+        </div>
+        <div class="resumen-stat">
+          <div class="resumen-numero" id="resumenTuta">0</div>
+          <div class="resumen-label">Tuta</div>
+        </div>
+        <div class="resumen-stat">
+          <div class="resumen-numero" id="resumenBarrera">0</div>
+          <div class="resumen-label">Barrera</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NUEVO: EXÁMENES ===== -->
+    <div class="examen-section">
+      <div class="examen-header">
+        <span style="font-size: 1.5rem;">📝</span>
+        <h3>Próximos exámenes</h3>
+      </div>
+      <div class="examen-input-panel">
+        <select id="examenMateria">
+          <option>Matemáticas</option><option>Física</option><option>Castellano</option><option>Bioquímica</option>
+          <option>Filosofía</option><option>Inglés</option><option>Taller</option><option>Baloncesto</option>
+          <option>Ética</option><option>Dibujo</option><option>Sociales</option><option>Religión</option>
+          <option>Artes</option><option>Informática</option>
+        </select>
+        <input type="date" id="examenFecha" placeholder="Fecha">
+        <input type="number" id="examenProgreso" min="0" max="100" value="50" placeholder="%">
+        <button id="addExamenBtn" class="btn-usuario btn-tuta" style="padding: 12px;">➕ Agregar</button>
+      </div>
+      <div id="examenesContainer"></div>
+    </div>
+
+    <!-- ===== NUEVO: BOTÓN BLEND ===== -->
+    <div class="blend-section">
+      <a href="https://open.spotify.com/blend/taste-match/b926f9f31b37b705?si=I5sMqomiTrKrn2LSQ9nqMg" 
+         target="_blank" class="barrera-blend-button">
+        🎧 ABRIR BLEND DE BARRERA EN SPOTIFY
+      </a>
+    </div>
   </div>
 
   <script type="module">
@@ -444,27 +743,60 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const tareasRef = ref(db, 'tareas');
+    const examenesRef = ref(db, 'examenes');
+    const dndRef = ref(db, 'modoNoMolestar');
 
-    // Elementos
+    // Elementos DOM
     const loginScreen = document.getElementById('loginScreen');
     const passInput = document.getElementById('passInput');
     const loginBtn = document.getElementById('loginBtn');
     const container = document.querySelector('.container');
+    
+    // Tareas
     const lista = document.getElementById('lista');
     const materia = document.getElementById('materia');
     const nombre = document.getElementById('nombre');
     const fecha = document.getElementById('fecha');
     const agregar = document.getElementById('agregar');
+    
+    // Usuario
     const btnTuta = document.getElementById('btnTuta');
     const btnBarrera = document.getElementById('btnBarrera');
+    let usuarioActual = 'Tuta';
     
+    // Estadísticas
     const statsTotal = document.getElementById('statsTotal');
     const statsCompletadas = document.getElementById('statsCompletadas');
     const statsPendientes = document.getElementById('statsPendientes');
-    const statsTuta = document.getElementById('statsTuta');
-    const statsBarrera = document.getElementById('statsBarrera');
+    
+    // Competencia
+    const barraTuta = document.getElementById('barraTuta');
+    const barraBarrera = document.getElementById('barraBarrera');
+    const competenciaMensaje = document.getElementById('competenciaMensaje');
+    
+    // No molestar
+    const dndTuta = document.getElementById('dndTuta');
+    const dndBarrera = document.getElementById('dndBarrera');
+    const toggleDndTuta = document.getElementById('toggleDndTuta');
+    const toggleDndBarrera = document.getElementById('toggleDndBarrera');
+    
+    // Logros
+    const logrosContainer = document.getElementById('logrosContainer');
+    
+    // Resumen
+    const resumenTareas = document.getElementById('resumenTareas');
+    const resumenRacha = document.getElementById('resumenRacha');
+    const resumenTuta = document.getElementById('resumenTuta');
+    const resumenBarrera = document.getElementById('resumenBarrera');
+    
+    // Exámenes
+    const examenMateria = document.getElementById('examenMateria');
+    const examenFecha = document.getElementById('examenFecha');
+    const examenProgreso = document.getElementById('examenProgreso');
+    const addExamenBtn = document.getElementById('addExamenBtn');
+    const examenesContainer = document.getElementById('examenesContainer');
 
-    // LOGIN - Contraseña: SantiAlejo
+    // LOGIN
     loginBtn.addEventListener('click', () => {
       if (passInput.value === 'SantiAlejo') {
         loginScreen.style.display = 'none';
@@ -478,16 +810,13 @@
       if (e.key === 'Enter') loginBtn.click();
     });
 
-    // Usuario actual
-    let usuarioActual = 'Tuta';
+    // Selector de usuario
     btnTuta.classList.add('activo');
-
     btnTuta.addEventListener('click', () => {
       usuarioActual = 'Tuta';
       btnTuta.classList.add('activo');
       btnBarrera.classList.remove('activo');
     });
-
     btnBarrera.addEventListener('click', () => {
       usuarioActual = 'Barrera';
       btnBarrera.classList.add('activo');
@@ -497,7 +826,6 @@
     // Agregar tarea
     agregar.addEventListener('click', () => {
       if (!nombre.value.trim()) return alert('Escribe el nombre');
-      
       push(tareasRef, {
         materia: materia.value,
         texto: nombre.value,
@@ -507,99 +835,190 @@
         completadoPor: null,
         timestamp: Date.now()
       });
-      
       nombre.value = '';
       fecha.value = '';
     });
 
-    // Escuchar cambios
+    // Escuchar tareas
     onValue(tareasRef, (snapshot) => {
       const tareas = [];
-      snapshot.forEach(child => {
-        tareas.push({ key: child.key, ...child.val() });
-      });
-
-      // Ordenar por timestamp (nuevas abajo)
+      snapshot.forEach(child => tareas.push({ key: child.key, ...child.val() }));
       tareas.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 
-      // Estadísticas
+      // Estadísticas principales
       const total = tareas.length;
       const completadas = tareas.filter(t => t.hecho).length;
-      const pendientes = total - completadas;
-      
       statsTotal.innerText = total;
       statsCompletadas.innerText = completadas;
-      statsPendientes.innerText = pendientes;
+      statsPendientes.innerText = total - completadas;
 
+      // Competencia
       const tutaCompletadas = tareas.filter(t => t.completadoPor === 'Tuta').length;
       const barreraCompletadas = tareas.filter(t => t.completadoPor === 'Barrera').length;
+      const totalComp = tutaCompletadas + barreraCompletadas;
       
-      statsTuta.innerText = tutaCompletadas;
-      statsBarrera.innerText = barreraCompletadas;
+      if (totalComp > 0) {
+        barraTuta.style.width = (tutaCompletadas / totalComp * 100) + '%';
+        barraBarrera.style.width = (barreraCompletadas / totalComp * 100) + '%';
+        barraTuta.innerHTML = tutaCompletadas;
+        barraBarrera.innerHTML = barreraCompletadas;
+        
+        if (tutaCompletadas > barreraCompletadas) competenciaMensaje.innerHTML = '🏆 Tuta va ganando!';
+        else if (barreraCompletadas > tutaCompletadas) competenciaMensaje.innerHTML = '🏆 Barrera va ganando!';
+        else competenciaMensaje.innerHTML = '⚔️ Están empatados!';
+      }
 
-      // Mostrar tareas
+      // Resumen semanal
+      const estaSemana = tareas.filter(t => {
+        if (!t.timestamp) return false;
+        const diff = Date.now() - t.timestamp;
+        return diff <= 7 * 24 * 60 * 60 * 1000;
+      });
+      resumenTareas.innerText = estaSemana.length;
+      resumenTuta.innerText = estaSemana.filter(t => t.creadoPor === 'Tuta').length;
+      resumenBarrera.innerText = estaSemana.filter(t => t.creadoPor === 'Barrera').length;
+
+      // Renderizar tareas
       lista.innerHTML = tareas.map(t => {
         const materiaClass = t.materia.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const completadoClass = t.completadoPor === 'Tuta' ? 'completado-tuta' : 
-                               (t.completadoPor === 'Barrera' ? 'completado-barrera' : '');
-        
         return `
-        <div class="tarea ${t.hecho ? 'completada' : ''} ${materiaClass}">
-          ${t.hecho ? `<div class="completado-por ${completadoClass}">✅ ${t.completadoPor}</div>` : ''}
+        <div class="tarea ${t.hecho ? 'completada' : ''} ${materiaClass}" style="position: relative;">
+          ${t.hecho ? `<div class="completado-por ${t.completadoPor === 'Tuta' ? 'completado-tuta' : 'completado-barrera'}">✅ ${t.completadoPor}</div>` : ''}
           <div class="tarea-info">
             <div class="tarea-materia">📚 ${t.materia}</div>
             <div class="tarea-nombre">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
-            <div class="tarea-creador">✍️ Creada por: ${t.creadoPor || '?'}</div>
+            <div class="tarea-creador">✍️ ${t.creadoPor || '?'}</div>
           </div>
           <div class="acciones">
-            <button class="completar" data-key="${t.key}" data-hecho="${t.hecho}">
-              ${t.hecho ? '↩️' : '✅'}
-            </button>
+            <button class="completar" data-key="${t.key}" data-hecho="${t.hecho}">${t.hecho ? '↩️' : '✅'}</button>
             <button class="editar" data-key="${t.key}" data-texto="${t.texto}">✏️</button>
             <button class="eliminar" data-key="${t.key}">🗑️</button>
           </div>
         </div>
       `}).join('');
 
-      // Eventos
+      // Eventos tareas
       document.querySelectorAll('.completar').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const key = btn.dataset.key;
           const hecho = btn.dataset.hecho === 'true';
-          const nuevoHecho = !hecho;
-          
-          const updates = {
-            hecho: nuevoHecho,
-            completadoPor: nuevoHecho ? usuarioActual : null
-          };
-          
-          update(ref(db, 'tareas/' + key), updates);
+          update(ref(db, 'tareas/' + key), {
+            hecho: !hecho,
+            completadoPor: !hecho ? usuarioActual : null
+          });
         });
       });
-
       document.querySelectorAll('.editar').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const key = btn.dataset.key;
-          const textoActual = btn.dataset.texto;
-          const nuevo = prompt('Editar tarea:', textoActual);
-          if (nuevo?.trim()) {
-            update(ref(db, 'tareas/' + key), { texto: nuevo.trim() });
-          }
+          const nuevo = prompt('Editar tarea:', btn.dataset.texto);
+          if (nuevo?.trim()) update(ref(db, 'tareas/' + key), { texto: nuevo.trim() });
         });
       });
-
       document.querySelectorAll('.eliminar').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const key = btn.dataset.key;
-          if (confirm('¿Eliminar?')) {
-            remove(ref(db, 'tareas/' + key));
-          }
+          if (confirm('¿Eliminar?')) remove(ref(db, 'tareas/' + btn.dataset.key));
         });
       });
+    });
+
+    // ===== LOGROS =====
+    const logros = [
+      { id: 1, nombre: 'Primeros pasos', desc: 'Completar 5 tareas', icon: '🌱' },
+      { id: 2, nombre: 'Dupla imparable', desc: '10 tareas en equipo', icon: '🤝' },
+      { id: 3, nombre: 'Racha 7 días', desc: 'Una semana seguida', icon: '🔥' },
+      { id: 4, nombre: 'Maestro', desc: '8 materias diferentes', icon: '📚' }
+    ];
+    logrosContainer.innerHTML = logros.map(l => `
+      <div class="logro-card" id="logro-${l.id}">
+        <div class="logro-icon">${l.icon}</div>
+        <div class="logro-nombre">${l.nombre}</div>
+        <div class="logro-desc">${l.desc}</div>
+      </div>
+    `).join('');
+
+    // ===== MODO NO MOLESTAR =====
+    let dndEstado = { Tuta: false, Barrera: false };
+    
+    toggleDndTuta.addEventListener('click', () => {
+      dndEstado.Tuta = !dndEstado.Tuta;
+      update(dndRef, dndEstado);
+    });
+    toggleDndBarrera.addEventListener('click', () => {
+      dndEstado.Barrera = !dndEstado.Barrera;
+      update(dndRef, dndEstado);
+    });
+    
+    onValue(dndRef, (snapshot) => {
+      const estado = snapshot.val() || { Tuta: false, Barrera: false };
+      dndEstado = estado;
+      
+      if (estado.Tuta) {
+        dndTuta.classList.replace('disponible', 'nodisponible');
+        dndTuta.querySelector('span').innerText = 'No molestar';
+        toggleDndTuta.innerHTML = '🔔 Disponible';
+      } else {
+        dndTuta.classList.replace('nodisponible', 'disponible');
+        dndTuta.querySelector('span').innerText = 'Disponible';
+        toggleDndTuta.innerHTML = '🔕 No molestar';
+      }
+      
+      if (estado.Barrera) {
+        dndBarrera.classList.replace('disponible', 'nodisponible');
+        dndBarrera.querySelector('span').innerText = 'No molestar';
+        toggleDndBarrera.innerHTML = '🔔 Disponible';
+      } else {
+        dndBarrera.classList.replace('nodisponible', 'disponible');
+        dndBarrera.querySelector('span').innerText = 'Disponible';
+        toggleDndBarrera.innerHTML = '🔕 No molestar';
+      }
+    });
+
+    // ===== EXÁMENES =====
+    function renderExamenes(examenes) {
+      examenesContainer.innerHTML = '';
+      if (!examenes?.length) {
+        examenesContainer.innerHTML = '<div style="text-align: center; padding: 20px; color: #a0a8c0;">No hay exámenes</div>';
+        return;
+      }
+      [...examenes].sort((a, b) => new Date(a.fecha) - new Date(b.fecha)).forEach(examen => {
+        const div = document.createElement('div');
+        div.className = 'examen-item';
+        div.innerHTML = `
+          <div class="examen-info">
+            <div class="examen-materia">📚 ${examen.materia}</div>
+            <div class="examen-fecha">📅 ${new Date(examen.fecha).toLocaleDateString()}</div>
+          </div>
+          <div class="examen-progress">
+            <progress value="${examen.progreso}" max="100"></progress>
+            <div style="font-size:0.8rem; text-align:right;">${examen.progreso}%</div>
+          </div>
+          <button class="delete-examen" data-key="${examen.key}" style="background:none; border:none; color:#ff5577; cursor:pointer;">🗑️</button>
+        `;
+        examenesContainer.appendChild(div);
+        div.querySelector('.delete-examen').addEventListener('click', () => remove(ref(db, 'examenes/' + examen.key)));
+      });
+    }
+
+    addExamenBtn.addEventListener('click', () => {
+      if (!examenFecha.value) return alert('Selecciona fecha');
+      push(examenesRef, {
+        materia: examenMateria.value,
+        fecha: examenFecha.value,
+        progreso: parseInt(examenProgreso.value)
+      });
+      examenFecha.value = '';
+      examenProgreso.value = '50';
+    });
+
+    onValue(examenesRef, (snapshot) => {
+      const examenes = [];
+      snapshot.forEach(child => examenes.push({ key: child.key, ...child.val() }));
+      renderExamenes(examenes);
     });
   </script>
 </body>
