@@ -7,7 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, sans-serif; }
     body { background: #0a0c12; color: white; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; }
+    .container { max-width: 600px; margin: 0 auto; display: none; }
     h1 { color: #ffaa00; margin-bottom: 20px; }
     .formulario { background: #1a1e2a; padding: 20px; border-radius: 16px; margin-bottom: 20px; }
     select, input, button { 
@@ -28,6 +28,30 @@
       margin-bottom: 0;
     }
     button:hover { background: #ffbb22; }
+    .stats {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: #1a1e2a;
+      padding: 15px;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 120px;
+    }
+    .stat-label {
+      color: #888;
+      font-size: 0.8rem;
+    }
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    .total { color: #ffaa00; }
+    .completadas { color: #00ff88; }
+    .pendientes { color: #ff5577; }
     .tarea {
       background: #1a1e2a;
       border-radius: 12px;
@@ -51,14 +75,100 @@
       color: white;
     }
     .acciones button:hover { background: #3a4050; }
-    .completada { opacity: 0.6; border-left-color: #00ff88; }
+    .completada { opacity: 0.6; }
     .completada .tarea-nombre { text-decoration: line-through; }
+    
+    /* Colores por materia */
+    .matematicas { border-left-color: #00ff88 !important; }
+    .fisica { border-left-color: #00c3ff !important; }
+    .castellano { border-left-color: #ff4d4d !important; }
+    .bioquimica { border-left-color: #a64dff !important; }
+    .filosofia { border-left-color: #ffcc00 !important; }
+    .ingles { border-left-color: #ff99cc !important; }
+    .taller { border-left-color: #00ffcc !important; }
+    .baloncesto { border-left-color: #ff9900 !important; }
+    .etica { border-left-color: #66cc66 !important; }
+    .dibujo { border-left-color: #ff66b2 !important; }
+    .sociales { border-left-color: #ff9933 !important; }
+    .religion { border-left-color: #cc66ff !important; }
+    .artes { border-left-color: #ff6666 !important; }
+    .informatica { border-left-color: #66ccff !important; }
+
+    /* LOGIN */
+    #loginScreen {
+      position: fixed;
+      top:0; 
+      left:0; 
+      width:100%; 
+      height:100%; 
+      background: #0a0c12; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      z-index: 1000;
+    }
+    .login-box {
+      background: #1a1e2a; 
+      padding: 40px; 
+      border-radius: 20px; 
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    .login-box h2 {
+      color: #ffaa00; 
+      margin-bottom: 20px;
+    }
+    .login-box input {
+      width: 100%; 
+      padding: 12px; 
+      margin-bottom: 20px; 
+      background: #2a2f3a; 
+      color: white; 
+      border: 1px solid #3a4050; 
+      border-radius: 8px;
+    }
+    .login-box button {
+      background: #ffaa00; 
+      color: black; 
+      padding: 12px 30px; 
+      border: none; 
+      border-radius: 8px; 
+      font-weight: bold; 
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-box">
+      <h2>TUTA & BARRERA</h2>
+      <input type="password" id="passInput" placeholder="Contraseña">
+      <button id="loginBtn">ENTRAR</button>
+    </div>
+  </div>
+
+  <!-- APP -->
   <div class="container">
     <h1>TUTA & BARRERA</h1>
     
+    <!-- ESTADÍSTICAS -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">TOTAL</div>
+        <div class="stat-number total" id="statsTotal">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">COMPLETADAS</div>
+        <div class="stat-number completadas" id="statsCompletadas">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">PENDIENTES</div>
+        <div class="stat-number pendientes" id="statsPendientes">0</div>
+      </div>
+    </div>
+
     <!-- FORMULARIO -->
     <div class="formulario">
       <select id="materia">
@@ -94,11 +204,34 @@
     const db = getDatabase(app);
     const tareasRef = ref(db, 'tareas');
 
+    // Elementos
+    const loginScreen = document.getElementById('loginScreen');
+    const passInput = document.getElementById('passInput');
+    const loginBtn = document.getElementById('loginBtn');
+    const container = document.querySelector('.container');
     const lista = document.getElementById('lista');
     const materia = document.getElementById('materia');
     const nombre = document.getElementById('nombre');
     const fecha = document.getElementById('fecha');
     const agregar = document.getElementById('agregar');
+    const statsTotal = document.getElementById('statsTotal');
+    const statsCompletadas = document.getElementById('statsCompletadas');
+    const statsPendientes = document.getElementById('statsPendientes');
+
+    // LOGIN
+    loginBtn.addEventListener('click', () => {
+      if (passInput.value === 'SantiAlejo') {
+        loginScreen.style.display = 'none';
+        container.style.display = 'block';
+      } else {
+        alert('Contraseña incorrecta');
+      }
+    });
+
+    // ENTER en el input de contraseña
+    passInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loginBtn.click();
+    });
 
     // Agregar tarea
     agregar.addEventListener('click', () => {
@@ -109,7 +242,7 @@
         texto: nombre.value,
         fecha: fecha.value || null,
         hecho: false,
-        timestamp: Date.now()  // Esto es clave para ordenar
+        timestamp: Date.now()
       });
       
       nombre.value = '';
@@ -123,12 +256,17 @@
         tareas.push({ key: child.key, ...child.val() });
       });
 
-      // ORDENAR POR TIMESTAMP (las más nuevas al final)
+      // Ordenar por timestamp
       tareas.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 
-      // Mostrar
+      // Actualizar estadísticas
+      statsTotal.innerText = tareas.length;
+      statsCompletadas.innerText = tareas.filter(t => t.hecho).length;
+      statsPendientes.innerText = tareas.filter(t => !t.hecho).length;
+
+      // Mostrar tareas
       lista.innerHTML = tareas.map(t => `
-        <div class="tarea ${t.hecho ? 'completada' : ''}">
+        <div class="tarea ${t.hecho ? 'completada' : ''} ${t.materia.toLowerCase()}">
           <div class="tarea-info">
             <div class="tarea-materia">📚 ${t.materia}</div>
             <div class="tarea-nombre">${t.texto}</div>
@@ -142,7 +280,7 @@
         </div>
       `).join('');
 
-      // Eventos de los botones
+      // Eventos botones
       document.querySelectorAll('.completar').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
