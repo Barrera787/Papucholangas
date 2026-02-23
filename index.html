@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TUTA & BARRERA · estudio definitivo</title>
-  <!-- Google Fonts para tipografía más bonita -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,6 @@
       position: relative;
     }
     
-    /* Fondo con partículas (efecto profesional) */
     body::before {
       content: '';
       position: fixed;
@@ -156,7 +155,7 @@
       color: white; 
     }
     
-    /* ESTADÍSTICAS */
+    /* ESTADÍSTICAS PRINCIPALES */
     .stats {
       display: flex;
       gap: 15px;
@@ -188,8 +187,33 @@
     .total { color: #ffaa00; }
     .completadas { color: #00e0ff; }
     .pendientes { color: #ff5577; }
-    .tuta-stats { color: #ffaa00; font-size: 1.2rem; font-weight: 700; }
-    .barrera-stats { color: #ff5577; font-size: 1.2rem; font-weight: 700; }
+    
+    /* ESTADÍSTICAS POR USUARIO */
+    .usuario-stats {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .usuario-card {
+      background: rgba(26, 30, 42, 0.7);
+      backdrop-filter: blur(20px);
+      padding: 15px;
+      border-radius: 24px;
+      flex: 1;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .usuario-nombre {
+      font-size: 0.9rem;
+      color: #a0a8c0;
+      margin-bottom: 5px;
+    }
+    .usuario-numero {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .tuta-numero { color: #ffaa00; }
+    .barrera-numero { color: #ff5577; }
     
     /* FORMULARIO */
     .formulario {
@@ -285,24 +309,30 @@
       gap: 4px;
     }
     
-    /* QUIÉN COMPLETÓ */
+    /* QUIÉN COMPLETÓ - AHORA APARECEN AMBOS */
     .completado-por {
-      position: absolute;
-      top: -8px;
-      right: 15px;
-      padding: 4px 15px;
-      border-radius: 60px;
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .completado-badge {
+      padding: 3px 10px;
+      border-radius: 30px;
       font-size: 0.7rem;
-      font-weight: 700;
-      box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
     .completado-tuta { 
-      background: linear-gradient(145deg, #ffaa00, #ff8800); 
-      color: black; 
+      background: rgba(255, 170, 0, 0.15); 
+      color: #ffaa00; 
+      border: 1px solid #ffaa00;
     }
     .completado-barrera { 
-      background: linear-gradient(145deg, #ff5577, #ff3366); 
-      color: white; 
+      background: rgba(255, 85, 119, 0.15); 
+      color: #ff5577; 
+      border: 1px solid #ff5577;
     }
     
     .acciones { 
@@ -333,8 +363,10 @@
       transform: scale(1.1);
       border-color: #ffaa00;
     }
-    .completada { opacity: 0.8; }
-    .completada .tarea-nombre { 
+    .completada-por-mi { 
+      opacity: 0.8; 
+    }
+    .completada-por-mi .tarea-nombre { 
       text-decoration: line-through; 
       text-decoration-color: #00e0ff;
       text-decoration-thickness: 2px;
@@ -356,7 +388,7 @@
     .artes { border-left-color: #ff6666; }
     .informatica { border-left-color: #66ccff; }
     
-    /* Scrollbar bonito */
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: rgba(26, 30, 42, 0.5); border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: linear-gradient(145deg, #ffaa00, #ff5577); border-radius: 10px; }
@@ -382,7 +414,7 @@
       <button class="btn-usuario btn-barrera" id="btnBarrera">⚡ BARRERA</button>
     </div>
 
-    <!-- ESTADÍSTICAS -->
+    <!-- ESTADÍSTICAS PRINCIPALES -->
     <div class="stats">
       <div class="stat-card">
         <div class="stat-label">TOTAL</div>
@@ -399,14 +431,14 @@
     </div>
 
     <!-- ESTADÍSTICAS POR USUARIO -->
-    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-      <div class="stat-card" style="flex: 1;">
-        <div class="stat-label">🧢 TUTA</div>
-        <div class="tuta-stats" id="statsTuta">0</div>
+    <div class="usuario-stats">
+      <div class="usuario-card">
+        <div class="usuario-nombre">🧢 TUTA</div>
+        <div class="usuario-numero tuta-numero" id="statsTuta">0</div>
       </div>
-      <div class="stat-card" style="flex: 1;">
-        <div class="stat-label">⚡ BARRERA</div>
-        <div class="barrera-stats" id="statsBarrera">0</div>
+      <div class="usuario-card">
+        <div class="usuario-nombre">⚡ BARRERA</div>
+        <div class="usuario-numero barrera-numero" id="statsBarrera">0</div>
       </div>
     </div>
 
@@ -464,7 +496,7 @@
     const statsTuta = document.getElementById('statsTuta');
     const statsBarrera = document.getElementById('statsBarrera');
 
-    // LOGIN - Contraseña: SantiAlejo
+    // LOGIN
     loginBtn.addEventListener('click', () => {
       if (passInput.value === 'SantiAlejo') {
         loginScreen.style.display = 'none';
@@ -502,9 +534,12 @@
         materia: materia.value,
         texto: nombre.value,
         fecha: fecha.value || null,
-        hecho: false,
+        // Estados separados para cada usuario
+        hecho: {
+          Tuta: false,
+          Barrera: false
+        },
         creadoPor: usuarioActual,
-        completadoPor: null,
         timestamp: Date.now()
       });
       
@@ -519,42 +554,52 @@
         tareas.push({ key: child.key, ...child.val() });
       });
 
-      // Ordenar por timestamp (nuevas abajo)
+      // Ordenar por timestamp
       tareas.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 
-      // Estadísticas
+      // Estadísticas globales
       const total = tareas.length;
-      const completadas = tareas.filter(t => t.hecho).length;
-      const pendientes = total - completadas;
+      
+      // Para las estadísticas globales, consideramos una tarea completada si AMBOS la hicieron
+      const completadasAmbos = tareas.filter(t => t.hecho?.Tuta && t.hecho?.Barrera).length;
+      const completadasTuta = tareas.filter(t => t.hecho?.Tuta).length;
+      const completadasBarrera = tareas.filter(t => t.hecho?.Barrera).length;
       
       statsTotal.innerText = total;
-      statsCompletadas.innerText = completadas;
-      statsPendientes.innerText = pendientes;
+      statsCompletadas.innerText = completadasAmbos;
+      statsPendientes.innerText = total - completadasAmbos;
 
-      const tutaCompletadas = tareas.filter(t => t.completadoPor === 'Tuta').length;
-      const barreraCompletadas = tareas.filter(t => t.completadoPor === 'Barrera').length;
-      
-      statsTuta.innerText = tutaCompletadas;
-      statsBarrera.innerText = barreraCompletadas;
+      statsTuta.innerText = completadasTuta;
+      statsBarrera.innerText = completadasBarrera;
 
       // Mostrar tareas
       lista.innerHTML = tareas.map(t => {
         const materiaClass = t.materia.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const completadoClass = t.completadoPor === 'Tuta' ? 'completado-tuta' : 
-                               (t.completadoPor === 'Barrera' ? 'completado-barrera' : '');
+        
+        // Determinar si la tarea debe aparecer tachada para el usuario actual
+        const completadaPorMi = t.hecho?.[usuarioActual] || false;
+        
+        // Quiénes han completado la tarea
+        const completadoTuta = t.hecho?.Tuta || false;
+        const completadoBarrera = t.hecho?.Barrera || false;
         
         return `
-        <div class="tarea ${t.hecho ? 'completada' : ''} ${materiaClass}">
-          ${t.hecho ? `<div class="completado-por ${completadoClass}">✅ ${t.completadoPor}</div>` : ''}
+        <div class="tarea ${completadaPorMi ? 'completada-por-mi' : ''} ${materiaClass}">
           <div class="tarea-info">
             <div class="tarea-materia">📚 ${t.materia}</div>
             <div class="tarea-nombre">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
             <div class="tarea-creador">✍️ Creada por: ${t.creadoPor || '?'}</div>
+            
+            <!-- QUIÉNES COMPLETARON LA TAREA -->
+            <div class="completado-por">
+              ${completadoTuta ? '<span class="completado-badge completado-tuta">🧢 Tuta</span>' : ''}
+              ${completadoBarrera ? '<span class="completado-badge completado-barrera">⚡ Barrera</span>' : ''}
+            </div>
           </div>
           <div class="acciones">
-            <button class="completar" data-key="${t.key}" data-hecho="${t.hecho}">
-              ${t.hecho ? '↩️' : '✅'}
+            <button class="completar" data-key="${t.key}" data-completado="${completadaPorMi}">
+              ${completadaPorMi ? '↩️' : '✅'}
             </button>
             <button class="editar" data-key="${t.key}" data-texto="${t.texto}">✏️</button>
             <button class="eliminar" data-key="${t.key}">🗑️</button>
@@ -567,15 +612,13 @@
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const key = btn.dataset.key;
-          const hecho = btn.dataset.hecho === 'true';
-          const nuevoHecho = !hecho;
+          const completado = btn.dataset.completado === 'true';
           
-          const updates = {
-            hecho: nuevoHecho,
-            completadoPor: nuevoHecho ? usuarioActual : null
-          };
-          
-          update(ref(db, 'tareas/' + key), updates);
+          // Actualizar SOLO el estado del usuario actual
+          const rutaHecho = `hecho/${usuarioActual}`;
+          update(ref(db, 'tareas/' + key), {
+            [rutaHecho]: !completado
+          });
         });
       });
 
