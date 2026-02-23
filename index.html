@@ -298,6 +298,32 @@
       font-size: 0.8rem;
     }
     
+    /* CONTADORES DE PENDIENTES */
+    .pendientes-container {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+    }
+    .pendiente-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .pendiente-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 12px;
+    }
+    .pendiente-texto {
+      flex: 1;
+    }
+    .pendiente-numero {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
@@ -370,7 +396,7 @@
           </div>
         </div>
         
-        <!-- Comparación Tuta vs Barrera -->
+        <!-- Comparación Tuta vs Barrera (completadas) -->
         <div style="margin-top: 20px;">
           <div style="display: flex; justify-content: space-around; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 20px;">
             <div>
@@ -384,15 +410,20 @@
           </div>
         </div>
         
-        <!-- Resumen de creadas -->
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 20px;">
-          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
-            <span style="background: #ffaa00; width: 10px; height: 10px; border-radius: 10px;"></span>
-            <span>Tareas de Tuta: <span id="totalTutas">0</span></span>
+        <!-- CONTADORES DE PENDIENTES (AHORA SÍ DISMINUYEN) -->
+        <div class="pendientes-container">
+          <h4 style="margin-bottom: 15px; color: #a0a8c0;">📋 PENDIENTES</h4>
+          
+          <div class="pendiente-item">
+            <div class="pendiente-color" style="background: #ffaa00;"></div>
+            <span class="pendiente-texto">🧢 Tuta</span>
+            <span class="pendiente-numero" id="pendientesTuta">0</span>
           </div>
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <span style="background: #ff5577; width: 10px; height: 10px; border-radius: 10px;"></span>
-            <span>Tareas de Barrera: <span id="totalBarreras">0</span></span>
+          
+          <div class="pendiente-item">
+            <div class="pendiente-color" style="background: #ff5577;"></div>
+            <span class="pendiente-texto">⚡ Barrera</span>
+            <span class="pendiente-numero" id="pendientesBarrera">0</span>
           </div>
         </div>
       </div>
@@ -469,8 +500,10 @@
     const statsGlobales = document.getElementById('statsGlobales');
     const statsTutaValor = document.getElementById('statsTutaValor');
     const statsBarreraValor = document.getElementById('statsBarreraValor');
-    const totalTutas = document.getElementById('totalTutas');
-    const totalBarreras = document.getElementById('totalBarreras');
+    
+    // NUEVO: Contadores de pendientes
+    const pendientesTuta = document.getElementById('pendientesTuta');
+    const pendientesBarrera = document.getElementById('pendientesBarrera');
 
     // LOGIN
     loginBtn.addEventListener('click', () => {
@@ -541,8 +574,6 @@
       const completadasAmbos = tareas.filter(t => t.hecho?.Tuta && t.hecho?.Barrera).length;
       const completadasTuta = tareas.filter(t => t.hecho?.Tuta).length;
       const completadasBarrera = tareas.filter(t => t.hecho?.Barrera).length;
-      const tareasTutaCount = tareas.filter(t => t.creadoPor === 'Tuta').length;
-      const tareasBarreraCount = tareas.filter(t => t.creadoPor === 'Barrera').length;
       
       statsTotal.innerText = total;
       statsCompletadas.innerText = completadasAmbos;
@@ -550,8 +581,14 @@
       statsGlobales.innerText = total;
       statsTutaValor.innerText = completadasTuta;
       statsBarreraValor.innerText = completadasBarrera;
-      totalTutas.innerText = tareasTutaCount;
-      totalBarreras.innerText = tareasBarreraCount;
+
+      // ===== NUEVO: Calcular pendientes por usuario =====
+      // Pendientes de Tuta = tareas donde Tuta NO ha hecho su parte
+      const tareasPendientesTuta = tareas.filter(t => !t.hecho?.Tuta).length;
+      const tareasPendientesBarrera = tareas.filter(t => !t.hecho?.Barrera).length;
+      
+      pendientesTuta.innerText = tareasPendientesTuta;
+      pendientesBarrera.innerText = tareasPendientesBarrera;
 
       // ===== TAREAS DE TUTA (CON TACHADO) =====
       listaTuta.innerHTML = tareas
