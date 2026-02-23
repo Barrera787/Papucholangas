@@ -135,7 +135,7 @@
     .titulo-barrera { color: #ff5577; }
     .titulo-central { color: #00e0ff; }
     
-    /* FORMULARIO PARA AGREGAR TAREAS (en cada columna) */
+    /* FORMULARIO PARA AGREGAR TAREAS */
     .formulario-columna {
       margin-bottom: 20px;
     }
@@ -164,45 +164,75 @@
       color: white;
     }
     
-    /* LISTA DE TAREAS EN CADA COLUMNA */
+    /* LISTA DE TAREAS */
     .lista-tareas {
-      max-height: 400px;
+      max-height: 500px;
       overflow-y: auto;
       padding-right: 5px;
     }
     .tarea-item {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
       border-radius: 16px;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-left: 4px solid;
-      position: relative;
+      padding: 15px;
+      margin-bottom: 12px;
+      border-left: 5px solid;
+      transition: 0.2s;
+    }
+    .tarea-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -10px rgba(255, 255, 255, 0.1);
     }
     .tarea-item.tuta { border-left-color: #ffaa00; }
     .tarea-item.barrera { border-left-color: #ff5577; }
     
+    /* MATERIA - AHORA SÍ SE VE */
+    .tarea-materia {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #a0a8c0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .tarea-materia.tuta-materia { 
+      background: rgba(255, 170, 0, 0.1); 
+      color: #ffaa00; 
+      border-color: #ffaa00;
+    }
+    .tarea-materia.barrera-materia { 
+      background: rgba(255, 85, 119, 0.1); 
+      color: #ff5577; 
+      border-color: #ff5577;
+    }
+    
     .tarea-texto {
       font-weight: 600;
       margin-bottom: 5px;
+      font-size: 1.1rem;
     }
     .tarea-fecha {
       font-size: 0.8rem;
       color: #a0a8c0;
+      margin-bottom: 5px;
     }
     .tarea-creador {
       font-size: 0.7rem;
       color: #8088a0;
-      margin-top: 5px;
+      margin-bottom: 8px;
     }
     
     /* QUIÉN COMPLETÓ */
     .completado-badge {
       display: inline-block;
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 30px;
       font-size: 0.7rem;
       margin-right: 5px;
-      margin-top: 5px;
+      margin-bottom: 5px;
+      font-weight: 600;
     }
     .badge-tuta { 
       background: rgba(255, 170, 0, 0.15); 
@@ -215,24 +245,29 @@
       border: 1px solid #ff5577;
     }
     
-    /* ACCIONES DE CADA TAREA */
+    /* ACCIONES */
     .acciones-tarea {
       display: flex;
       gap: 5px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
     .acciones-tarea button {
       background: #2a2f3a;
       border: 1px solid #3a4050;
       color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 30px;
+      width: 36px;
+      height: 36px;
+      border-radius: 36px;
       cursor: pointer;
+      font-size: 1rem;
     }
-    .acciones-tarea button:hover { background: #ffaa00; color: black; }
+    .acciones-tarea button:hover { 
+      background: #ffaa00; 
+      color: black; 
+      transform: scale(1.05);
+    }
     
-    /* ESTADÍSTICAS CENTRALES */
+    /* ESTADÍSTICAS */
     .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -240,7 +275,7 @@
       margin: 20px 0;
     }
     .stat-card {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
       border-radius: 20px;
       padding: 15px;
       text-align: center;
@@ -283,7 +318,7 @@
           <span>🧢</span> TUTA
         </div>
         
-        <!-- Formulario para agregar tarea de Tuta -->
+        <!-- Formulario Tuta -->
         <div class="formulario-columna">
           <select id="materiaTuta">
             <option>Matemáticas</option><option>Física</option><option>Castellano</option>
@@ -297,7 +332,7 @@
           <button class="btn-agregar" id="agregarTuta">➕ AGREGAR TAREA</button>
         </div>
         
-        <!-- Lista de tareas de Tuta -->
+        <!-- Lista Tuta -->
         <div class="lista-tareas" id="listaTuta"></div>
       </div>
       
@@ -326,21 +361,22 @@
           </div>
         </div>
         
+        <!-- Comparación Tuta vs Barrera -->
         <div style="margin-top: 20px;">
-          <div style="display: flex; justify-content: space-around; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 20px;">
+          <div style="display: flex; justify-content: space-around; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 20px;">
             <div>
               <div style="color: #ffaa00; font-size: 1.5rem; font-weight: 700;" id="statsTutaValor">0</div>
-              <div style="color: #a0a8c0;">🧢 TUTA</div>
+              <div style="color: #a0a8c0;">🧢 COMPLETADAS</div>
             </div>
             <div>
               <div style="color: #ff5577; font-size: 1.5rem; font-weight: 700;" id="statsBarreraValor">0</div>
-              <div style="color: #a0a8c0;">⚡ BARRERA</div>
+              <div style="color: #a0a8c0;">⚡ COMPLETADAS</div>
             </div>
           </div>
         </div>
         
-        <!-- Resumen rápido -->
-        <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 20px;">
+        <!-- Resumen de creadas -->
+        <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 20px;">
           <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
             <span style="background: #ffaa00; width: 10px; height: 10px; border-radius: 10px;"></span>
             <span>Tareas de Tuta: <span id="totalTutas">0</span></span>
@@ -358,7 +394,7 @@
           <span>⚡</span> BARRERA
         </div>
         
-        <!-- Formulario para agregar tarea de Barrera -->
+        <!-- Formulario Barrera -->
         <div class="formulario-columna">
           <select id="materiaBarrera">
             <option>Matemáticas</option><option>Física</option><option>Castellano</option>
@@ -372,7 +408,7 @@
           <button class="btn-agregar barrera" id="agregarBarrera">➕ AGREGAR TAREA</button>
         </div>
         
-        <!-- Lista de tareas de Barrera -->
+        <!-- Lista Barrera -->
         <div class="lista-tareas" id="listaBarrera"></div>
       </div>
       
@@ -496,8 +532,8 @@
       const completadasAmbos = tareas.filter(t => t.hecho?.Tuta && t.hecho?.Barrera).length;
       const completadasTuta = tareas.filter(t => t.hecho?.Tuta).length;
       const completadasBarrera = tareas.filter(t => t.hecho?.Barrera).length;
-      const tareasTuta = tareas.filter(t => t.creadoPor === 'Tuta').length;
-      const tareasBarrera = tareas.filter(t => t.creadoPor === 'Barrera').length;
+      const tareasTutaCount = tareas.filter(t => t.creadoPor === 'Tuta').length;
+      const tareasBarreraCount = tareas.filter(t => t.creadoPor === 'Barrera').length;
       
       statsTotal.innerText = total;
       statsCompletadas.innerText = completadasAmbos;
@@ -505,10 +541,10 @@
       statsGlobales.innerText = total;
       statsTutaValor.innerText = completadasTuta;
       statsBarreraValor.innerText = completadasBarrera;
-      totalTutas.innerText = tareasTuta;
-      totalBarreras.innerText = tareasBarrera;
+      totalTutas.innerText = tareasTutaCount;
+      totalBarreras.innerText = tareasBarreraCount;
 
-      // ===== TAREAS DE TUTA =====
+      // ===== TAREAS DE TUTA (CON MATERIA VISIBLE) =====
       listaTuta.innerHTML = tareas
         .filter(t => t.creadoPor === 'Tuta')
         .map(t => {
@@ -517,6 +553,7 @@
           
           return `
           <div class="tarea-item tuta">
+            <span class="tarea-materia tuta-materia">📚 ${t.materia}</span>
             <div class="tarea-texto">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
             <div class="tarea-creador">✍️ Creada por: Tuta</div>
@@ -532,7 +569,7 @@
           </div>
         `}).join('');
 
-      // ===== TAREAS DE BARRERA =====
+      // ===== TAREAS DE BARRERA (CON MATERIA VISIBLE) =====
       listaBarrera.innerHTML = tareas
         .filter(t => t.creadoPor === 'Barrera')
         .map(t => {
@@ -541,6 +578,7 @@
           
           return `
           <div class="tarea-item barrera">
+            <span class="tarea-materia barrera-materia">📚 ${t.materia}</span>
             <div class="tarea-texto">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
             <div class="tarea-creador">✍️ Creada por: Barrera</div>
@@ -556,7 +594,7 @@
           </div>
         `}).join('');
 
-      // Eventos completar (para ambos)
+      // Eventos
       document.querySelectorAll('.completar').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -564,9 +602,8 @@
           const usuario = btn.dataset.usuario;
           const completado = btn.dataset.completado === 'true';
           
-          const rutaHecho = `hecho/${usuario}`;
           update(ref(db, 'tareas/' + key), {
-            [rutaHecho]: !completado
+            [`hecho/${usuario}`]: !completado
           });
         });
       });
