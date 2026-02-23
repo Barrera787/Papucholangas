@@ -185,7 +185,7 @@
     .tarea-item.tuta { border-left-color: #ffaa00; }
     .tarea-item.barrera { border-left-color: #ff5577; }
     
-    /* MATERIA - AHORA SÍ SE VE */
+    /* MATERIA */
     .tarea-materia {
       display: inline-block;
       background: rgba(255, 255, 255, 0.05);
@@ -208,11 +208,20 @@
       border-color: #ff5577;
     }
     
+    /* TEXTO DE LA TAREA - CON TACHADO */
     .tarea-texto {
       font-weight: 600;
       margin-bottom: 5px;
       font-size: 1.1rem;
+      transition: 0.2s;
     }
+    .tarea-texto.tachado {
+      text-decoration: line-through;
+      text-decoration-color: #00e0ff;
+      text-decoration-thickness: 2px;
+      opacity: 0.8;
+    }
+    
     .tarea-fecha {
       font-size: 0.8rem;
       color: #a0a8c0;
@@ -544,7 +553,7 @@
       totalTutas.innerText = tareasTutaCount;
       totalBarreras.innerText = tareasBarreraCount;
 
-      // ===== TAREAS DE TUTA (CON MATERIA VISIBLE) =====
+      // ===== TAREAS DE TUTA (CON TACHADO) =====
       listaTuta.innerHTML = tareas
         .filter(t => t.creadoPor === 'Tuta')
         .map(t => {
@@ -554,7 +563,7 @@
           return `
           <div class="tarea-item tuta">
             <span class="tarea-materia tuta-materia">📚 ${t.materia}</span>
-            <div class="tarea-texto">${t.texto}</div>
+            <div class="tarea-texto ${completadoTuta ? 'tachado' : ''}">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
             <div class="tarea-creador">✍️ Creada por: Tuta</div>
             <div>
@@ -569,7 +578,7 @@
           </div>
         `}).join('');
 
-      // ===== TAREAS DE BARRERA (CON MATERIA VISIBLE) =====
+      // ===== TAREAS DE BARRERA (CON TACHADO) =====
       listaBarrera.innerHTML = tareas
         .filter(t => t.creadoPor === 'Barrera')
         .map(t => {
@@ -579,7 +588,7 @@
           return `
           <div class="tarea-item barrera">
             <span class="tarea-materia barrera-materia">📚 ${t.materia}</span>
-            <div class="tarea-texto">${t.texto}</div>
+            <div class="tarea-texto ${completadoBarrera ? 'tachado' : ''}">${t.texto}</div>
             <div class="tarea-fecha">📅 ${t.fecha ? new Date(t.fecha).toLocaleDateString() : 'Sin fecha'}</div>
             <div class="tarea-creador">✍️ Creada por: Barrera</div>
             <div>
