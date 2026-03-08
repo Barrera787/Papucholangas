@@ -233,6 +233,8 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+      max-height: 200px;
+      overflow-y: auto;
     }
     
     .tarea-mini {
@@ -244,6 +246,7 @@
       justify-content: space-between;
       align-items: center;
       border-left: 3px solid;
+      word-break: break-word;
     }
     .tarea-mini.sebas { border-left-color: #3b82f6; }
     .tarea-mini.barrera { border-left-color: #ff5577; }
@@ -251,6 +254,8 @@
     .tarea-mini-texto {
       flex: 1;
       margin: 0 5px;
+      white-space: normal;
+      word-wrap: break-word;
     }
     .tarea-mini-texto.tachado {
       text-decoration: line-through;
@@ -292,7 +297,8 @@
       border-radius: 30px;
       padding: 6px 10px;
       color: white;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
+      /* SIN LÍMITE DE CARACTERES */
     }
     .agregar-tarea-celda button {
       background: #3b82f6;
@@ -301,7 +307,7 @@
       padding: 6px 12px;
       color: white;
       font-weight: 600;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       cursor: pointer;
     }
     .agregar-tarea-celda button.barrera {
@@ -431,7 +437,7 @@
 
     // LOGIN
     loginBtn.addEventListener('click', () => {
-      if (passInput.value === 'puta') {
+      if (passInput.value === 'SantiAlejo') {
         loginScreen.style.display = 'none';
         container.style.display = 'block';
       } else {
@@ -541,9 +547,9 @@
                         `}).join('')}
                     </div>
                     
-                    <!-- Formulario para agregar tarea en esta celda -->
+                    <!-- Formulario para agregar tarea en esta celda (SIN LÍMITE DE CARACTERES) -->
                     <div class="agregar-tarea-celda">
-                      <input type="text" id="input-${dia}-${hora}" placeholder="+ tarea" maxlength="30">
+                      <input type="text" id="input-${dia}-${hora}" placeholder="+ tarea">
                       <button class="agregar-celda ${usuarioActual === 'Barrera' ? 'barrera' : ''}" 
                               data-dia="${dia}" 
                               data-hora="${hora}"
@@ -570,8 +576,8 @@
           push(tareasRef, {
             materia: materia,
             texto: texto,
-            dia: dia,           // ← Guardamos el día exacto
-            hora: hora,          // ← Guardamos la hora exacta
+            dia: dia,
+            hora: hora,
             hecho: { Sebas: false, Barrera: false },
             creadoPor: usuarioActual,
             timestamp: Date.now()
@@ -609,4 +615,3 @@
   </script>
 </body>
 </html>
-
