@@ -211,7 +211,7 @@
       width: fit-content;
     }
     
-    /* Colores de materias (basado en el horario) */
+    /* Colores de materias */
     .materia-filosofia { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
     .materia-etica { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
     .materia-dibujo { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
@@ -308,7 +308,7 @@
       background: #ff5577;
     }
     
-    /* PIE DE PÁGINA (clasificaciones) */
+    /* PIE DE PÁGINA */
     .clasificaciones {
       margin-top: 20px;
       display: flex;
@@ -341,7 +341,7 @@
     <h1>SEBAS & BARRERA</h1>
     <div class="subtitulo">Horario de clases 2026 · Sebas 1001 · Barrera 1003</div>
     
-    <!-- SELECTOR DE USUARIO (quién está usando la app) -->
+    <!-- SELECTOR DE USUARIO -->
     <div style="display: flex; justify-content: center;">
       <div class="selector-usuario">
         <button class="btn-usuario btn-sebas" id="btnSebas">🔵 SEBAS (1001)</button>
@@ -402,7 +402,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const tareasRef = ref(db, 'tareas'); // Misma base de datos
+    const tareasRef = ref(db, 'tareas');
 
     // Elementos
     const loginScreen = document.getElementById('loginScreen');
@@ -429,7 +429,7 @@
       btnSebas.classList.remove('activo');
     });
 
-    // LOGIN (misma clave)
+    // LOGIN
     loginBtn.addEventListener('click', () => {
       if (passInput.value === 'SantiAlejo') {
         loginScreen.style.display = 'none';
@@ -514,10 +514,9 @@
               const materiaNombre = materiaInfo?.materia || '';
               const materiaClase = materiaInfo?.clase || '';
               
-              // Filtrar tareas para esta celda (materia específica)
+              // Filtrar tareas para esta celda (mismo día y misma hora)
               const tareasCelda = tareas.filter(t => 
-                t.materia?.toUpperCase() === materiaNombre || 
-                t.materia?.includes(materiaNombre)
+                t.dia === dia && t.hora === hora
               );
               
               return `
@@ -567,14 +566,14 @@
           
           if (!texto) return;
           
+          // Guardar con día y hora específicos
           push(tareasRef, {
             materia: materia,
             texto: texto,
-            fecha: null, // En el horario no usamos fecha específica
+            dia: dia,           // ← Guardamos el día exacto
+            hora: hora,          // ← Guardamos la hora exacta
             hecho: { Sebas: false, Barrera: false },
             creadoPor: usuarioActual,
-            dia: dia,
-            hora: hora,
             timestamp: Date.now()
           });
           
