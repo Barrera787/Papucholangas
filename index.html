@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEBAS & TUTA & BARRERA · horario 2026</title>
+  <title>SEBAS · TUTA · BARRERA · horario 2026</title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
     body { 
       background: #0f1219; 
       color: white; 
-      padding: 20px;
+      padding: 10px;
       min-height: 100vh;
     }
     
@@ -30,10 +30,10 @@
     }
     
     h1 { 
-      background: linear-gradient(145deg, #3b82f6, #8b5cf6);
+      background: linear-gradient(145deg, #3b82f6, #8b5cf6, #ff5577);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       margin-bottom: 10px;
       text-align: center;
     }
@@ -41,8 +41,8 @@
     .subtitulo {
       text-align: center;
       color: #a0a8c0;
-      margin-bottom: 30px;
-      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-size: 1rem;
     }
     
     /* LOGIN */
@@ -67,7 +67,7 @@
       max-width: 400px;
     }
     .login-box h2 {
-      background: linear-gradient(145deg, #3b82f6, #8b5cf6);
+      background: linear-gradient(145deg, #3b82f6, #8b5cf6, #ff5577);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 20px;
@@ -82,7 +82,7 @@
       border-radius: 16px; 
     }
     .login-box button {
-      background: linear-gradient(145deg, #3b82f6, #8b5cf6); 
+      background: linear-gradient(145deg, #3b82f6, #8b5cf6, #ff5577); 
       color: white; 
       padding: 15px 30px; 
       border: none; 
@@ -92,25 +92,28 @@
       width: 100%;
     }
     
-    /* SELECTOR DE USUARIO */
+    /* SELECTOR DE USUARIO - 3 USUARIOS */
     .selector-usuario {
       background: #1a1e2a;
       border-radius: 60px;
       padding: 5px;
       display: inline-flex;
-      margin: 0 auto 30px;
+      margin: 0 auto 20px;
       width: fit-content;
       border: 1px solid #3a4050;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     .btn-usuario {
-      padding: 12px 30px;
+      padding: 10px 20px;
       border: none;
       border-radius: 60px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       opacity: 0.5;
       transition: 0.2s;
-      font-size: 1rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
     }
     .btn-usuario.activo {
       opacity: 1;
@@ -118,6 +121,10 @@
     }
     .btn-sebas { 
       background: linear-gradient(145deg, #3b82f6, #2563eb); 
+      color: white; 
+    }
+    .btn-tuta { 
+      background: linear-gradient(145deg, #8b5cf6, #7c3aed); 
       color: white; 
     }
     .btn-barrera { 
@@ -129,43 +136,51 @@
     .horario-container {
       background: rgba(26, 30, 42, 0.7);
       backdrop-filter: blur(10px);
-      border-radius: 30px;
-      padding: 20px;
+      border-radius: 20px;
+      padding: 15px;
       border: 1px solid #3a4050;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      overflow-x: auto;
     }
     
     .encabezado-escuela {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 10px;
     }
     
     .info-escuela h2 {
       color: white;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
     .info-escuela p {
       color: #a0a8c0;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
     
     .cursos-info {
       display: flex;
-      gap: 20px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     .curso-badge {
-      padding: 8px 16px;
+      padding: 5px 12px;
       border-radius: 40px;
       font-weight: 600;
+      font-size: 0.8rem;
     }
     .curso-sebas {
       background: rgba(59, 130, 246, 0.15);
       border: 1px solid #3b82f6;
       color: #3b82f6;
+    }
+    .curso-tuta {
+      background: rgba(139, 92, 246, 0.15);
+      border: 1px solid #8b5cf6;
+      color: #8b5cf6;
     }
     .curso-barrera {
       background: rgba(255, 85, 119, 0.15);
@@ -176,26 +191,28 @@
     .tabla-horario {
       width: 100%;
       border-collapse: collapse;
+      min-width: 1000px;
     }
     
     .tabla-horario th {
       background: rgba(0,0,0,0.3);
-      padding: 15px 10px;
+      padding: 10px 5px;
       text-align: center;
       color: #a0a8c0;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       border-bottom: 2px solid #3a4050;
     }
     
     .tabla-horario td {
       border: 1px solid #2a2f3a;
       vertical-align: top;
-      min-width: 150px;
+      min-width: 160px;
+      max-width: 180px;
     }
     
     .celda-horario {
-      padding: 10px;
+      padding: 8px;
       min-height: 120px;
       display: flex;
       flex-direction: column;
@@ -203,12 +220,16 @@
     
     .materia-nombre {
       font-weight: 700;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      padding: 4px 8px;
+      margin-bottom: 5px;
+      font-size: 0.8rem;
+      padding: 3px 6px;
       border-radius: 30px;
       display: inline-block;
       width: fit-content;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     
     /* Colores de materias */
@@ -229,19 +250,19 @@
     
     /* TAREAS DENTRO DE LA CELDA */
     .tareas-celda {
-      margin-top: 8px;
+      margin-top: 5px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 3px;
       max-height: 200px;
       overflow-y: auto;
     }
     
     .tarea-mini {
       background: rgba(0,0,0,0.3);
-      border-radius: 8px;
-      padding: 6px 8px;
-      font-size: 0.8rem;
+      border-radius: 4px;
+      padding: 3px 4px;
+      font-size: 0.7rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -249,13 +270,16 @@
       word-break: break-word;
     }
     .tarea-mini.sebas { border-left-color: #3b82f6; }
+    .tarea-mini.tuta { border-left-color: #8b5cf6; }
     .tarea-mini.barrera { border-left-color: #ff5577; }
     
     .tarea-mini-texto {
       flex: 1;
-      margin: 0 5px;
+      margin: 0 3px;
       white-space: normal;
       word-wrap: break-word;
+      font-size: 0.7rem;
+      line-height: 1.2;
     }
     .tarea-mini-texto.tachado {
       text-decoration: line-through;
@@ -264,17 +288,17 @@
     
     .tarea-mini-acciones {
       display: flex;
-      gap: 3px;
+      gap: 2px;
     }
     .tarea-mini-acciones button {
       background: transparent;
       border: none;
       color: #a0a8c0;
       cursor: pointer;
-      font-size: 0.7rem;
-      width: 20px;
-      height: 20px;
-      border-radius: 20px;
+      font-size: 0.65rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -286,29 +310,33 @@
     
     /* FORMULARIO PARA AGREGAR TAREA EN CELDA */
     .agregar-tarea-celda {
-      margin-top: 8px;
+      margin-top: 5px;
       display: flex;
-      gap: 4px;
+      gap: 2px;
     }
     .agregar-tarea-celda input {
       flex: 1;
       background: #2a2f3a;
       border: 1px solid #3a4050;
       border-radius: 30px;
-      padding: 6px 10px;
+      padding: 3px 6px;
       color: white;
-      font-size: 0.8rem;
-      /* SIN LÍMITE DE CARACTERES */
+      font-size: 0.7rem;
+      width: 100%;
     }
     .agregar-tarea-celda button {
       background: #3b82f6;
       border: none;
       border-radius: 30px;
-      padding: 6px 12px;
+      padding: 3px 8px;
       color: white;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       cursor: pointer;
+      white-space: nowrap;
+    }
+    .agregar-tarea-celda button.tuta {
+      background: #8b5cf6;
     }
     .agregar-tarea-celda button.barrera {
       background: #ff5577;
@@ -316,18 +344,19 @@
     
     /* PIE DE PÁGINA */
     .clasificaciones {
-      margin-top: 20px;
+      margin-top: 15px;
       display: flex;
-      gap: 20px;
-      padding: 15px;
+      gap: 15px;
+      padding: 10px;
       background: rgba(0,0,0,0.2);
       border-radius: 20px;
       color: #a0a8c0;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
+      flex-wrap: wrap;
     }
     
     /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
     ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
   </style>
@@ -336,7 +365,7 @@
   <!-- LOGIN -->
   <div id="loginScreen">
     <div class="login-box">
-      <h2>SEBAS & TUTA & BARRERA</h2>
+      <h2>SEBAS · TUTA · BARRERA</h2>
       <input type="password" id="passInput" placeholder="Contraseña">
       <button id="loginBtn">ENTRAR</button>
     </div>
@@ -344,13 +373,14 @@
 
   <!-- APP -->
   <div class="container">
-    <h1>SEBAS & BARRERA</h1>
-    <div class="subtitulo">Horario de clases 2026 · Sebas 1001 · Barrera & Tuta 1003</div>
+    <h1>SEBAS · TUTA · BARRERA</h1>
+    <div class="subtitulo">Horario 2026 · Sebas 1001 · Tuta & Barrera 1003</div>
     
-    <!-- SELECTOR DE USUARIO -->
+    <!-- SELECTOR DE USUARIO - 3 OPCIONES -->
     <div style="display: flex; justify-content: center;">
       <div class="selector-usuario">
         <button class="btn-usuario btn-sebas" id="btnSebas">🔵 SEBAS (1001)</button>
+        <button class="btn-usuario btn-tuta" id="btnTuta">🟣 TUTA (1003)</button>
         <button class="btn-usuario btn-barrera" id="btnBarrera">🔴 BARRERA (1003)</button>
       </div>
     </div>
@@ -360,11 +390,12 @@
       <div class="encabezado-escuela">
         <div class="info-escuela">
           <h2>ESCUELA TECNOLÓGICA INSTITUTO TÉCNICO CENTRAL</h2>
-          <p>Instituto de Bachillerato Técnico Industrial · HORARIO DE CLASES 2026</p>
+          <p>Instituto de Bachillerato Técnico Industrial · HORARIO 2026</p>
         </div>
         <div class="cursos-info">
-          <span class="curso-badge curso-sebas">CURSO 1001 · SEBAS</span>
-          <span class="curso-badge curso-barrera">CURSO 1003 · BARRERA</span>
+          <span class="curso-badge curso-sebas">1001 · SEBAS</span>
+          <span class="curso-badge curso-tuta">1003 · TUTA</span>
+          <span class="curso-badge curso-barrera">1003 · BARRERA</span>
         </div>
       </div>
 
@@ -385,9 +416,9 @@
       </table>
       
       <div class="clasificaciones">
-        <span>CLASIF. DE CONFIDENCIALIDAD: IPB</span>
-        <span>CLASIF. DE INTEGRIDAD: A</span>
-        <span>CLASIF. DE DISPONIBILIDAD: 1</span>
+        <span>CLASIF. CONFID: IPB</span>
+        <span>CLASIF. INTEG: A</span>
+        <span>CLASIF. DISP: 1</span>
       </div>
     </div>
   </div>
@@ -417,6 +448,7 @@
     const container = document.querySelector('.container');
     const horarioBody = document.getElementById('horarioBody');
     const btnSebas = document.getElementById('btnSebas');
+    const btnTuta = document.getElementById('btnTuta');
     const btnBarrera = document.getElementById('btnBarrera');
 
     // Usuario actual
@@ -426,6 +458,14 @@
     btnSebas.addEventListener('click', () => {
       usuarioActual = 'Sebas';
       btnSebas.classList.add('activo');
+      btnTuta.classList.remove('activo');
+      btnBarrera.classList.remove('activo');
+    });
+
+    btnTuta.addEventListener('click', () => {
+      usuarioActual = 'Tuta';
+      btnTuta.classList.add('activo');
+      btnSebas.classList.remove('activo');
       btnBarrera.classList.remove('activo');
     });
 
@@ -433,11 +473,12 @@
       usuarioActual = 'Barrera';
       btnBarrera.classList.add('activo');
       btnSebas.classList.remove('activo');
+      btnTuta.classList.remove('activo');
     });
 
     // LOGIN
     loginBtn.addEventListener('click', () => {
-      if (passInput.value === 'puta') {
+      if (passInput.value === 'SantiAlejo') {
         loginScreen.style.display = 'none';
         container.style.display = 'block';
       } else {
@@ -467,7 +508,7 @@
       { hora: '3', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
       { hora: '3', dia: 'MIÉRCOLES', materia: 'FÍSICA', clase: 'fisica' },
       { hora: '3', dia: 'JUEVES', materia: 'FÍSICA', clase: 'fisica' },
-      { hora: '3', dia: 'VIERNES', materia: 'EXPR. ARTÍST', clase: 'artistica' },
+      { hora: '3', dia: 'VIERNES', materia: 'EXPL. ARTÍST', clase: 'artistica' },
       
       { hora: '4', dia: 'LUNES', materia: 'DIBUJO', clase: 'dibujo' },
       { hora: '4', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
@@ -499,6 +540,98 @@
       { hora: '8', dia: 'JUEVES', materia: 'EDU. FÍSICA', clase: 'educacion' },
       { hora: '8', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' }
     ];
+
+    // Tareas iniciales (como en la imagen)
+    const tareasIniciales = [
+      // Lunes 1ra: FILOSOFÍA
+      { dia: 'LUNES', hora: '1', texto: 'Leer la carta parte', creadoPor: 'Sebas' },
+      { dia: 'LUNES', hora: '1', texto: 'Y tarea de giro', creadoPor: 'Sebas' },
+      
+      // Lunes 2da: ÉTICA
+      { dia: 'LUNES', hora: '2', texto: 'Nada', creadoPor: 'Sebas' },
+      
+      // Lunes 3ra: DIBUJO
+      { dia: 'LUNES', hora: '3', texto: 'Nada', creadoPor: 'Sebas' },
+      
+      // Lunes 4ta: DIBUJO
+      { dia: 'LUNES', hora: '4', texto: 'Nada', creadoPor: 'Sebas' },
+      
+      // Lunes 5ta: C. POLÍTICAS
+      { dia: 'LUNES', hora: '5', texto: '1. Hacer lo de la hoja examen', creadoPor: 'Barrera' },
+      { dia: 'LUNES', hora: '5', texto: '2. Evaluación', creadoPor: 'Barrera' },
+      
+      // Lunes 6ta: C. POLÍTICAS
+      { dia: 'LUNES', hora: '6', texto: '1. Hacer lo de la hoja examen', creadoPor: 'Barrera' },
+      { dia: 'LUNES', hora: '6', texto: '2. Evaluación', creadoPor: 'Barrera' },
+      { dia: 'LUNES', hora: '6', texto: 'Llevar las impresiones y constitución', creadoPor: 'Barrera' },
+      
+      // Lunes 7ma: BIOQUÍMICA
+      { dia: 'LUNES', hora: '7', texto: 'Nada(creo)', creadoPor: 'Tuta' },
+      
+      // Lunes 8va: BIOQUÍMICA
+      { dia: 'LUNES', hora: '8', texto: 'Nada(creo)', creadoPor: 'Tuta' },
+      
+      // Miércoles 4ta: MATEMÁTICAS
+      { dia: 'MIÉRCOLES', hora: '4', texto: 'Pílogo 2 hasta actividad 10', creadoPor: 'Tuta' },
+      
+      // Castellano 6ta
+      { dia: 'MIÉRCOLES', hora: '6', texto: 'Adelantar lectura (Caps = a)', creadoPor: 'Sebas' },
+      
+      // +tarea en varias celdas (como en la imagen)
+      { dia: 'MARTES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '2', texto: 'Nada(creo)', creadoPor: 'Tuta' },
+      { dia: 'MIÉRCOLES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '3', texto: 'Nada', creadoPor: 'Tuta' },
+      { dia: 'MIÉRCOLES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '5', texto: 'Nada', creadoPor: 'Tuta' },
+      { dia: 'MIÉRCOLES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '6', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '6', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '6', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MARTES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'MIÉRCOLES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'JUEVES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' },
+      { dia: 'VIERNES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' }
+    ];
+
+    // Función para cargar tareas iniciales (solo si no hay ninguna)
+    const cargarTareasIniciales = () => {
+      onValue(tareasRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          tareasIniciales.forEach(tarea => {
+            const materia = horarioData.find(d => d.dia === tarea.dia && d.hora === tarea.hora)?.materia || '';
+            push(tareasRef, {
+              ...tarea,
+              materia: materia,
+              hecho: { Sebas: false, Tuta: false, Barrera: false },
+              timestamp: Date.now()
+            });
+          });
+        }
+      }, { onlyOnce: true });
+    };
+
+    cargarTareasIniciales();
 
     // Escuchar cambios en Firebase
     onValue(tareasRef, (snapshot) => {
@@ -533,24 +666,29 @@
                     <div class="tareas-celda" id="celda-${dia}-${hora}">
                       ${tareasCelda.map(t => {
                         const completadoUsuario = t.hecho?.[usuarioActual] || false;
-                        const esSebas = t.creadoPor === 'Sebas';
+                        let claseUsuario = '';
+                        if (t.creadoPor === 'Sebas') claseUsuario = 'sebas';
+                        else if (t.creadoPor === 'Tuta') claseUsuario = 'tuta';
+                        else if (t.creadoPor === 'Barrera') claseUsuario = 'barrera';
+                        
                         return `
-                          <div class="tarea-mini ${esSebas ? 'sebas' : 'barrera'}">
+                          <div class="tarea-mini ${claseUsuario}">
                             <span class="tarea-mini-texto ${completadoUsuario ? 'tachado' : ''}">${t.texto}</span>
                             <div class="tarea-mini-acciones">
                               <button class="completar-tarea" data-key="${t.key}" data-usuario="${usuarioActual}" data-completado="${completadoUsuario}">
                                 ${completadoUsuario ? '↩️' : '✅'}
                               </button>
+                              <button class="editar-tarea" data-key="${t.key}" data-texto="${t.texto}">✏️</button>
                               <button class="eliminar-tarea" data-key="${t.key}">🗑️</button>
                             </div>
                           </div>
                         `}).join('')}
                     </div>
                     
-                    <!-- Formulario para agregar tarea en esta celda (SIN LÍMITE DE CARACTERES) -->
+                    <!-- Formulario para agregar tarea en esta celda -->
                     <div class="agregar-tarea-celda">
                       <input type="text" id="input-${dia}-${hora}" placeholder="+ tarea">
-                      <button class="agregar-celda ${usuarioActual === 'Barrera' ? 'barrera' : ''}" 
+                      <button class="agregar-celda ${usuarioActual === 'Tuta' ? 'tuta' : (usuarioActual === 'Barrera' ? 'barrera' : '')}" 
                               data-dia="${dia}" 
                               data-hora="${hora}"
                               data-materia="${materiaNombre}">➕</button>
@@ -578,7 +716,7 @@
             texto: texto,
             dia: dia,
             hora: hora,
-            hecho: { Sebas: false, Barrera: false },
+            hecho: { Sebas: false, Tuta: false, Barrera: false },
             creadoPor: usuarioActual,
             timestamp: Date.now()
           });
@@ -601,6 +739,22 @@
         });
       });
 
+      // Eventos para editar tareas
+      document.querySelectorAll('.editar-tarea').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const key = btn.dataset.key;
+          const textoActual = btn.dataset.texto;
+          const nuevoTexto = prompt('Editar tarea:', textoActual);
+          
+          if (nuevoTexto && nuevoTexto.trim() !== '') {
+            update(ref(db, 'tareas/' + key), {
+              texto: nuevoTexto.trim()
+            });
+          }
+        });
+      });
+
       // Eventos para eliminar tareas
       document.querySelectorAll('.eliminar-tarea').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -615,5 +769,3 @@
   </script>
 </body>
 </html>
-
-
