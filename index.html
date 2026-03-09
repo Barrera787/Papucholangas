@@ -92,7 +92,7 @@
       width: 100%;
     }
     
-    /* SELECTOR DE USUARIO - 3 USUARIOS */
+    /* SELECTOR DE USUARIO */
     .selector-usuario {
       background: #1a1e2a;
       border-radius: 60px;
@@ -161,7 +161,7 @@
       font-size: 0.8rem;
     }
     
-    .cursos-info {
+    .curso-info {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -177,15 +177,10 @@
       border: 1px solid #3b82f6;
       color: #3b82f6;
     }
-    .curso-tuta {
+    .curso-1003 {
       background: rgba(139, 92, 246, 0.15);
       border: 1px solid #8b5cf6;
       color: #8b5cf6;
-    }
-    .curso-barrera {
-      background: rgba(255, 85, 119, 0.15);
-      border: 1px solid #ff5577;
-      color: #ff5577;
     }
     
     .tabla-horario {
@@ -218,6 +213,15 @@
       flex-direction: column;
     }
     
+    .hora-contenedor {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 5px;
+      font-size: 0.75rem;
+      color: #a0a8c0;
+    }
+    
     .materia-nombre {
       font-weight: 700;
       margin-bottom: 5px;
@@ -233,20 +237,20 @@
     }
     
     /* Colores de materias */
-    .materia-filosofia { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
-    .materia-etica { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-    .materia-dibujo { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
-    .materia-politicas { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
-    .materia-bioquimica { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
-    .materia-taller { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; }
-    .materia-castellano { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-    .materia-matematicas { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-    .materia-religion { background: rgba(217, 70, 239, 0.2); color: #e879f9; }
-    .materia-ingles { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
     .materia-fisica { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
-    .materia-artistica { background: rgba(251, 146, 60, 0.2); color: #fdba74; }
-    .materia-educacion { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+    .materia-taller { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; }
+    .materia-dibujo { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+    .materia-filosofia { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
     .materia-informatica { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+    .materia-castellano { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .materia-religion { background: rgba(217, 70, 239, 0.2); color: #e879f9; }
+    .materia-matematicas { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .materia-artistica { background: rgba(251, 146, 60, 0.2); color: #fdba74; }
+    .materia-ingles { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+    .materia-bioquimica { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+    .materia-educacion { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+    .materia-politicas { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+    .materia-etica { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
     
     /* TAREAS DENTRO DE LA CELDA */
     .tareas-celda {
@@ -390,12 +394,10 @@
       <div class="encabezado-escuela">
         <div class="info-escuela">
           <h2>ESCUELA TECNOLÓGICA INSTITUTO TÉCNICO CENTRAL</h2>
-          <p>Instituto de Bachillerato Técnico Industrial · HORARIO 2026</p>
+          <p>Instituto de Bachillerato Técnico Industrial · HORARIO DE CLASES 2026</p>
         </div>
-        <div class="cursos-info">
-          <span class="curso-badge curso-sebas">1001 · SEBAS</span>
-          <span class="curso-badge curso-tuta">1003 · TUTA</span>
-          <span class="curso-badge curso-barrera">1003 · BARRERA</span>
+        <div class="curso-info">
+          <span class="curso-badge curso-sebas" id="cursoBadge">CURSO 1001 · SEBAS</span>
         </div>
       </div>
 
@@ -416,9 +418,9 @@
       </table>
       
       <div class="clasificaciones">
-        <span>CLASIF. CONFID: IPB</span>
-        <span>CLASIF. INTEG: A</span>
-        <span>CLASIF. DISP: 1</span>
+        <span>CLASIF. DE CONFIDENCIALIDAD: IPB</span>
+        <span>CLASIF. DE INTEGRIDAD: A</span>
+        <span>CLASIF. DE DISPONIBILIDAD: 1</span>
       </div>
     </div>
   </div>
@@ -450,30 +452,46 @@
     const btnSebas = document.getElementById('btnSebas');
     const btnTuta = document.getElementById('btnTuta');
     const btnBarrera = document.getElementById('btnBarrera');
+    const cursoBadge = document.getElementById('cursoBadge');
 
     // Usuario actual
     let usuarioActual = 'Sebas';
+    let cursoActual = '1001';
     btnSebas.classList.add('activo');
+    cursoBadge.innerText = 'CURSO 1001 · SEBAS';
+    cursoBadge.className = 'curso-badge curso-sebas';
 
     btnSebas.addEventListener('click', () => {
       usuarioActual = 'Sebas';
+      cursoActual = '1001';
       btnSebas.classList.add('activo');
       btnTuta.classList.remove('activo');
       btnBarrera.classList.remove('activo');
+      cursoBadge.innerText = 'CURSO 1001 · SEBAS';
+      cursoBadge.className = 'curso-badge curso-sebas';
+      cargarHorario();
     });
 
     btnTuta.addEventListener('click', () => {
       usuarioActual = 'Tuta';
+      cursoActual = '1003';
       btnTuta.classList.add('activo');
       btnSebas.classList.remove('activo');
       btnBarrera.classList.remove('activo');
+      cursoBadge.innerText = 'CURSO 1003 · TUTA & BARRERA';
+      cursoBadge.className = 'curso-badge curso-1003';
+      cargarHorario();
     });
 
     btnBarrera.addEventListener('click', () => {
       usuarioActual = 'Barrera';
+      cursoActual = '1003';
       btnBarrera.classList.add('activo');
       btnSebas.classList.remove('activo');
       btnTuta.classList.remove('activo');
+      cursoBadge.innerText = 'CURSO 1003 · TUTA & BARRERA';
+      cursoBadge.className = 'curso-badge curso-1003';
+      cargarHorario();
     });
 
     // LOGIN
@@ -490,282 +508,264 @@
       if (e.key === 'Enter') loginBtn.click();
     });
 
-    // HORARIO (según la imagen)
-    const horarioData = [
-      { hora: '1', dia: 'LUNES', materia: 'FILOSOFÍA', clase: 'filosofia' },
-      { hora: '1', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '1', dia: 'MIÉRCOLES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
-      { hora: '1', dia: 'JUEVES', materia: 'CASTELLANO', clase: 'castellano' },
-      { hora: '1', dia: 'VIERNES', materia: 'FÍSICA', clase: 'fisica' },
+    // HORARIOS
+    const horario1001 = [
+      // Hora 1: 6:30 - 7:20
+      { hora: '1', rango: '6:30 - 7:20', dia: 'LUNES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'MIÉRCOLES', materia: 'DIBUJO', clase: 'dibujo' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'JUEVES', materia: 'FILOSOFÍA', clase: 'filosofia' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
       
-      { hora: '2', dia: 'LUNES', materia: 'ÉTICA', clase: 'etica' },
-      { hora: '2', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '2', dia: 'MIÉRCOLES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
-      { hora: '2', dia: 'JUEVES', materia: 'CASTELLANO', clase: 'castellano' },
-      { hora: '2', dia: 'VIERNES', materia: 'FÍSICA', clase: 'fisica' },
+      // Hora 2: 7:20 - 8:05
+      { hora: '2', rango: '7:20 - 8:05', dia: 'LUNES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'MIÉRCOLES', materia: 'DIBUJO', clase: 'dibujo' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'JUEVES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
       
-      { hora: '3', dia: 'LUNES', materia: 'DIBUJO', clase: 'dibujo' },
-      { hora: '3', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '3', dia: 'MIÉRCOLES', materia: 'FÍSICA', clase: 'fisica' },
-      { hora: '3', dia: 'JUEVES', materia: 'FÍSICA', clase: 'fisica' },
-      { hora: '3', dia: 'VIERNES', materia: 'EXPL. ARTÍST', clase: 'artistica' },
+      // Hora 3: 8:05 - 9:20
+      { hora: '3', rango: '8:05 - 9:20', dia: 'LUNES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'MIÉRCOLES', materia: 'RELIGIÓN', clase: 'religion' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'JUEVES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'VIERNES', materia: 'EXPR. ARTÍST', clase: 'artistica' },
       
-      { hora: '4', dia: 'LUNES', materia: 'DIBUJO', clase: 'dibujo' },
-      { hora: '4', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '4', dia: 'MIÉRCOLES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
-      { hora: '4', dia: 'JUEVES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
-      { hora: '4', dia: 'VIERNES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      // Hora 4: 9:20 - 10:05
+      { hora: '4', rango: '9:20 - 10:05', dia: 'LUNES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'JUEVES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'VIERNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
       
-      { hora: '5', dia: 'LUNES', materia: 'C. POLÍTICAS', clase: 'politicas' },
-      { hora: '5', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '5', dia: 'MIÉRCOLES', materia: 'RELIGIÓN', clase: 'religion' },
-      { hora: '5', dia: 'JUEVES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
-      { hora: '5', dia: 'VIERNES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      // Hora 5: 10:05 - 11:40
+      { hora: '5', rango: '10:05 - 11:40', dia: 'LUNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'JUEVES', materia: 'EDU. FÍSICA', clase: 'educacion' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'VIERNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
       
-      { hora: '6', dia: 'LUNES', materia: 'C. POLÍTICAS', clase: 'politicas' },
-      { hora: '6', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '6', dia: 'MIÉRCOLES', materia: 'CASTELLANO', clase: 'castellano' },
-      { hora: '6', dia: 'JUEVES', materia: 'INGLÉS', clase: 'ingles' },
-      { hora: '6', dia: 'VIERNES', materia: 'FILOSOFÍA', clase: 'filosofia' },
+      // Hora 6: 11:40 - 12:10 (descanso - vacío)
+      { hora: '6', rango: '11:40 - 12:10', dia: 'LUNES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'MARTES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'MIÉRCOLES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'JUEVES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'VIERNES', materia: '', clase: '' },
       
-      { hora: '7', dia: 'LUNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
-      { hora: '7', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '7', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
-      { hora: '7', dia: 'JUEVES', materia: 'EDU. FÍSICA', clase: 'educacion' },
-      { hora: '7', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
+      // Hora 7: 12:10 - 1:00
+      { hora: '7', rango: '12:10 - 1:00', dia: 'LUNES', materia: 'FILOSOFÍA', clase: 'filosofia' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'MIÉRCOLES', materia: 'C. POLÍTICAS', clase: 'politicas' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'JUEVES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'VIERNES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
       
-      { hora: '8', dia: 'LUNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
-      { hora: '8', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '8', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
-      { hora: '8', dia: 'JUEVES', materia: 'EDU. FÍSICA', clase: 'educacion' },
-      { hora: '8', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' }
+      // Hora 8: 1:00 - 1:45
+      { hora: '8', rango: '1:00 - 1:45', dia: 'LUNES', materia: 'ÉTICA', clase: 'etica' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'MIÉRCOLES', materia: 'C. POLÍTICAS', clase: 'politicas' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'JUEVES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'VIERNES', materia: 'MATEMÁTICAS', clase: 'matematicas' }
     ];
 
-    // Tareas iniciales (como en la imagen)
-    const tareasIniciales = [
-      // Lunes 1ra: FILOSOFÍA
-      { dia: 'LUNES', hora: '1', texto: 'Leer la carta parte', creadoPor: 'Sebas' },
-      { dia: 'LUNES', hora: '1', texto: 'Y tarea de giro', creadoPor: 'Sebas' },
+    const horario1003 = [
+      // Este es el horario de 1003 (Tuta y Barrera)
+      // Por ahora lo dejamos igual al anterior pero podés cambiarlo después
+      { hora: '1', rango: '6:30 - 7:20', dia: 'LUNES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'MIÉRCOLES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'JUEVES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'VIERNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
       
-      // Lunes 2da: ÉTICA
-      { dia: 'LUNES', hora: '2', texto: 'Nada', creadoPor: 'Sebas' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'LUNES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'MIÉRCOLES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'JUEVES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'VIERNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
       
-      // Lunes 3ra: DIBUJO
-      { dia: 'LUNES', hora: '3', texto: 'Nada', creadoPor: 'Sebas' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'LUNES', materia: 'DIBUJO', clase: 'dibujo' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'JUEVES', materia: 'FILOSOFÍA', clase: 'filosofia' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
       
-      // Lunes 4ta: DIBUJO
-      { dia: 'LUNES', hora: '4', texto: 'Nada', creadoPor: 'Sebas' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'LUNES', materia: 'DIBUJO', clase: 'dibujo' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'JUEVES', materia: 'RELIGIÓN', clase: 'religion' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'VIERNES', materia: 'EXPR. ARTÍST', clase: 'artistica' },
       
-      // Lunes 5ta: C. POLÍTICAS
-      { dia: 'LUNES', hora: '5', texto: '1. Hacer lo de la hoja examen', creadoPor: 'Barrera' },
-      { dia: 'LUNES', hora: '5', texto: '2. Evaluación', creadoPor: 'Barrera' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'LUNES', materia: 'C. POLÍTICAS', clase: 'politicas' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'MIÉRCOLES', materia: 'ÉTICA', clase: 'etica' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'JUEVES', materia: 'EDU. FÍSICA', clase: 'educacion' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'VIERNES', materia: 'FILOSOFÍA', clase: 'filosofia' },
       
-      // Lunes 6ta: C. POLÍTICAS
-      { dia: 'LUNES', hora: '6', texto: '1. Hacer lo de la hoja examen', creadoPor: 'Barrera' },
-      { dia: 'LUNES', hora: '6', texto: '2. Evaluación', creadoPor: 'Barrera' },
-      { dia: 'LUNES', hora: '6', texto: 'Llevar las impresiones y constitución', creadoPor: 'Barrera' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'LUNES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'MARTES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'MIÉRCOLES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'JUEVES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'VIERNES', materia: '', clase: '' },
       
-      // Lunes 7ma: BIOQUÍMICA
-      { dia: 'LUNES', hora: '7', texto: 'Nada(creo)', creadoPor: 'Tuta' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'LUNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'MIÉRCOLES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'JUEVES', materia: 'INFORMÁTICA', clase: 'informatica' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'VIERNES', materia: 'FÍSICA', clase: 'fisica' },
       
-      // Lunes 8va: BIOQUÍMICA
-      { dia: 'LUNES', hora: '8', texto: 'Nada(creo)', creadoPor: 'Tuta' },
-      
-      // Miércoles 4ta: MATEMÁTICAS
-      { dia: 'MIÉRCOLES', hora: '4', texto: 'Pílogo 2 hasta actividad 10', creadoPor: 'Tuta' },
-      
-      // Castellano 6ta
-      { dia: 'MIÉRCOLES', hora: '6', texto: 'Adelantar lectura (Caps = a)', creadoPor: 'Sebas' },
-      
-      // +tarea en varias celdas (como en la imagen)
-      { dia: 'MARTES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '1', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '2', texto: 'Nada(creo)', creadoPor: 'Tuta' },
-      { dia: 'MIÉRCOLES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '2', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '3', texto: 'Nada', creadoPor: 'Tuta' },
-      { dia: 'MIÉRCOLES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '3', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '4', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '5', texto: 'Nada', creadoPor: 'Tuta' },
-      { dia: 'MIÉRCOLES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '5', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '6', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '6', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '6', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '7', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MARTES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'MIÉRCOLES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'JUEVES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' },
-      { dia: 'VIERNES', hora: '8', texto: '+ tarifa', creadoPor: 'Sebas' }
+      { hora: '8', rango: '1:00 - 1:45', dia: 'LUNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'MIÉRCOLES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'JUEVES', materia: 'INFORMÁTICA', clase: 'informatica' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'VIERNES', materia: 'FÍSICA', clase: 'fisica' }
     ];
 
-    // Función para cargar tareas iniciales (solo si no hay ninguna)
-    const cargarTareasIniciales = () => {
+    // Función para cargar el horario según el curso
+    function cargarHorario() {
+      const horario = cursoActual === '1001' ? horario1001 : horario1003;
+      
+      // Escuchar cambios en Firebase
       onValue(tareasRef, (snapshot) => {
-        if (!snapshot.exists()) {
-          tareasIniciales.forEach(tarea => {
-            const materia = horarioData.find(d => d.dia === tarea.dia && d.hora === tarea.hora)?.materia || '';
+        const tareas = [];
+        snapshot.forEach(child => {
+          tareas.push({ key: child.key, ...child.val() });
+        });
+
+        // Generar las filas del horario
+        const horas = ['1', '2', '3', '4', '5', '6', '7', '8'];
+        const dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES'];
+
+        horarioBody.innerHTML = horas.map(hora => {
+          const horaInfo = horario.find(h => h.hora === hora && h.dia === 'LUNES');
+          const rango = horaInfo?.rango || '';
+          
+          return `
+            <tr>
+              <td style="text-align: center; font-weight: 600; background: rgba(0,0,0,0.2);">
+                ${hora}<br><span style="font-size: 0.6rem; color: #a0a8c0;">${rango}</span>
+              </td>
+              ${dias.map(dia => {
+                const materiaInfo = horario.find(h => h.hora === hora && h.dia === dia);
+                const materiaNombre = materiaInfo?.materia || '';
+                const materiaClase = materiaInfo?.clase || '';
+                
+                // Filtrar tareas para esta celda (mismo día y misma hora)
+                const tareasCelda = tareas.filter(t => 
+                  t.dia === dia && t.hora === hora && t.curso === cursoActual
+                );
+                
+                return `
+                  <td>
+                    <div class="celda-horario">
+                      ${materiaNombre ? `<span class="materia-nombre materia-${materiaClase}">${materiaNombre}</span>` : ''}
+                      
+                      <div class="tareas-celda" id="celda-${dia}-${hora}">
+                        ${tareasCelda.map(t => {
+                          const completadoUsuario = t.hecho?.[usuarioActual] || false;
+                          let claseUsuario = '';
+                          if (t.creadoPor === 'Sebas') claseUsuario = 'sebas';
+                          else if (t.creadoPor === 'Tuta') claseUsuario = 'tuta';
+                          else if (t.creadoPor === 'Barrera') claseUsuario = 'barrera';
+                          
+                          return `
+                            <div class="tarea-mini ${claseUsuario}">
+                              <span class="tarea-mini-texto ${completadoUsuario ? 'tachado' : ''}">${t.texto}</span>
+                              <div class="tarea-mini-acciones">
+                                <button class="completar-tarea" data-key="${t.key}" data-usuario="${usuarioActual}" data-completado="${completadoUsuario}">
+                                  ${completadoUsuario ? '↩️' : '✅'}
+                                </button>
+                                <button class="editar-tarea" data-key="${t.key}" data-texto="${t.texto}">✏️</button>
+                                <button class="eliminar-tarea" data-key="${t.key}">🗑️</button>
+                              </div>
+                            </div>
+                          `}).join('')}
+                      </div>
+                      
+                      <!-- Formulario para agregar tarea en esta celda -->
+                      <div class="agregar-tarea-celda">
+                        <input type="text" id="input-${dia}-${hora}" placeholder="+ tarea">
+                        <button class="agregar-celda ${usuarioActual === 'Tuta' ? 'tuta' : (usuarioActual === 'Barrera' ? 'barrera' : '')}" 
+                                data-dia="${dia}" 
+                                data-hora="${hora}"
+                                data-materia="${materiaNombre}">➕</button>
+                      </div>
+                    </div>
+                  </td>
+                `}).join('')}
+            </tr>
+          `}).join('');
+
+        // Eventos para los botones de agregar (por celda)
+        document.querySelectorAll('.agregar-celda').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const dia = btn.dataset.dia;
+            const hora = btn.dataset.hora;
+            const materia = btn.dataset.materia;
+            const input = document.getElementById(`input-${dia}-${hora}`);
+            const texto = input.value.trim();
+            
+            if (!texto) return;
+            
+            // Guardar con día y hora específicos
             push(tareasRef, {
-              ...tarea,
               materia: materia,
+              texto: texto,
+              dia: dia,
+              hora: hora,
+              curso: cursoActual,
               hecho: { Sebas: false, Tuta: false, Barrera: false },
+              creadoPor: usuarioActual,
               timestamp: Date.now()
             });
-          });
-        }
-      }, { onlyOnce: true });
-    };
-
-    cargarTareasIniciales();
-
-    // Escuchar cambios en Firebase
-    onValue(tareasRef, (snapshot) => {
-      const tareas = [];
-      snapshot.forEach(child => {
-        tareas.push({ key: child.key, ...child.val() });
-      });
-
-      // Generar las filas del horario
-      const horas = ['1', '2', '3', '4', '5', '6', '7', '8'];
-      const dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES'];
-
-      horarioBody.innerHTML = horas.map(hora => {
-        return `
-          <tr>
-            <td style="text-align: center; font-weight: 600; background: rgba(0,0,0,0.2);">${hora}</td>
-            ${dias.map(dia => {
-              const materiaInfo = horarioData.find(d => d.hora === hora && d.dia === dia);
-              const materiaNombre = materiaInfo?.materia || '';
-              const materiaClase = materiaInfo?.clase || '';
-              
-              // Filtrar tareas para esta celda (mismo día y misma hora)
-              const tareasCelda = tareas.filter(t => 
-                t.dia === dia && t.hora === hora
-              );
-              
-              return `
-                <td>
-                  <div class="celda-horario">
-                    <span class="materia-nombre materia-${materiaClase}">${materiaNombre}</span>
-                    
-                    <div class="tareas-celda" id="celda-${dia}-${hora}">
-                      ${tareasCelda.map(t => {
-                        const completadoUsuario = t.hecho?.[usuarioActual] || false;
-                        let claseUsuario = '';
-                        if (t.creadoPor === 'Sebas') claseUsuario = 'sebas';
-                        else if (t.creadoPor === 'Tuta') claseUsuario = 'tuta';
-                        else if (t.creadoPor === 'Barrera') claseUsuario = 'barrera';
-                        
-                        return `
-                          <div class="tarea-mini ${claseUsuario}">
-                            <span class="tarea-mini-texto ${completadoUsuario ? 'tachado' : ''}">${t.texto}</span>
-                            <div class="tarea-mini-acciones">
-                              <button class="completar-tarea" data-key="${t.key}" data-usuario="${usuarioActual}" data-completado="${completadoUsuario}">
-                                ${completadoUsuario ? '↩️' : '✅'}
-                              </button>
-                              <button class="editar-tarea" data-key="${t.key}" data-texto="${t.texto}">✏️</button>
-                              <button class="eliminar-tarea" data-key="${t.key}">🗑️</button>
-                            </div>
-                          </div>
-                        `}).join('')}
-                    </div>
-                    
-                    <!-- Formulario para agregar tarea en esta celda -->
-                    <div class="agregar-tarea-celda">
-                      <input type="text" id="input-${dia}-${hora}" placeholder="+ tarea">
-                      <button class="agregar-celda ${usuarioActual === 'Tuta' ? 'tuta' : (usuarioActual === 'Barrera' ? 'barrera' : '')}" 
-                              data-dia="${dia}" 
-                              data-hora="${hora}"
-                              data-materia="${materiaNombre}">➕</button>
-                    </div>
-                  </div>
-                </td>
-              `}).join('')}
-          </tr>
-        `}).join('');
-
-      // Eventos para los botones de agregar (por celda)
-      document.querySelectorAll('.agregar-celda').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const dia = btn.dataset.dia;
-          const hora = btn.dataset.hora;
-          const materia = btn.dataset.materia;
-          const input = document.getElementById(`input-${dia}-${hora}`);
-          const texto = input.value.trim();
-          
-          if (!texto) return;
-          
-          // Guardar con día y hora específicos
-          push(tareasRef, {
-            materia: materia,
-            texto: texto,
-            dia: dia,
-            hora: hora,
-            hecho: { Sebas: false, Tuta: false, Barrera: false },
-            creadoPor: usuarioActual,
-            timestamp: Date.now()
-          });
-          
-          input.value = '';
-        });
-      });
-
-      // Eventos para completar tareas
-      document.querySelectorAll('.completar-tarea').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const key = btn.dataset.key;
-          const usuario = btn.dataset.usuario;
-          const completado = btn.dataset.completado === 'true';
-          
-          update(ref(db, 'tareas/' + key), {
-            [`hecho/${usuario}`]: !completado
+            
+            input.value = '';
           });
         });
-      });
 
-      // Eventos para editar tareas
-      document.querySelectorAll('.editar-tarea').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const key = btn.dataset.key;
-          const textoActual = btn.dataset.texto;
-          const nuevoTexto = prompt('Editar tarea:', textoActual);
-          
-          if (nuevoTexto && nuevoTexto.trim() !== '') {
+        // Eventos para completar tareas
+        document.querySelectorAll('.completar-tarea').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const key = btn.dataset.key;
+            const usuario = btn.dataset.usuario;
+            const completado = btn.dataset.completado === 'true';
+            
             update(ref(db, 'tareas/' + key), {
-              texto: nuevoTexto.trim()
+              [`hecho/${usuario}`]: !completado
             });
-          }
+          });
         });
-      });
 
-      // Eventos para eliminar tareas
-      document.querySelectorAll('.eliminar-tarea').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const key = btn.dataset.key;
-          if (confirm('¿Eliminar tarea?')) {
-            remove(ref(db, 'tareas/' + key));
-          }
+        // Eventos para editar tareas
+        document.querySelectorAll('.editar-tarea').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const key = btn.dataset.key;
+            const textoActual = btn.dataset.texto;
+            const nuevoTexto = prompt('Editar tarea:', textoActual);
+            
+            if (nuevoTexto && nuevoTexto.trim() !== '') {
+              update(ref(db, 'tareas/' + key), {
+                texto: nuevoTexto.trim()
+              });
+            }
+          });
         });
-      });
-    });
+
+        // Eventos para eliminar tareas
+        document.querySelectorAll('.eliminar-tarea').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const key = btn.dataset.key;
+            if (confirm('¿Eliminar tarea?')) {
+              remove(ref(db, 'tareas/' + key));
+            }
+          });
+        });
+      }, { onlyOnce: false });
+    }
+
+    // Cargar horario inicial
+    cargarHorario();
   </script>
 </body>
 </html>
