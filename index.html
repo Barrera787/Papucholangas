@@ -230,20 +230,20 @@
     }
     
     /* Colores de materias */
-    .materia-filosofia { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
-    .materia-etica { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-    .materia-dibujo { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
-    .materia-politicas { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
-    .materia-bioquimica { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
-    .materia-taller { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; }
-    .materia-castellano { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-    .materia-matematicas { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-    .materia-religion { background: rgba(217, 70, 239, 0.2); color: #e879f9; }
-    .materia-ingles { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
     .materia-fisica { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }
-    .materia-artistica { background: rgba(251, 146, 60, 0.2); color: #fdba74; }
-    .materia-educacion { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+    .materia-taller { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; }
+    .materia-dibujo { background: rgba(249, 115, 22, 0.2); color: #fb923c; }
+    .materia-filosofia { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
     .materia-informatica { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+    .materia-castellano { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .materia-religion { background: rgba(217, 70, 239, 0.2); color: #e879f9; }
+    .materia-matematicas { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .materia-artistica { background: rgba(251, 146, 60, 0.2); color: #fdba74; }
+    .materia-ingles { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
+    .materia-bioquimica { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+    .materia-educacion { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+    .materia-politicas { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+    .materia-etica { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
     
     /* TAREAS DENTRO DE LA CELDA */
     .tareas-celda {
@@ -267,8 +267,7 @@
       word-break: break-word;
     }
     .tarea-mini.sebas { border-left-color: #3b82f6; }
-    .tarea-mini.tuta { border-left-color: #ff5577; }
-    .tarea-mini.barrera { border-left-color: #ff5577; }
+    .tarea-mini.grupo { border-left-color: #ff5577; }
     
     .tarea-mini-texto {
       flex: 1;
@@ -484,7 +483,66 @@
       if (e.key === 'Enter') loginBtn.click();
     });
 
-    // HORARIO DE 1003 (según la imagen)
+    // HORARIO DE 1001 (SEBAS) - según la imagen
+    const horario1001 = [
+      // Hora 1: 6:30 - 7:20
+      { hora: '1', rango: '6:30 - 7:20', dia: 'LUNES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'MIÉRCOLES', materia: 'DIBUJO', clase: 'dibujo' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'JUEVES', materia: 'FILOSOFÍA', clase: 'filosofia' },
+      { hora: '1', rango: '6:30 - 7:20', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
+      
+      // Hora 2: 7:20 - 8:05
+      { hora: '2', rango: '7:20 - 8:05', dia: 'LUNES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'MIÉRCOLES', materia: 'DIBUJO', clase: 'dibujo' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'JUEVES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '2', rango: '7:20 - 8:05', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
+      
+      // Hora 3: 8:05 - 9:20
+      { hora: '3', rango: '8:05 - 9:20', dia: 'LUNES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'MIÉRCOLES', materia: 'RELIGIÓN', clase: 'religion' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'JUEVES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '3', rango: '8:05 - 9:20', dia: 'VIERNES', materia: 'EXPR. ARTÍST', clase: 'artistica' },
+      
+      // Hora 4: 9:20 - 10:05
+      { hora: '4', rango: '9:20 - 10:05', dia: 'LUNES', materia: 'CASTELLANO', clase: 'castellano' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'JUEVES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      { hora: '4', rango: '9:20 - 10:05', dia: 'VIERNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
+      
+      // Hora 5: 10:05 - 11:40
+      { hora: '5', rango: '10:05 - 11:40', dia: 'LUNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'MIÉRCOLES', materia: 'INGLÉS', clase: 'ingles' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'JUEVES', materia: 'EDU. FÍSICA', clase: 'educacion' },
+      { hora: '5', rango: '10:05 - 11:40', dia: 'VIERNES', materia: 'BIOQUÍMICA', clase: 'bioquimica' },
+      
+      // Hora 6: 11:40 - 12:10 (descanso - vacío)
+      { hora: '6', rango: '11:40 - 12:10', dia: 'LUNES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'MARTES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'MIÉRCOLES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'JUEVES', materia: '', clase: '' },
+      { hora: '6', rango: '11:40 - 12:10', dia: 'VIERNES', materia: '', clase: '' },
+      
+      // Hora 7: 12:10 - 1:00
+      { hora: '7', rango: '12:10 - 1:00', dia: 'LUNES', materia: 'FILOSOFÍA', clase: 'filosofia' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'MIÉRCOLES', materia: 'C. POLÍTICAS', clase: 'politicas' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'JUEVES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '7', rango: '12:10 - 1:00', dia: 'VIERNES', materia: 'MATEMÁTICAS', clase: 'matematicas' },
+      
+      // Hora 8: 1:00 - 1:45
+      { hora: '8', rango: '1:00 - 1:45', dia: 'LUNES', materia: 'ÉTICA', clase: 'etica' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'MIÉRCOLES', materia: 'C. POLÍTICAS', clase: 'politicas' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'JUEVES', materia: 'FÍSICA', clase: 'fisica' },
+      { hora: '8', rango: '1:00 - 1:45', dia: 'VIERNES', materia: 'MATEMÁTICAS', clase: 'matematicas' }
+    ];
+
+    // HORARIO DE 1003 (TUTA & BARRERA) - según imagen anterior
     const horario1003 = [
       // Hora 1
       { hora: '1', rango: '6:30 - 7:20', dia: 'LUNES', materia: 'FILOSOFÍA', clase: 'filosofia' },
@@ -543,16 +601,6 @@
       { hora: '8', rango: '1:00 - 1:45', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' }
     ];
 
-    const horario1001 = [
-      // Horario de Sebas (simplificado por ahora)
-      { hora: '1', rango: '6:30 - 7:20', dia: 'LUNES', materia: 'FÍSICA', clase: 'fisica' },
-      { hora: '1', rango: '6:30 - 7:20', dia: 'MARTES', materia: 'TALLER', clase: 'taller' },
-      { hora: '1', rango: '6:30 - 7:20', dia: 'MIÉRCOLES', materia: 'DIBUJO', clase: 'dibujo' },
-      { hora: '1', rango: '6:30 - 7:20', dia: 'JUEVES', materia: 'FILOSOFÍA', clase: 'filosofia' },
-      { hora: '1', rango: '6:30 - 7:20', dia: 'VIERNES', materia: 'INFORMÁTICA', clase: 'informatica' },
-      // ... (podés completar después)
-    ];
-
     // Función para cargar el horario según el curso
     function cargarHorario() {
       const horario = cursoActual === '1001' ? horario1001 : horario1003;
@@ -601,7 +649,7 @@
                           
                           let claseUsuario = '';
                           if (t.creadoPor === 'Sebas') claseUsuario = 'sebas';
-                          else claseUsuario = 'tuta'; // Para Tuta y Barrera usamos el mismo color
+                          else claseUsuario = 'grupo';
                           
                           return `
                             <div class="tarea-mini ${claseUsuario}">
